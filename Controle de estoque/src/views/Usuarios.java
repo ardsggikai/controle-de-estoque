@@ -114,6 +114,7 @@ public class Usuarios extends JDialog {
 		setLocationRelativeTo(null);
 
 		btnCreate = new JButton("");
+		btnCreate.setEnabled(false);
 		btnCreate.setToolTipText("Adicionar Usuario");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,6 +130,7 @@ public class Usuarios extends JDialog {
 
 		// btn delete
 		btnDelete = new JButton("");
+		btnDelete.setEnabled(false);
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				deleteByID();
@@ -176,6 +178,7 @@ public class Usuarios extends JDialog {
 		RestrictedTextField senha = new RestrictedTextField(txtSenha);
 
 		btnUpdate = new JButton("");
+		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				alterarContato();
@@ -304,6 +307,7 @@ public class Usuarios extends JDialog {
 				// System.out.println(confirma);
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Contato adicionado.");
+					limpar();
 
 				}
 
