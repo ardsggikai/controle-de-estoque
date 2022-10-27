@@ -178,6 +178,8 @@ public class Usuarios extends JDialog {
 		RestrictedTextField senha = new RestrictedTextField(txtSenha);
 
 		btnUpdate = new JButton("");
+		btnUpdate.setToolTipText("Alterar Dados");
+		btnUpdate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
