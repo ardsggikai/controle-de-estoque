@@ -17,10 +17,15 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 
 public class Usuarios extends JDialog {
 
@@ -56,6 +61,7 @@ public class Usuarios extends JDialog {
 	 * Create the dialog.
 	 */
 	public Usuarios() {
+		setModal(true);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -110,7 +116,7 @@ public class Usuarios extends JDialog {
 		txtUsuario.setColumns(10);
 		setResizable(false);
 		setTitle("Usuarios");
-		setBounds(100, 100, 600, 280);
+		setBounds(100, 100, 600, 300);
 		setLocationRelativeTo(null);
 
 		btnCreate = new JButton("");
@@ -190,7 +196,34 @@ public class Usuarios extends JDialog {
 		btnUpdate.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnUpdate.setBounds(139, 120, 64, 64);
 		getContentPane().add(btnUpdate);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.GRAY);
+		panel.setForeground(Color.WHITE);
+		panel.setBounds(0, 211, 584, 50);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblHoras = new JLabel("");
+		lblHoras.setHorizontalAlignment(SwingConstants.CENTER);
+		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblHoras.setBounds(186, 11, 204, 28);
+		panel.add(lblHoras);
 		senha.setLimit(250);
+		
+		// Ativar Janela inferior
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+
+				Date data = new Date();
+				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+				lblHoras.setText(formatador.format(data));
+				
+				
+				
+			}
+		});
 
 	}// Fim do construtor
 
@@ -417,5 +450,4 @@ public class Usuarios extends JDialog {
 		btnUpdate.setEnabled(true);
 		btnSearch.setEnabled(true);
 	}
-
 }// Fim do codigo
