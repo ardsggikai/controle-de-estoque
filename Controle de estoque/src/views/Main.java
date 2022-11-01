@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 public class Main extends JFrame {
 
@@ -47,6 +48,7 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Main.class.getResource("/img/icone-controle-estoque.png")));
 		setTitle("Controle de estoque");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

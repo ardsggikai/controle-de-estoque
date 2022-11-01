@@ -17,6 +17,7 @@ import java.net.URI;
 import javax.swing.JTextPane;
 import java.awt.Color;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class Sobre extends JDialog {
 
@@ -55,6 +56,7 @@ public class Sobre extends JDialog {
 		}
 	}
 	public Sobre() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Sobre.class.getResource("/img/icone-sobre.png")));
 		setTitle("Sobre");
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
