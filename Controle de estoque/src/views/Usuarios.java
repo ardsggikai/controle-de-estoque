@@ -26,6 +26,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class Usuarios extends JDialog {
 
@@ -33,7 +36,6 @@ public class Usuarios extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtSenha;
 	private JLabel lblLogin;
 	private JLabel lblSenha;
 	private JTextField txtId;
@@ -60,6 +62,7 @@ public class Usuarios extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Usuarios() {
 		setModal(true);
 		addWindowListener(new WindowAdapter() {
@@ -91,12 +94,6 @@ public class Usuarios extends JDialog {
 		txtId.setBounds(348, 30, 86, 20);
 		getContentPane().add(txtId);
 		txtId.setColumns(10);
-
-		txtSenha = new JTextField();
-		txtSenha.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtSenha.setBounds(80, 89, 190, 20);
-		getContentPane().add(txtSenha);
-		txtSenha.setColumns(10);
 
 		lblStatus = new JLabel("");
 		lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dboff.png")));
@@ -180,8 +177,6 @@ public class Usuarios extends JDialog {
 		// txt login
 		RestrictedTextField login = new RestrictedTextField(txtLog);
 		login.setLimit(40);
-		// txt senha
-		RestrictedTextField senha = new RestrictedTextField(txtSenha);
 
 		btnUpdate = new JButton("");
 		btnUpdate.setToolTipText("Alterar Dados");
@@ -209,7 +204,21 @@ public class Usuarios extends JDialog {
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblHoras.setBounds(186, 11, 204, 28);
 		panel.add(lblHoras);
-		senha.setLimit(250);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(80, 86, 190, 20);
+		getContentPane().add(txtPassword);
+		
+		cboPerfil = new JComboBox();
+		cboPerfil.setModel(new DefaultComboBoxModel(new String[] {"", "admin", "user"}));
+		cboPerfil.setFont(new Font("Arial", Font.PLAIN, 11));
+		cboPerfil.setBounds(348, 57, 64, 22);
+		getContentPane().add(cboPerfil);
+		
+		JLabel lblPerfil = new JLabel("Perfil :");
+		lblPerfil.setBounds(302, 61, 46, 14);
+		getContentPane().add(lblPerfil);
+		
 		
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
@@ -235,6 +244,9 @@ public class Usuarios extends JDialog {
 	private JTextField txtLog;
 	private JLabel lblStatus;
 	private JButton btnUpdate;
+	private JPasswordField txtPassword;
+	@SuppressWarnings("rawtypes")
+	private JComboBox cboPerfil;
 
 	/**
 	 * Metodo responsavel por verificar o status da conexao com o banco
@@ -292,7 +304,8 @@ public class Usuarios extends JDialog {
 					// setar as caixas de texto com o resultado da pesquisa
 					txtUsuario.setText(rs.getString(2));
 					txtLog.setText(rs.getString(3));
-					txtSenha.setText(rs.getString(4));
+					txtPassword.setText(rs.getString(4));
+					cboPerfil.setSelectedItem(rs.getString(5));
 					// habilitar botoes (alterar e excluir)
 					btnUpdate.setEnabled(true);
 					btnDelete.setEnabled(true);
@@ -302,7 +315,7 @@ public class Usuarios extends JDialog {
 					txtUsuario.requestFocus();
 					// setar campos e botoes (UX)
 					txtUsuario.setText(null);
-					txtSenha.setText(null);
+					txtPassword.setText(null);
 					btnCreate.setEnabled(true);
 					btnSearch.setEnabled(false);
 
@@ -318,6 +331,7 @@ public class Usuarios extends JDialog {
 	/**
 	 * Metodo responsavel pelo cadastro de um novo contato
 	 */
+	@SuppressWarnings("deprecation")
 	void adicionarContato() {
 		// validadaçao de campos obrigatorios
 		if (txtUsuario.getText().isEmpty()) {
@@ -336,7 +350,7 @@ public class Usuarios extends JDialog {
 				PreparedStatement pst = con.prepareStatement(create);
 				pst.setString(1, txtUsuario.getText());
 				pst.setString(2, txtLog.getText());
-				pst.setString(3, txtSenha.getText());
+				pst.setString(3, txtPassword.getText());
 				// Executar a query e confirmar a inserção no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
@@ -359,6 +373,7 @@ public class Usuarios extends JDialog {
 	 * Metodo Responsavel por alterar informacoes do contato
 	 */
 
+	@SuppressWarnings("deprecation")
 	private void alterarContato() {
 
 		// Validaçao
@@ -368,9 +383,9 @@ public class Usuarios extends JDialog {
 		} else if (txtLog.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Digite o Numero do Login");
 			txtLog.requestFocus();
-		} else if (txtSenha.getText().isEmpty()) {
+		} else if (txtPassword.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Digite a Senha");
-			txtSenha.requestFocus();
+			txtPassword.requestFocus();
 		} else {
 
 			// Logica Principal
@@ -383,7 +398,7 @@ public class Usuarios extends JDialog {
 				PreparedStatement pst = con.prepareStatement(update);
 				pst.setString(1, txtUsuario.getText());
 				pst.setString(2, txtLog.getText());
-				pst.setString(3, txtSenha.getText());
+				pst.setString(3, txtPassword.getText());
 				pst.setString(4, txtId.getText());
 				// Executar a query e atualizar as informa�oes no banco
 				int confirma = pst.executeUpdate();
@@ -443,7 +458,7 @@ public class Usuarios extends JDialog {
 		txtId.setText(null);
 		txtUsuario.setText(null);
 		txtLog.setText(null);
-		txtSenha.setText(null);
+		txtPassword.setText(null);
 		txtUsuario.requestFocus();
 		btnCreate.setEnabled(false);
 		btnDelete.setEnabled(true);
