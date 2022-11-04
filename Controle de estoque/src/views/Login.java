@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -80,7 +81,7 @@ public class Login extends JFrame {
 		btnAcessar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAcessar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				logar ();
+				logar();
 			}
 		});
 		btnAcessar.setFocusPainted(false);
@@ -136,38 +137,36 @@ public class Login extends JFrame {
 
 		// tecla enter associada ao botão
 		getRootPane().setDefaultButton(btnAcessar);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);
 		panel.setBounds(0, 212, 404, 49);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		lblHoras = new JLabel("");
 		lblHoras.setBounds(160, 11, 234, 27);
 		lblHoras.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
 		panel.add(lblHoras);
-		
+
 		lblUsuarios = new JLabel("");
 		lblUsuarios.setBounds(10, 11, 112, 27);
 		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuarios.setFont(new Font("Arial", Font.PLAIN, 11));
 		panel.add(lblUsuarios);
-		
-		// Ativar Janela inferior
-				addWindowListener(new WindowAdapter() {
-					@Override
-					public void windowActivated(WindowEvent e) {
 
-						Date data = new Date();
-						DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
-						lblHoras.setText(formatador.format(data));
-						
-						
-						
-					}
-				});
+		// Ativar Janela inferior
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+
+				Date data = new Date();
+				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+				lblHoras.setText(formatador.format(data));
+
+			}
+		});
 
 	}// Fim do construtor
 
@@ -209,11 +208,29 @@ public class Login extends JFrame {
 	 * Metodo Logar
 	 */
 
+	@SuppressWarnings("deprecation")
 	private void logar() {
-    Main main = new Main ();
-    main.setVisible(true);
-    //fechar o JFrame
-    this.dispose();
-    
+		// validacao da senha (captura segura)
+		String capturaSenha = new String(txtSenha.getPassword());
+		// validação de campos obrigatórios
+		if (txtLogin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Informe o seu login");
+			txtLogin.requestFocus();
+		} else if (capturaSenha.length() == 0) {
+			if (txtSenha.getText().isEmpty()) {
+				JOptionPane.showMessageDialog(null, "Digite a sua senha");
+				txtSenha.requestFocus();
+			} else {
+
+				// logica principal (pesquisar login e senha correspondente)
+
+				// System.out.println("teste do botao acessar");
+				Main main = new Main();
+				main.setVisible(true);
+				// fechar o JFrame
+				this.dispose();
+
+			}
+		}
 	}
 }// Fim Do Codigo
