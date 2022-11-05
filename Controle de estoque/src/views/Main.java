@@ -129,8 +129,14 @@ public class Main extends JFrame {
 		JLabel lblHoras = new JLabel("");
 		lblHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblHoras.setBounds(112, 11, 204, 28);
+		lblHoras.setBounds(220, 11, 204, 28);
 		panel.add(lblHoras);
+		
+		JLabel lblUsuarios = new JLabel("");
+		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuarios.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblUsuarios.setBounds(10, 12, 112, 27);
+		panel.add(lblUsuarios);
 		
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
@@ -141,6 +147,7 @@ public class Main extends JFrame {
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
 				
+				lblUsuarios.setText(getName());
 				
 				
 			}

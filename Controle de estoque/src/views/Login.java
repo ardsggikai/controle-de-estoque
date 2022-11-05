@@ -11,6 +11,8 @@ import models.DAO;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -135,7 +137,7 @@ public class Login extends JFrame {
 		lblImgDireita.setBounds(325, 55, 64, 64);
 		contentPane.add(lblImgDireita);
 
-		// tecla enter associada ao botão
+		// tecla enter associada ao botÃ£o
 		getRootPane().setDefaultButton(btnAcessar);
 
 		JPanel panel = new JPanel();
@@ -165,6 +167,7 @@ public class Login extends JFrame {
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
 
+
 			}
 		});
 
@@ -185,17 +188,17 @@ public class Login extends JFrame {
 	 */
 	private void status() {
 		// System.out.println("Teste - Janela Ativada");
-		// uso da classe connection (JDBC) para estabelecer a conexão
+		// uso da classe connection (JDBC) para estabelecer a conexÃ£o
 		try {
 			Connection con = dao.conectar();
 			if (con == null) {
-				System.out.println("Erro de Conexão");
+				System.out.println("Erro de ConexÃ£o");
 				lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dboff - 32.png")));
 			} else {
 				System.out.println("Banco Conectado!");
 				lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dbon - 32.png")));
 			}
-			// Nunca esquecer de encerrar a conexão
+			// Nunca esquecer de encerrar a conexÃ£o
 			con.close();
 
 		} catch (Exception e) {
@@ -208,29 +211,54 @@ public class Login extends JFrame {
 	 * Metodo Logar
 	 */
 
-	@SuppressWarnings("deprecation")
 	private void logar() {
 		// validacao da senha (captura segura)
 		String capturaSenha = new String(txtSenha.getPassword());
-		// validação de campos obrigatórios
 		if (txtLogin.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Informe o seu login");
 			txtLogin.requestFocus();
 		} else if (capturaSenha.length() == 0) {
-			if (txtSenha.getText().isEmpty()) {
-				JOptionPane.showMessageDialog(null, "Digite a sua senha");
-				txtSenha.requestFocus();
-			} else {
-
-				// logica principal (pesquisar login e senha correspondente)
-
-				// System.out.println("teste do botao acessar");
-				Main main = new Main();
-				main.setVisible(true);
-				// fechar o JFrame
-				this.dispose();
-
+			JOptionPane.showMessageDialog(null, "Informe a sua senha");
+			txtSenha.requestFocus();
+		} else {
+			String read = "select * from usuarios where login = ? and senha = md5(?)";
+			try {
+				/**
+				 * Estabelecer a conexao
+				 */
+				Connection con = dao.conectar();
+				/**
+				 * Prepara o codigo sql para execucao
+				 */
+				PreparedStatement pst = con.prepareStatement(read);
+				/**
+				 * A linha abaixo substitui o ? pelo conteudo da caixa de texto txtLogin; o 1
+				 * faz referencia a interrogacao
+				 */
+				pst.setString(1, txtLogin.getText());
+				pst.setString(2, capturaSenha);
+				/**
+				 * Obter os dados do funcionario
+				 */
+				ResultSet rs = pst.executeQuery();
+				if (rs.next()) {
+					// System.out.println("teste do botao acessar");
+					Main main = new Main();
+					main.setVisible(true);
+					// fechar o JFrame
+					this.dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuï¿½rio e/ou senha invï¿½lido(s)");
+				}
+				/**
+				 * Fechar a conexao
+				 */
+				con.close();
+			} catch (Exception e) {
+				System.out.println(e);
 			}
+
 		}
+
 	}
 }// Fim Do Codigo
