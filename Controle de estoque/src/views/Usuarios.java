@@ -312,12 +312,8 @@ public class Usuarios extends JDialog {
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Contato inexistente");
+					limpar();
 					txtUsuario.requestFocus();
-					// setar campos e botoes (UX)
-					txtUsuario.setText(null);
-					txtPassword.setText(null);
-					btnCreate.setEnabled(true);
-					btnSearch.setEnabled(false);
 
 				}
 				// fechar a conexÃ£o
@@ -459,6 +455,7 @@ public class Usuarios extends JDialog {
 		txtUsuario.setText(null);
 		txtLog.setText(null);
 		txtPassword.setText(null);
+		cboPerfil.setSelectedItem("");
 		txtUsuario.requestFocus();
 		btnCreate.setEnabled(false);
 		btnDelete.setEnabled(true);
