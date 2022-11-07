@@ -104,13 +104,14 @@ public class Login extends JFrame {
 		lblLogin.setBounds(170, 68, 46, 14);
 		contentPane.add(lblLogin);
 
-		JLabel lblNewLabel = new JLabel("Senha");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblNewLabel.setBounds(170, 93, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSenha.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblSenha.setBounds(170, 93, 46, 14);
+		contentPane.add(lblSenha);
 
 		txtLogin = new JTextField();
+		txtLogin.setToolTipText("Insira o Login");
 		txtLogin.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLogin.setBounds(226, 65, 89, 20);
@@ -118,6 +119,7 @@ public class Login extends JFrame {
 		txtLogin.setColumns(10);
 
 		txtSenha = new JPasswordField();
+		txtSenha.setToolTipText("Coloque a Senha");
 		txtSenha.setHorizontalAlignment(SwingConstants.CENTER);
 		txtSenha.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtSenha.setBounds(226, 90, 89, 20);
@@ -153,7 +155,7 @@ public class Login extends JFrame {
 		panel.add(lblHoras);
 
 		lblUsuarios = new JLabel("");
-		lblUsuarios.setBounds(10, 11, 112, 27);
+		lblUsuarios.setBounds(0, 11, 93, 27);
 		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuarios.setFont(new Font("Arial", Font.PLAIN, 11));
 		panel.add(lblUsuarios);
@@ -166,7 +168,6 @@ public class Login extends JFrame {
 				Date data = new Date();
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
-
 
 			}
 		});
@@ -244,9 +245,30 @@ public class Login extends JFrame {
 				if (rs.next()) {
 					// System.out.println("teste do botao acessar");
 					Main main = new Main();
-					main.setVisible(true);
-					// fechar o JFrame
-					this.dispose();
+					// a linha abaixo captura o perfil do usuário
+					String perfil = rs.getString(5);
+					// Comportamento de login em função do perfil
+					if (perfil.equals("admin")) {
+						main.setVisible(true);
+						// Apoio ao entendimento da logica
+						// Alterar a Label da tela principal (inserir o nome do usuário no rodapé)
+						// System.out.println(rs.getString(2));
+						main.lblUsuarios.setText(rs.getString(2));
+						// habilitar todos os botões 
+						main.btnRelatorios.setEnabled(true);
+						main.btnUsuarios.setEnabled(true);
+						// Alterar a cor do rodapé
+						main.panelUsuario.setBackground(Color.RED);
+						
+						// fechar o JFrame
+						this.dispose();
+					} else {
+						main.setVisible(true);
+						main.lblUsuarios.setText(rs.getString(2));
+						// fechar o JFrame
+						this.dispose();
+					}
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Usu�rio e/ou senha inv�lido(s)");
 				}

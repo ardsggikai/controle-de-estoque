@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Toolkit;
+import java.awt.SystemColor;
 
 public class Main extends JFrame {
 
@@ -27,6 +28,10 @@ public class Main extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	JButton btnUsuarios;
+	JButton btnRelatorios;
+	JPanel panelUsuario;
+	JLabel lblUsuarios;
 
 	/**
 	 * Launch the application.
@@ -59,7 +64,8 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnUsuarios = new JButton("");
+		btnUsuarios = new JButton("");
+		btnUsuarios.setEnabled(false);
 		btnUsuarios.setIcon(new ImageIcon(Main.class.getResource("/img/users.png")));
 		btnUsuarios.setToolTipText("Aba Us\u00FAarios");
 		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -98,7 +104,8 @@ public class Main extends JFrame {
 		btnClientes.setBounds(57, 173, 64, 64);
 		contentPane.add(btnClientes);
 		
-		JButton btnRelatorios = new JButton("");
+		btnRelatorios = new JButton("");
+		btnRelatorios.setEnabled(false);
 		btnRelatorios.setIcon(new ImageIcon(Main.class.getResource("/img/report.png")));
 		btnRelatorios.setToolTipText("Aba Relat\u00F3rios");
 		btnRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -120,23 +127,31 @@ public class Main extends JFrame {
 		btnSobre.setBounds(320, 173, 70, 70);
 		contentPane.add(btnSobre);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.GRAY);
-		panel.setBounds(0, 259, 434, 52);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		panelUsuario = new JPanel();
+		panelUsuario.setBackground(Color.GRAY);
+		panelUsuario.setBounds(0, 259, 434, 52);
+		contentPane.add(panelUsuario);
+		panelUsuario.setLayout(null);
 		
 		JLabel lblHoras = new JLabel("");
+		lblHoras.setBounds(220, 11, 204, 28);
 		lblHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblHoras.setBounds(220, 11, 204, 28);
-		panel.add(lblHoras);
+		panelUsuario.add(lblHoras);
 		
-		JLabel lblUsuarios = new JLabel("");
-		lblUsuarios.setHorizontalAlignment(SwingConstants.CENTER);
-		lblUsuarios.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblUsuarios.setBounds(10, 12, 112, 27);
-		panel.add(lblUsuarios);
+		JLabel lblUsuario = new JLabel("Usu\u00E1rio :");
+		lblUsuario.setForeground(SystemColor.text);
+		lblUsuario.setBounds(0, 11, 112, 27);
+		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
+		lblUsuario.setFont(new Font("Arial", Font.PLAIN, 12));
+		panelUsuario.add(lblUsuario);
+		
+		lblUsuarios = new JLabel("");
+		lblUsuarios.setForeground(SystemColor.text);
+		lblUsuarios.setHorizontalAlignment(SwingConstants.LEFT);
+		lblUsuarios.setFont(new Font("Arial", Font.BOLD, 11));
+		lblUsuarios.setBounds(86, 11, 112, 28);
+		panelUsuario.add(lblUsuarios);
 		
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
@@ -147,11 +162,13 @@ public class Main extends JFrame {
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
 				
-				lblUsuarios.setText(getName());
-				
 				
 			}
 		});
 		
 	}// Fim do construtor
+	
+	
+	
+	
 }// Fim Do Codigo
