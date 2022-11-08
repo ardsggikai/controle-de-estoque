@@ -378,7 +378,6 @@ public class Usuarios extends JDialog {
 	 * Metodo Responsavel por alterar informacoes do contato
 	 */
 
-	@SuppressWarnings("deprecation")
 	private void alterarContato() {
 
 		// Validaçao
@@ -388,13 +387,13 @@ public class Usuarios extends JDialog {
 		} else if (txtLog.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Digite o Numero do Login");
 			txtLog.requestFocus();
-		} else if (txtPassword.getText().isEmpty()) {
+		} else if (txtPassword.getPassword().length == 0) {
 			JOptionPane.showMessageDialog(null, "Digite a Senha");
 			txtPassword.requestFocus();
 		} else {
 
 			// Logica Principal
-			String update = "update usuarios set usuario = ?, login = ?, senha = ?, perfil = ? where id = ?";
+			String update = "update usuarios set usuario = ?, login = ?, senha = md5(?), perfil = ? where id = ?";
 
 			try {
 				// Abrir a conexao
@@ -403,7 +402,6 @@ public class Usuarios extends JDialog {
 				PreparedStatement pst = con.prepareStatement(update);
 				pst.setString(1, txtUsuario.getText());
 				pst.setString(2, txtLog.getText());
-				// captura segura de senha
 				String capturaSenha = new String(txtPassword.getPassword());
 				pst.setString(3, capturaSenha);
 				// CboPerfil

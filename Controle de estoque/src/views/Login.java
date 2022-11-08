@@ -270,7 +270,7 @@ public class Login extends JFrame {
 					}
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Usu�rio e/ou senha inv�lido(s)");
+					JOptionPane.showMessageDialog(null, "Usuario e/ou senha invalido(s)");
 				}
 				/**
 				 * Fechar a conexao
