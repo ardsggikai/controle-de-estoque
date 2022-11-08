@@ -191,35 +191,34 @@ public class Usuarios extends JDialog {
 		btnUpdate.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnUpdate.setBounds(139, 120, 64, 64);
 		getContentPane().add(btnUpdate);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.GRAY);
 		panel.setForeground(Color.WHITE);
 		panel.setBounds(0, 211, 584, 50);
 		getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		JLabel lblHoras = new JLabel("");
 		lblHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblHoras.setBounds(186, 11, 204, 28);
 		panel.add(lblHoras);
-		
+
 		txtPassword = new JPasswordField();
 		txtPassword.setBounds(80, 86, 190, 20);
 		getContentPane().add(txtPassword);
-		
+
 		cboPerfil = new JComboBox();
-		cboPerfil.setModel(new DefaultComboBoxModel(new String[] {"", "admin", "user"}));
+		cboPerfil.setModel(new DefaultComboBoxModel(new String[] { "", "admin", "user" }));
 		cboPerfil.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboPerfil.setBounds(348, 57, 64, 22);
 		getContentPane().add(cboPerfil);
-		
+
 		JLabel lblPerfil = new JLabel("Perfil :");
 		lblPerfil.setBounds(302, 61, 46, 14);
 		getContentPane().add(lblPerfil);
-		
-		
+
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -228,9 +227,7 @@ public class Usuarios extends JDialog {
 				Date data = new Date();
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
-				
-				
-				
+
 			}
 		});
 
@@ -314,6 +311,11 @@ public class Usuarios extends JDialog {
 					JOptionPane.showMessageDialog(null, "Contato inexistente");
 					limpar();
 					txtUsuario.requestFocus();
+					// setar campos e botoes (UX)
+					txtUsuario.setText(null);
+					txtPassword.setText(null);
+					btnCreate.setEnabled(true);
+					btnSearch.setEnabled(false);
 
 				}
 				// fechar a conexÃ£o
@@ -327,7 +329,6 @@ public class Usuarios extends JDialog {
 	/**
 	 * Metodo responsavel pelo cadastro de um novo contato
 	 */
-	@SuppressWarnings("deprecation")
 	void adicionarContato() {
 		// validadaçao de campos obrigatorios
 		if (txtUsuario.getText().isEmpty()) {
@@ -338,7 +339,7 @@ public class Usuarios extends JDialog {
 			txtLog.requestFocus();
 		} else {
 			// System.out.println("teste adicionar");
-			String create = "insert into usuarios (Usuario,Login,Senha) values (?,?,?)";
+			String create = "insert into usuarios (Usuario,Login,Senha,perfil) values (?,?,md5(?),?)";
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
@@ -346,7 +347,13 @@ public class Usuarios extends JDialog {
 				PreparedStatement pst = con.prepareStatement(create);
 				pst.setString(1, txtUsuario.getText());
 				pst.setString(2, txtLog.getText());
-				pst.setString(3, txtPassword.getText());
+
+				// captura segura de senha
+				String capturaSenha = new String(txtPassword.getPassword());
+				pst.setString(3, capturaSenha);
+				// CboPerfil
+				pst.setString(4, cboPerfil.getSelectedItem().toString());
+
 				// Executar a query e confirmar a inserção no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
@@ -361,6 +368,8 @@ public class Usuarios extends JDialog {
 
 			} catch (Exception e) {
 				System.out.println(e);
+				JOptionPane.showMessageDialog(null, "Contato Não Adicionado");
+				limpar();
 			}
 		}
 	}
@@ -385,7 +394,7 @@ public class Usuarios extends JDialog {
 		} else {
 
 			// Logica Principal
-			String update = "update usuarios set usuario = ?, login = ?, senha = ? where id = ?";
+			String update = "update usuarios set usuario = ?, login = ?, senha = ?, perfil = ? where id = ?";
 
 			try {
 				// Abrir a conexao
@@ -394,8 +403,12 @@ public class Usuarios extends JDialog {
 				PreparedStatement pst = con.prepareStatement(update);
 				pst.setString(1, txtUsuario.getText());
 				pst.setString(2, txtLog.getText());
-				pst.setString(3, txtPassword.getText());
-				pst.setString(4, txtId.getText());
+				// captura segura de senha
+				String capturaSenha = new String(txtPassword.getPassword());
+				pst.setString(3, capturaSenha);
+				// CboPerfil
+				pst.setString(4, cboPerfil.getSelectedItem().toString());
+				pst.setString(5, txtId.getText());
 				// Executar a query e atualizar as informa�oes no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
