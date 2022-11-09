@@ -29,6 +29,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JCheckBox;
+import java.awt.SystemColor;
 
 public class Usuarios extends JDialog {
 
@@ -86,12 +88,12 @@ public class Usuarios extends JDialog {
 		getContentPane().add(lblSenha);
 
 		lblId = new JLabel("ID");
-		lblId.setBounds(316, 32, 46, 14);
+		lblId.setBounds(382, 32, 46, 14);
 		getContentPane().add(lblId);
 
 		txtId = new JTextField();
 		txtId.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtId.setBounds(348, 30, 86, 20);
+		txtId.setBounds(414, 30, 86, 20);
 		getContentPane().add(txtId);
 		txtId.setColumns(10);
 
@@ -157,10 +159,11 @@ public class Usuarios extends JDialog {
 		btnSearch.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnSeach.png")));
 		btnSearch.setToolTipText("Pesquisar Pelo ID");
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnSearch.setBounds(444, 11, 64, 64);
+		btnSearch.setBounds(510, 30, 64, 64);
 		getContentPane().add(btnSearch);
 
 		txtLog = new JTextField();
+		txtLog.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtLog.setBounds(80, 58, 190, 20);
 		getContentPane().add(txtLog);
 		txtLog.setColumns(10);
@@ -184,7 +187,12 @@ public class Usuarios extends JDialog {
 		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				alterarContato();
+				// Verificar se o checkbox está selecionado 
+				if (chckbxSenha.isSelected()) {
+					alterarUsuarioSenha();
+				} else {
+					alterarContato();
+				}
 			}
 		});
 		btnUpdate.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnUpdate.png")));
@@ -206,18 +214,36 @@ public class Usuarios extends JDialog {
 		panel.add(lblHoras);
 
 		txtPassword = new JPasswordField();
+		txtPassword.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtPassword.setForeground(SystemColor.textInactiveText);
 		txtPassword.setBounds(80, 86, 190, 20);
 		getContentPane().add(txtPassword);
 
 		cboPerfil = new JComboBox();
 		cboPerfil.setModel(new DefaultComboBoxModel(new String[] { "", "admin", "user" }));
 		cboPerfil.setFont(new Font("Arial", Font.PLAIN, 11));
-		cboPerfil.setBounds(348, 57, 64, 22);
+		cboPerfil.setBounds(414, 57, 64, 22);
 		getContentPane().add(cboPerfil);
 
 		JLabel lblPerfil = new JLabel("Perfil :");
-		lblPerfil.setBounds(302, 61, 46, 14);
+		lblPerfil.setBounds(368, 61, 46, 14);
 		getContentPane().add(lblPerfil);
+
+		chckbxSenha = new JCheckBox("Alterar Senha");
+		chckbxSenha.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// fazer o check na caixa Jcheckbox
+				txtPassword.setEditable(true);
+				txtPassword.setText(null);
+				txtPassword.requestFocus();
+				txtPassword.setBackground(Color.BLACK);
+			}
+		});
+		chckbxSenha.setVisible(false);
+		chckbxSenha.setFont(new Font("Arial", Font.PLAIN, 11));
+		chckbxSenha.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbxSenha.setBounds(276, 85, 97, 23);
+		getContentPane().add(chckbxSenha);
 
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
@@ -244,6 +270,7 @@ public class Usuarios extends JDialog {
 	private JPasswordField txtPassword;
 	@SuppressWarnings("rawtypes")
 	private JComboBox cboPerfil;
+	private JCheckBox chckbxSenha;
 
 	/**
 	 * Metodo responsavel por verificar o status da conexao com o banco
@@ -303,6 +330,10 @@ public class Usuarios extends JDialog {
 					txtLog.setText(rs.getString(3));
 					txtPassword.setText(rs.getString(4));
 					cboPerfil.setSelectedItem(rs.getString(5));
+					// exibir a caixa checkbox
+					chckbxSenha.setVisible(true);
+					// desativar a edição da senha
+					txtPassword.setEditable(false);
 					// habilitar botoes (alterar e excluir)
 					btnUpdate.setEnabled(true);
 					btnDelete.setEnabled(true);
@@ -387,6 +418,50 @@ public class Usuarios extends JDialog {
 		} else if (txtLog.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Digite o Numero do Login");
 			txtLog.requestFocus();
+		} else {
+
+			// Logica Principal
+			String update = "update usuarios set usuario = ?, login = ?, perfil = ? where id = ?";
+
+			try {
+				// Abrir a conexao
+				Connection con = dao.conectar();
+				// Preparar a query (substituiçao de parametros)
+				PreparedStatement pst = con.prepareStatement(update);
+				pst.setString(1, txtUsuario.getText());
+				pst.setString(2, txtLog.getText());
+				// CboPerfil
+				pst.setString(3, cboPerfil.getSelectedItem().toString());
+				pst.setString(4, txtId.getText());
+				// Executar a query e atualizar as informaçoes no banco
+				int confirma = pst.executeUpdate();
+				// System.out.println(confirma);
+				if (confirma == 1) {
+					JOptionPane.showMessageDialog(null, "Informaçoes do Contato Atualizados com Sucesso.");
+					limpar();
+				}
+
+				// Encerrar a conexao
+				con.close();
+			} catch (Exception e) {
+				System.out.println(e);
+				JOptionPane.showMessageDialog(null, "Contato Não Atualizado");
+				limpar();
+			}
+		}
+	}
+	
+	//Metodo para trocar senha
+	
+	private void alterarUsuarioSenha() {
+
+		// Validaçao
+		if (txtUsuario.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Digite o Nome do Usuario");
+			txtUsuario.requestFocus();
+		} else if (txtLog.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Digite o Numero do Login");
+			txtLog.requestFocus();
 		} else if (txtPassword.getPassword().length == 0) {
 			JOptionPane.showMessageDialog(null, "Digite a Senha");
 			txtPassword.requestFocus();
@@ -407,7 +482,7 @@ public class Usuarios extends JDialog {
 				// CboPerfil
 				pst.setString(4, cboPerfil.getSelectedItem().toString());
 				pst.setString(5, txtId.getText());
-				// Executar a query e atualizar as informa�oes no banco
+				// Executar a query e atualizar as informaçoes no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
@@ -419,7 +494,8 @@ public class Usuarios extends JDialog {
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
-
+				JOptionPane.showMessageDialog(null, "Contato Não Atualizado");
+				limpar();
 			}
 		}
 	}
@@ -452,6 +528,8 @@ public class Usuarios extends JDialog {
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
+				JOptionPane.showMessageDialog(null, "Contato Não Foi Excluido");
+				limpar();
 			}
 
 		}
@@ -466,6 +544,7 @@ public class Usuarios extends JDialog {
 		txtUsuario.setText(null);
 		txtLog.setText(null);
 		txtPassword.setText(null);
+		txtPassword.setBackground(null);
 		cboPerfil.setSelectedItem("");
 		txtUsuario.requestFocus();
 		btnCreate.setEnabled(false);
