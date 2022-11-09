@@ -543,9 +543,12 @@ public class Usuarios extends JDialog {
 		txtId.setText(null);
 		txtUsuario.setText(null);
 		txtLog.setText(null);
+		txtPassword.setEditable(true);
 		txtPassword.setText(null);
 		txtPassword.setBackground(null);
 		cboPerfil.setSelectedItem("");
+		chckbxSenha.setSelected(false);
+		chckbxSenha.setVisible(false);
 		txtUsuario.requestFocus();
 		btnCreate.setEnabled(false);
 		btnDelete.setEnabled(true);
