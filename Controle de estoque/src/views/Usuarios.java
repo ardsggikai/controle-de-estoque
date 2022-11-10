@@ -64,27 +64,22 @@ public class Usuarios extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Usuarios() {
-		setModal(true);
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowActivated(WindowEvent e) {
-				status();
-			}
-		});
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Usuarios.class.getResource("/img/icoUsuarios.png")));
 		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
 		getContentPane().setLayout(null);
 
 		lblLogin = new JLabel("Login:");
 		lblLogin.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblLogin.setBounds(23, 61, 57, 14);
+		lblLogin.setBounds(23, 14, 57, 14);
 		getContentPane().add(lblLogin);
 
 		lblSenha = new JLabel("Senha:");
 		lblSenha.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblSenha.setBounds(23, 92, 57, 14);
+		lblSenha.setBounds(23, 42, 57, 14);
 		getContentPane().add(lblSenha);
 
 		lblId = new JLabel("ID");
@@ -92,25 +87,20 @@ public class Usuarios extends JDialog {
 		getContentPane().add(lblId);
 
 		txtId = new JTextField();
+		txtId.setEditable(false);
 		txtId.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtId.setBounds(414, 30, 86, 20);
 		getContentPane().add(txtId);
 		txtId.setColumns(10);
 
-		lblStatus = new JLabel("");
-		lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dboff.png")));
-		lblStatus.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblStatus.setBounds(444, 120, 64, 64);
-		getContentPane().add(lblStatus);
-
 		JLabel lblUsuario = new JLabel("Usuario");
 		lblUsuario.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblUsuario.setBounds(20, 36, 46, 14);
+		lblUsuario.setBounds(18, 81, 46, 14);
 		getContentPane().add(lblUsuario);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtUsuario.setBounds(80, 30, 190, 20);
+		txtUsuario.setBounds(78, 75, 190, 20);
 		getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		setResizable(false);
@@ -123,7 +113,7 @@ public class Usuarios extends JDialog {
 		btnCreate.setToolTipText("Adicionar Usuario");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				adicionarContato();
+				adicionarFuncionario();
 			}
 		});
 		btnCreate.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnRead.png")));
@@ -153,18 +143,18 @@ public class Usuarios extends JDialog {
 		btnSearch = new JButton("");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pesquisarContato();
+				pesquisarFuncionario();
 			}
 		});
 		btnSearch.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnSeach.png")));
-		btnSearch.setToolTipText("Pesquisar Pelo ID");
+		btnSearch.setToolTipText("Pesquisar Pelo Login");
 		btnSearch.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnSearch.setBounds(510, 30, 64, 64);
+		btnSearch.setBounds(272, 5, 32, 32);
 		getContentPane().add(btnSearch);
 
 		txtLog = new JTextField();
 		txtLog.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtLog.setBounds(80, 58, 190, 20);
+		txtLog.setBounds(80, 11, 190, 20);
 		getContentPane().add(txtLog);
 		txtLog.setColumns(10);
 
@@ -191,7 +181,7 @@ public class Usuarios extends JDialog {
 				if (chckbxSenha.isSelected()) {
 					alterarUsuarioSenha();
 				} else {
-					alterarContato();
+					alterarFuncionario();
 				}
 			}
 		});
@@ -216,7 +206,7 @@ public class Usuarios extends JDialog {
 		txtPassword = new JPasswordField();
 		txtPassword.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtPassword.setForeground(SystemColor.textInactiveText);
-		txtPassword.setBounds(80, 86, 190, 20);
+		txtPassword.setBounds(80, 36, 190, 20);
 		getContentPane().add(txtPassword);
 
 		cboPerfil = new JComboBox();
@@ -242,7 +232,7 @@ public class Usuarios extends JDialog {
 		chckbxSenha.setVisible(false);
 		chckbxSenha.setFont(new Font("Arial", Font.PLAIN, 11));
 		chckbxSenha.setHorizontalAlignment(SwingConstants.CENTER);
-		chckbxSenha.setBounds(276, 85, 97, 23);
+		chckbxSenha.setBounds(268, 35, 97, 23);
 		getContentPane().add(chckbxSenha);
 
 		// Ativar Janela inferior
@@ -265,7 +255,6 @@ public class Usuarios extends JDialog {
 	private JButton btnSearch;
 	private JButton btnDelete;
 	private JTextField txtLog;
-	private JLabel lblStatus;
 	private JButton btnUpdate;
 	private JPasswordField txtPassword;
 	@SuppressWarnings("rawtypes")
@@ -273,43 +262,19 @@ public class Usuarios extends JDialog {
 	private JCheckBox chckbxSenha;
 
 	/**
-	 * Metodo responsavel por verificar o status da conexao com o banco
-	 */
-	private void status() {
-		// System.out.println("Teste - Janela Ativada");
-		// uso da classe connection (JDBC) para estabelecer a conexão
-		try {
-			Connection con = dao.conectar();
-			if (con == null) {
-				System.out.println("Erro de Conexão");
-				lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dboff.png")));
-			} else {
-				System.out.println("Banco Conectado!");
-				lblStatus.setIcon(new ImageIcon(Usuarios.class.getResource("/img/dbon.png")));
-			}
-			// Nunca esquecer de encerrar a conexão
-			con.close();
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-
-	} // Fim do Status
-
-	/**
 	 * Metodo responsavel pela pesquisa (select)
 	 */
 
-	private void pesquisarContato() {
+	private void pesquisarFuncionario() {
 		// Validaçao
-		if (txtId.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Digite o Numero do Id");
-			txtId.requestFocus();
+		if (txtLog.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Digite o seu login");
+			txtLog.requestFocus();
 		} else {
 
 			// System.out.println("Teste Pesquisar"); (pra testar)
 			// selecione um parametro a ser substituido
-			String read = "select * from usuarios where id = ?";
+			String read = "select * from usuarios where login = ?";
 			try {
 
 				// Estabelecer a conexÃ£o ("abrir a porta da geladeira")
@@ -319,13 +284,14 @@ public class Usuarios extends JDialog {
 				// A Linha abaixo substituir o ? pelo conteudo da caixa de texto txtUsuario, o
 				// 1
 				// faz referencia a interrogacao
-				pst.setString(1, txtId.getText());
-				// Obter os dados do contato (resultado)
+				pst.setString(1, txtLog.getText());
+				// Obter os dados do Funcionario (resultado)
 				ResultSet rs = pst.executeQuery();
-				// Verificar se existe um contato cadastrado
-				// rs.next() significa ter um contato correspondente ao nome pesquisado
+				// Verificar se existe um Funcionario cadastrado
+				// rs.next() significa ter um Funcionario correspondente ao nome pesquisado
 				if (rs.next()) {
 					// setar as caixas de texto com o resultado da pesquisa
+					txtId.setText(rs.getString(1));
 					txtUsuario.setText(rs.getString(2));
 					txtLog.setText(rs.getString(3));
 					txtPassword.setText(rs.getString(4));
@@ -339,7 +305,7 @@ public class Usuarios extends JDialog {
 					btnDelete.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Contato inexistente");
+					JOptionPane.showMessageDialog(null, "Funcionario inexistente");
 					limpar();
 					txtUsuario.requestFocus();
 					// setar campos e botoes (UX)
@@ -358,9 +324,9 @@ public class Usuarios extends JDialog {
 	}
 
 	/**
-	 * Metodo responsavel pelo cadastro de um novo contato
+	 * Metodo responsavel pelo cadastro de um novo Funcionario
 	 */
-	void adicionarContato() {
+	void adicionarFuncionario() {
 		// validadaçao de campos obrigatorios
 		if (txtUsuario.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Preencha o Usuario");
@@ -389,11 +355,11 @@ public class Usuarios extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Contato adicionado.");
+					JOptionPane.showMessageDialog(null, "Funcionario adicionado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Contato Não Adicionado");
+					JOptionPane.showMessageDialog(null, "Funcionario Não Adicionado");
 					limpar();
 				}
 
@@ -416,10 +382,10 @@ public class Usuarios extends JDialog {
 	}
 
 	/**
-	 * Metodo Responsavel por alterar informacoes do contato
+	 * Metodo Responsavel por alterar informacoes do Funcionario
 	 */
 
-	private void alterarContato() {
+	private void alterarFuncionario() {
 
 		// Validaçao
 		if (txtUsuario.getText().isEmpty()) {
@@ -447,7 +413,7 @@ public class Usuarios extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Informaçoes do Contato Atualizados com Sucesso.");
+					JOptionPane.showMessageDialog(null, "Informaçoes do Funcionario Atualizados com Sucesso.");
 					limpar();
 				}
 
@@ -455,7 +421,7 @@ public class Usuarios extends JDialog {
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Contato Não Atualizado");
+				JOptionPane.showMessageDialog(null, "Funcionario Não Atualizado");
 				limpar();
 			}
 		}
@@ -496,7 +462,7 @@ public class Usuarios extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Informaçoes do Contato Atualizados com Sucesso.");
+					JOptionPane.showMessageDialog(null, "Informaçoes do Funcionario Atualizados com Sucesso.");
 					limpar();
 				}
 
@@ -504,20 +470,20 @@ public class Usuarios extends JDialog {
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Contato Não Atualizado");
+				JOptionPane.showMessageDialog(null, "Funcionario Não Atualizado");
 				limpar();
 			}
 		}
 	}
 
 	/**
-	 * Metodo Responsavel por deletar informa�oes do contato
+	 * Metodo Responsavel por deletar informa�oes do Funcionario
 	 */
 
 	private void deleteByID() {
 
-		// Valida��o
-		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusão deste contato?", "Atenção",
+		// Validação
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusão deste Funcionario?", "Atenção",
 				JOptionPane.YES_NO_OPTION);
 		if (confirma == JOptionPane.YES_OPTION) {
 
@@ -532,13 +498,13 @@ public class Usuarios extends JDialog {
 				int confirmaExcluir = pst.executeUpdate();
 				if (confirmaExcluir == 1) {
 					limpar();
-					JOptionPane.showMessageDialog(null, "Contato excluido com sucesso");
+					JOptionPane.showMessageDialog(null, "Funcionario excluido com sucesso");
 				}
 				// Encerrar a conexao
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Contato Não Foi Excluido");
+				JOptionPane.showMessageDialog(null, "Funcionario Não Foi Excluido");
 				limpar();
 			}
 
