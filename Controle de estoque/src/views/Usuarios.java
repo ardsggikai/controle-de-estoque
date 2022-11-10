@@ -187,7 +187,7 @@ public class Usuarios extends JDialog {
 		btnUpdate.setEnabled(false);
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Verificar se o checkbox está selecionado 
+				// Verificar se o checkbox está selecionado
 				if (chckbxSenha.isSelected()) {
 					alterarUsuarioSenha();
 				} else {
@@ -391,15 +391,25 @@ public class Usuarios extends JDialog {
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Contato adicionado.");
 					limpar();
-
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Contato Não Adicionado");
+					limpar();
 				}
 
 				// Encerrar a conexÃ£o
 				con.close();
+			}
 
-			} catch (Exception e) {
-				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Contato Não Adicionado");
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showConfirmDialog(null, "Usuario não adicionado - Login Existente");
+				txtLog.setText(null);
+				txtLog.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
 				limpar();
 			}
 		}
@@ -450,9 +460,9 @@ public class Usuarios extends JDialog {
 			}
 		}
 	}
-	
-	//Metodo para trocar senha
-	
+
+	// Metodo para trocar senha
+
 	private void alterarUsuarioSenha() {
 
 		// Validaçao
