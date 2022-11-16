@@ -92,7 +92,7 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
 
-		JLabel lblObservacao = new JLabel("Observação");
+		JLabel lblObservacao = new JLabel("Observa\u00E7\u00E3o");
 		lblObservacao.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblObservacao.setBounds(10, 416, 70, 14);
 		getContentPane().add(lblObservacao);
@@ -141,7 +141,7 @@ public class Fornecedores extends JDialog {
 		txtIe.setBounds(345, 194, 150, 20);
 		getContentPane().add(txtIe);
 
-		JLabel lblRazaoSocial = new JLabel("Razão Social");
+		JLabel lblRazaoSocial = new JLabel("Raz\u00E3o Social");
 		lblRazaoSocial.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblRazaoSocial.setBounds(10, 232, 80, 14);
 		getContentPane().add(lblRazaoSocial);
@@ -180,7 +180,7 @@ public class Fornecedores extends JDialog {
 		btnCep.setBounds(143, 260, 32, 32);
 		getContentPane().add(btnCep);
 
-		JLabel lblEndereco = new JLabel("Endereço");
+		JLabel lblEndereco = new JLabel("Endere\u00E7o");
 		lblEndereco.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblEndereco.setBounds(175, 267, 55, 14);
 		getContentPane().add(lblEndereco);
@@ -190,9 +190,9 @@ public class Fornecedores extends JDialog {
 		txtEndereco.setBounds(235, 264, 250, 20);
 		getContentPane().add(txtEndereco);
 
-		JLabel lblNumero = new JLabel("Nº");
+		JLabel lblNumero = new JLabel("N");
 		lblNumero.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblNumero.setBounds(490, 267, 20, 14);
+		lblNumero.setBounds(495, 267, 20, 14);
 		getContentPane().add(lblNumero);
 
 		txtNumero = new JTextField();
