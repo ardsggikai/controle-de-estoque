@@ -260,17 +260,17 @@ public class Fornecedores extends JDialog {
 
 		txtFone = new JTextField();
 		txtFone.setColumns(10);
-		txtFone.setBounds(375, 334, 90, 20);
+		txtFone.setBounds(375, 334, 105, 20);
 		getContentPane().add(txtFone);
 
 		JLabel lblWhatsapp = new JLabel("Whatsapp");
 		lblWhatsapp.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblWhatsapp.setBounds(470, 337, 60, 14);
+		lblWhatsapp.setBounds(495, 333, 60, 20);
 		getContentPane().add(lblWhatsapp);
 
 		txtWhatsapp = new JTextField();
 		txtWhatsapp.setColumns(10);
-		txtWhatsapp.setBounds(535, 334, 90, 20);
+		txtWhatsapp.setBounds(565, 335, 105, 20);
 		getContentPane().add(txtWhatsapp);
 
 		JLabel lblSite = new JLabel("Site");
@@ -294,7 +294,7 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(txtEmail);
 
 		txtObservacao = new JTextArea();
-		txtObservacao.setBounds(85, 403, 400, 40);
+		txtObservacao.setBounds(85, 403, 360, 40);
 		getContentPane().add(txtObservacao);
 
 		btnCreate = new JButton("");
@@ -304,7 +304,7 @@ public class Fornecedores extends JDialog {
 		btnCreate.setContentAreaFilled(false);
 		btnCreate.setBorderPainted(false);
 		btnCreate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnCreate.setBounds(495, 391, 64, 64);
+		btnCreate.setBounds(455, 391, 64, 64);
 		getContentPane().add(btnCreate);
 
 		btnDelete = new JButton("");
@@ -314,23 +314,43 @@ public class Fornecedores extends JDialog {
 		btnDelete.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/btnDelete.png")));
 		btnDelete.setContentAreaFilled(false);
 		btnDelete.setBorderPainted(false);
-		btnDelete.setBounds(635, 391, 64, 64);
+		btnDelete.setBounds(618, 391, 64, 64);
 		getContentPane().add(btnDelete);
 
 		btnUpdate = new JButton("");
+		btnUpdate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				atualizar();
+			}
+		});
 		btnUpdate.setEnabled(false);
 		btnUpdate.setToolTipText("Atualizar fornecedor");
 		btnUpdate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUpdate.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/btnUpdate.png")));
 		btnUpdate.setContentAreaFilled(false);
 		btnUpdate.setBorderPainted(false);
-		btnUpdate.setBounds(566, 391, 64, 64);
+		btnUpdate.setBounds(541, 391, 64, 64);
 		getContentPane().add(btnUpdate);
 
 		/**
 		 * Uso da tecla <Enter> junto com um botao
 		 */
 		getRootPane().setDefaultButton(btnBuscar);
+		
+		btnLimpar = new JButton("");
+		btnLimpar.setEnabled(false);
+		btnLimpar.setContentAreaFilled(false);
+		btnLimpar.setBorderPainted(false);
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+			}
+		});
+		btnLimpar.setToolTipText("Bot\u00E3o Limpar");
+		btnLimpar.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/BtnEraser.png")));
+		btnLimpar.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnLimpar.setBounds(681, 392, 64, 64);
+		getContentPane().add(btnLimpar);
 
 	} // Fim do construtor
 
@@ -342,6 +362,7 @@ public class Fornecedores extends JDialog {
 	private JButton btnDelete;
 	private JComboBox<Object> cboUf;
 	private JTextArea txtObservacao;
+	private JButton btnLimpar;
 
 	private void pesquisar() {
 
@@ -382,9 +403,10 @@ public class Fornecedores extends JDialog {
 					 */
 					btnUpdate.setEnabled(true);
 					btnDelete.setEnabled(true);
+					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Fornecedor nÃ£o cadastrado");
+					JOptionPane.showMessageDialog(null, "Fornecedor não cadastrado");
 					btnCreate.setEnabled(true);
 					limpar();
 					txtId.requestFocus();
@@ -438,9 +460,12 @@ public class Fornecedores extends JDialog {
 			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
 			txtEmail.requestFocus();
 		} else {
+			// Logica Principal
 			String create = "insert into fornecedores (razaoSocial, fantasia, cnpj, ie, cep, endereco, numero, complemento, bairro, cidade, uf, nomeContato, fone1, fone2, email, site, obs) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
+				// Abrir a conexao
 				Connection con = dao.conectar();
+				// Preparar a query (substituiçao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
 				pst.setString(1, txtRazaoSocial.getText());
 				pst.setString(2, txtNomeFantasia.getText());
@@ -460,10 +485,12 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 
+				// Executar a query e atualizar as informaçoes no banco
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!");
 					limpar();
+					// Encerrar a conexao
 					con.close();
 				}
 			} catch (Exception e) {
@@ -471,6 +498,94 @@ public class Fornecedores extends JDialog {
 			}
 		}
 	}
+	
+	public void atualizar() {
+		
+		// Validaçao
+		if (txtRazaoSocial.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a Razao Social");
+			txtRazaoSocial.requestFocus();
+		} else if (txtNomeFantasia.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Nome Fantasia");
+			txtNomeFantasia.requestFocus();
+		} else if (txtCnpj.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o CNPJ");
+			txtCnpj.requestFocus();
+		} else if (txtIe.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a Inscricao Social");
+			txtIe.requestFocus();
+		} else if (txtCep.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o CEP");
+			txtCep.requestFocus();
+		} else if (txtEndereco.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o endereco");
+			txtEndereco.requestFocus();
+		} else if (txtNumero.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o numero");
+			txtNumero.requestFocus();
+		} else if (txtBairro.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o bairro");
+			txtBairro.requestFocus();
+		} else if (txtCidade.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a cidade");
+			txtCidade.requestFocus();
+		} else if (txtContato.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
+			txtContato.requestFocus();
+		} else if (txtFone.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
+			txtFone.requestFocus();
+		} else if (txtEmail.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
+			txtEmail.requestFocus();
+		} else {
+
+					// Logica Principal
+					String update = "update fornecedores set razaoSocial = ?, fantasia = ?, cnpj = ?, ie = ?, cep = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, nomeContato = ?, fone1 = ?, fone2 = ?, email = ?, site = ?, obs = ? where idFor = ?";
+
+					try {
+						// Abrir a conexao
+						Connection con = dao.conectar();
+						// Preparar a query (substituiçao de parametros)
+						PreparedStatement pst = con.prepareStatement(update);
+						pst.setString(1, txtRazaoSocial.getText());
+						pst.setString(2, txtNomeFantasia.getText());
+						pst.setString(3, txtCnpj.getText());
+						pst.setString(4, txtIe.getText());
+						pst.setString(5, txtCep.getText());
+						pst.setString(6, txtEndereco.getText());
+						pst.setString(7, txtNumero.getText());
+						pst.setString(8, txtComplemento.getText());
+						pst.setString(9, txtBairro.getText());
+						pst.setString(10, txtCidade.getText());
+						pst.setString(11, cboUf.getSelectedItem().toString());
+						pst.setString(12, txtContato.getText());
+						pst.setString(13, txtFone.getText());
+						pst.setString(14, txtWhatsapp.getText());
+						pst.setString(15, txtEmail.getText());
+						pst.setString(16, txtSite.getText());
+						pst.setString(17, txtObservacao.getText());
+						pst.setString(18, txtId.getText());
+						// Executar a query e atualizar as informaçoes no banco
+						int confirma = pst.executeUpdate();
+						// System.out.println(confirma);
+						if (confirma == 1) {
+							JOptionPane.showMessageDialog(null, "Informaçoes do Fornecedores Atualizados com Sucesso.");
+							limpar();
+						}
+
+						// Encerrar a conexao
+						con.close();
+					} catch (Exception e) {
+						System.out.println(e);
+						JOptionPane.showMessageDialog(null, "Fornecedores Não Atualizado");
+						limpar();
+					}
+				}
+			}
+		
+	
+	
 
 	public void limpar() {
 		txtFornecedor.setText(null);
@@ -494,5 +609,4 @@ public class Fornecedores extends JDialog {
 		txtObservacao.setText(null);
 
 	}
-
 } // Fim do codigo
