@@ -94,23 +94,25 @@ public class Fornecedores extends JDialog {
 		txtFornecedor.setColumns(10);
 
 		JLabel lblObservacao = new JLabel("Observa\u00E7\u00E3o");
-		lblObservacao.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblObservacao.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblObservacao.setBounds(10, 416, 70, 14);
 		getContentPane().add(lblObservacao);
 
 		JLabel lblId = new JLabel("ID");
-		lblId.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblId.setBounds(10, 197, 20, 14);
+		lblId.setFont(new Font("Arial", Font.PLAIN, 11));
+		lblId.setBounds(74, 205, 20, 14);
 		getContentPane().add(lblId);
 
 		txtId = new JTextField();
-		txtId.setBounds(30, 194, 50, 20);
+		txtId.setToolTipText("Coloque o Id");
+		txtId.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtId.setBounds(94, 202, 50, 20);
 		getContentPane().add(txtId);
 		txtId.setColumns(10);
 
 		JLabel lblCnpj = new JLabel("CNPJ");
 		lblCnpj.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblCnpj.setBounds(125, 197, 35, 14);
+		lblCnpj.setBounds(205, 202, 35, 14);
 		getContentPane().add(lblCnpj);
 
 		btnBuscar = new JButton("");
@@ -124,30 +126,36 @@ public class Fornecedores extends JDialog {
 		btnBuscar.setBorderPainted(false);
 		btnBuscar.setToolTipText("Buscar ID");
 		btnBuscar.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/btnSeach.png")));
-		btnBuscar.setBounds(83, 189, 32, 32);
+		btnBuscar.setBounds(163, 190, 32, 32);
 		getContentPane().add(btnBuscar);
 
 		txtCnpj = new JTextField();
+		txtCnpj.setToolTipText("Coloque o CNPJ");
+		txtCnpj.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCnpj.setColumns(10);
-		txtCnpj.setBounds(165, 194, 150, 20);
+		txtCnpj.setBounds(245, 199, 150, 20);
 		getContentPane().add(txtCnpj);
 
 		JLabel lblIe = new JLabel("IE");
 		lblIe.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblIe.setBounds(320, 197, 20, 14);
+		lblIe.setBounds(470, 205, 20, 14);
 		getContentPane().add(lblIe);
 
 		txtIe = new JTextField();
+		txtIe.setToolTipText("Coloque a Incri\u00E7\u00E3o Estadual");
+		txtIe.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtIe.setColumns(10);
-		txtIe.setBounds(345, 194, 150, 20);
+		txtIe.setBounds(495, 202, 150, 20);
 		getContentPane().add(txtIe);
 
 		JLabel lblRazaoSocial = new JLabel("Raz\u00E3o Social");
-		lblRazaoSocial.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblRazaoSocial.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblRazaoSocial.setBounds(10, 232, 80, 14);
 		getContentPane().add(lblRazaoSocial);
 
 		txtRazaoSocial = new JTextField();
+		txtRazaoSocial.setToolTipText("Coloque o Raz\u00E3o Social");
+		txtRazaoSocial.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtRazaoSocial.setColumns(10);
 		txtRazaoSocial.setBounds(95, 229, 300, 20);
 		getContentPane().add(txtRazaoSocial);
@@ -158,18 +166,22 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblNomeFantasia);
 
 		txtNomeFantasia = new JTextField();
+		txtNomeFantasia.setToolTipText("Coloque o Nome Fantasia");
+		txtNomeFantasia.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtNomeFantasia.setColumns(10);
 		txtNomeFantasia.setBounds(495, 229, 250, 20);
 		getContentPane().add(txtNomeFantasia);
 
 		JLabel lblCep = new JLabel("CEP");
-		lblCep.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblCep.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblCep.setBounds(10, 267, 25, 14);
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
+		txtCep.setToolTipText("Coloque o CEP");
+		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCep.setColumns(10);
-		txtCep.setBounds(40, 264, 100, 20);
+		txtCep.setBounds(55, 265, 100, 20);
 		getContentPane().add(txtCep);
 
 		btnCep = new JButton("");
@@ -178,79 +190,93 @@ public class Fornecedores extends JDialog {
 		btnCep.setToolTipText("Buscar CEP");
 		btnCep.setContentAreaFilled(false);
 		btnCep.setBorderPainted(false);
-		btnCep.setBounds(143, 260, 32, 32);
+		btnCep.setBounds(160, 260, 32, 32);
 		getContentPane().add(btnCep);
 
 		JLabel lblEndereco = new JLabel("Endere\u00E7o");
 		lblEndereco.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblEndereco.setBounds(175, 267, 55, 14);
+		lblEndereco.setBounds(192, 266, 55, 14);
 		getContentPane().add(lblEndereco);
 
 		txtEndereco = new JTextField();
+		txtEndereco.setToolTipText("Coloque o Endere\u00E7o");
+		txtEndereco.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtEndereco.setColumns(10);
-		txtEndereco.setBounds(235, 264, 250, 20);
+		txtEndereco.setBounds(250, 265, 250, 20);
 		getContentPane().add(txtEndereco);
 
 		JLabel lblNumero = new JLabel("N");
 		lblNumero.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblNumero.setBounds(495, 267, 20, 14);
+		lblNumero.setBounds(505, 266, 20, 14);
 		getContentPane().add(lblNumero);
 
 		txtNumero = new JTextField();
+		txtNumero.setToolTipText("Coloque o Numero da Casa");
+		txtNumero.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(515, 264, 70, 20);
+		txtNumero.setBounds(525, 265, 40, 20);
 		getContentPane().add(txtNumero);
 
 		JLabel lblComplemento = new JLabel("Complemento");
 		lblComplemento.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblComplemento.setBounds(590, 267, 80, 14);
+		lblComplemento.setBounds(575, 266, 80, 14);
 		getContentPane().add(lblComplemento);
 
 		txtComplemento = new JTextField();
+		txtComplemento.setToolTipText("Coloque o Complemento");
+		txtComplemento.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtComplemento.setColumns(10);
-		txtComplemento.setBounds(675, 264, 70, 20);
+		txtComplemento.setBounds(665, 265, 78, 20);
 		getContentPane().add(txtComplemento);
 
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblBairro.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblBairro.setBounds(10, 302, 40, 14);
 		getContentPane().add(lblBairro);
 
 		txtBairro = new JTextField();
+		txtBairro.setToolTipText("Coloque o Bairro");
+		txtBairro.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtBairro.setColumns(10);
 		txtBairro.setBounds(55, 299, 250, 20);
 		getContentPane().add(txtBairro);
 
 		JLabel lblCidade = new JLabel("Cidade");
 		lblCidade.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblCidade.setBounds(310, 302, 40, 14);
+		lblCidade.setBounds(328, 301, 40, 14);
 		getContentPane().add(lblCidade);
 
 		txtCidade = new JTextField();
+		txtCidade.setToolTipText("Coloque a Cidade");
+		txtCidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(355, 299, 250, 20);
+		txtCidade.setBounds(378, 300, 250, 20);
 		getContentPane().add(txtCidade);
 
 		JLabel lblUf = new JLabel("UF");
 		lblUf.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblUf.setBounds(610, 302, 20, 14);
+		lblUf.setBounds(638, 301, 20, 14);
 		getContentPane().add(lblUf);
 
 		cboUf = new JComboBox<Object>();
+		cboUf.setToolTipText("Coloque o Estado");
+		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUf.setModel(new DefaultComboBoxModel<Object>(
 				new String[] { "", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
-		cboUf.setBounds(635, 298, 60, 22);
+		cboUf.setBounds(663, 297, 60, 22);
 		getContentPane().add(cboUf);
 
 		JLabel lblContato = new JLabel("Contato");
-		lblContato.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblContato.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblContato.setBounds(10, 337, 50, 14);
 		getContentPane().add(lblContato);
 
 		txtContato = new JTextField();
+		txtContato.setToolTipText("Coloque o Contato");
+		txtContato.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtContato.setColumns(10);
-		txtContato.setBounds(65, 334, 250, 20);
+		txtContato.setBounds(55, 335, 250, 20);
 		getContentPane().add(txtContato);
 
 		JLabel lblFone = new JLabel("Telefone");
@@ -259,6 +285,8 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblFone);
 
 		txtFone = new JTextField();
+		txtFone.setToolTipText("Coloque o Telefone");
+		txtFone.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtFone.setColumns(10);
 		txtFone.setBounds(375, 334, 105, 20);
 		getContentPane().add(txtFone);
@@ -269,31 +297,38 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblWhatsapp);
 
 		txtWhatsapp = new JTextField();
+		txtWhatsapp.setToolTipText("Coloque o Whatsapp");
+		txtWhatsapp.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtWhatsapp.setColumns(10);
 		txtWhatsapp.setBounds(565, 335, 105, 20);
 		getContentPane().add(txtWhatsapp);
 
 		JLabel lblSite = new JLabel("Site");
-		lblSite.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblSite.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblSite.setBounds(10, 372, 25, 14);
 		getContentPane().add(lblSite);
 
 		txtSite = new JTextField();
+		txtSite.setToolTipText("Coloque o Site");
+		txtSite.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtSite.setColumns(10);
-		txtSite.setBounds(40, 369, 250, 20);
+		txtSite.setBounds(55, 370, 250, 20);
 		getContentPane().add(txtSite);
 
 		JLabel lblEmail = new JLabel("E-mail");
 		lblEmail.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblEmail.setBounds(295, 372, 40, 14);
+		lblEmail.setBounds(330, 371, 40, 14);
 		getContentPane().add(lblEmail);
 
 		txtEmail = new JTextField();
+		txtEmail.setToolTipText("Coloque o E-mail");
+		txtEmail.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(340, 369, 250, 20);
+		txtEmail.setBounds(375, 365, 295, 20);
 		getContentPane().add(txtEmail);
 
 		txtObservacao = new JTextArea();
+		txtObservacao.setToolTipText("Modifique a Observa\u00E7\u00E3o");
 		txtObservacao.setBounds(85, 403, 360, 40);
 		getContentPane().add(txtObservacao);
 
