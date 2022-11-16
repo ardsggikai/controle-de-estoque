@@ -80,6 +80,7 @@ public class Fornecedores extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Fornecedores.class.getResource("/img/supliers.png")));
 		setTitle("Controle de Estoque - Fornecedores");
 		setBounds(100, 100, 784, 511);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
 		JLabel lblFornecedor = new JLabel("Fornecedor");
