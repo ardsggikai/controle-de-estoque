@@ -116,7 +116,7 @@ public class Usuarios extends JDialog {
 				adicionarFuncionario();
 			}
 		});
-		btnCreate.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnRead.png")));
+		btnCreate.setIcon(new ImageIcon(Usuarios.class.getResource("/img/btnSeach.png")));
 		btnCreate.setFocusPainted(false);
 		btnCreate.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnCreate.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -254,12 +254,12 @@ public class Login extends JFrame {
 						// Alterar a Label da tela principal (inserir o nome do usuário no rodapé)
 						// System.out.println(rs.getString(2));
 						main.lblUsuarios.setText(rs.getString(2));
-						// habilitar todos os botões 
+						// habilitar todos os botões
 						main.btnRelatorios.setEnabled(true);
 						main.btnUsuarios.setEnabled(true);
 						// Alterar a cor do rodapé
 						main.panelUsuario.setBackground(Color.RED);
-						
+
 						// fechar o JFrame
 						this.dispose();
 					} else {
