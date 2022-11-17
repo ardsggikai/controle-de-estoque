@@ -24,6 +24,8 @@ import javax.swing.JTextField;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Fornecedores extends JDialog {
 
@@ -105,6 +107,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblId);
 
 		txtId = new JTextField();
+		txtId.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtId.setToolTipText("Coloque o Id");
 		txtId.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtId.setBounds(94, 202, 50, 20);
@@ -131,6 +143,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(btnBuscar);
 
 		txtCnpj = new JTextField();
+		txtCnpj.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321./-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCnpj.setToolTipText("Coloque o CNPJ");
 		txtCnpj.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCnpj.setColumns(10);
@@ -143,6 +165,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblIe);
 
 		txtIe = new JTextField();
+		txtIe.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtIe.setToolTipText("Coloque a Incri\u00E7\u00E3o Estadual");
 		txtIe.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtIe.setColumns(10);
@@ -155,6 +187,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblRazaoSocial);
 
 		txtRazaoSocial = new JTextField();
+		txtRazaoSocial.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtRazaoSocial.setToolTipText("Coloque o Raz\u00E3o Social");
 		txtRazaoSocial.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtRazaoSocial.setColumns(10);
@@ -167,6 +209,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblNomeFantasia);
 
 		txtNomeFantasia = new JTextField();
+		txtNomeFantasia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtNomeFantasia.setToolTipText("Coloque o Nome Fantasia");
 		txtNomeFantasia.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtNomeFantasia.setColumns(10);
@@ -179,6 +231,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
+		txtCep.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCep.setToolTipText("Coloque o CEP");
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCep.setColumns(10);
@@ -200,6 +262,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblEndereco);
 
 		txtEndereco = new JTextField();
+		txtEndereco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtEndereco.setToolTipText("Coloque o Endere\u00E7o");
 		txtEndereco.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtEndereco.setColumns(10);
@@ -212,6 +284,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblNumero);
 
 		txtNumero = new JTextField();
+		txtNumero.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtNumero.setToolTipText("Coloque o Numero da Casa");
 		txtNumero.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtNumero.setColumns(10);
@@ -224,6 +306,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblComplemento);
 
 		txtComplemento = new JTextField();
+		txtComplemento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtComplemento.setToolTipText("Coloque o Complemento");
 		txtComplemento.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtComplemento.setColumns(10);
@@ -286,6 +378,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblFone);
 
 		txtFone = new JTextField();
+		txtFone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtFone.setToolTipText("Coloque o Telefone");
 		txtFone.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtFone.setColumns(10);
@@ -298,6 +400,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblWhatsapp);
 
 		txtWhatsapp = new JTextField();
+		txtWhatsapp.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtWhatsapp.setToolTipText("Coloque o Whatsapp");
 		txtWhatsapp.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtWhatsapp.setColumns(10);
@@ -401,23 +513,32 @@ public class Fornecedores extends JDialog {
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
 		// txtId
 		RestrictedTextField id = new RestrictedTextField(txtId);
-		id.setOnlyAlphaNumeric(true);
-		id.setLimit(50);
+		id.setLimit(7);
 		// txtCnpj
+		RestrictedTextField cnpj = new RestrictedTextField(txtCnpj);
+		cnpj.setLimit(18);
 		// txtIe
+		RestrictedTextField Ie = new RestrictedTextField(txtIe);
+		Ie.setLimit(12);
 		// txtRazaoSocial
+		RestrictedTextField RS = new RestrictedTextField(txtRazaoSocial);
+		RS.setLimit(50);
 		// txtNomeFantasia
+		RestrictedTextField NF = new RestrictedTextField(txtNomeFantasia);
+		NF.setLimit(50);
 		// txtCep
+		RestrictedTextField CEP = new RestrictedTextField(txtCep);
+		CEP.setLimit(8);
 		// txtEndereco
+		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
+		Endereco.setLimit(50);
 		// txtNumero
+		RestrictedTextField NumeroCasa = new RestrictedTextField(txtNumero);
+		NumeroCasa.setLimit(4);
 		// txtComplemento
-		// txtBairro
-		// txtCidade
-		// txtContato
-		// txtFone
-		// txtWhatsapp
-		// txtSite
-		// txtEmail
+		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
+		Complemento.setLimit(15);
+		
 
 	} // Fim do construtor
 
