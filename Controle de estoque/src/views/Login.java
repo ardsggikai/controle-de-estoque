@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
 
 import javax.swing.JButton;
@@ -171,6 +172,16 @@ public class Login extends JFrame {
 
 			}
 		});
+
+		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
+		// txtLogin
+		RestrictedTextField login = new RestrictedTextField(txtLogin);
+		login.setOnlyAlphaNumeric(true);
+		login.setLimit(50);
+		// txtFone
+		RestrictedTextField senha = new RestrictedTextField(txtSenha);
+		senha.setOnlyAlphaNumeric(true);
+		senha.setLimit(50);
 
 	}// Fim do construtor
 
