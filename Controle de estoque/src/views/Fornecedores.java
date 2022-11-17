@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
 
 public class Fornecedores extends JDialog {
@@ -396,6 +397,27 @@ public class Fornecedores extends JDialog {
 		btnLimpar.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnLimpar.setBounds(681, 392, 64, 64);
 		getContentPane().add(btnLimpar);
+
+		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
+		// txtId
+		RestrictedTextField id = new RestrictedTextField(txtId);
+		id.setOnlyAlphaNumeric(true);
+		id.setLimit(50);
+		// txtCnpj
+		// txtIe
+		// txtRazaoSocial
+		// txtNomeFantasia
+		// txtCep
+		// txtEndereco
+		// txtNumero
+		// txtComplemento
+		// txtBairro
+		// txtCidade
+		// txtContato
+		// txtFone
+		// txtWhatsapp
+		// txtSite
+		// txtEmail
 
 	} // Fim do construtor
 
