@@ -622,8 +622,6 @@ public class Fornecedores extends JDialog {
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
 		Email.setLimit(30);
-		
-		
 
 	} // Fim do construtor
 

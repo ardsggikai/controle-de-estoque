@@ -41,6 +41,10 @@ public class Login extends JFrame {
 	private JLabel lblStatus;
 	private JTextField txtLogin;
 	private JPasswordField txtSenha;
+	private JLabel lblHoras;
+	private JLabel lblUsuarios;
+	private JLabel lblImgEsq;
+	private JLabel lblImgDireita;
 
 	/**
 	 * Launch the application.
@@ -185,15 +189,10 @@ public class Login extends JFrame {
 
 	}// Fim do construtor
 
-	private JLabel lblImgEsq;
-	private JLabel lblImgDireita;
-
 	/**
 	 * Criar um objeto para acessar o metodo conectar() da classe DAO
 	 */
 	DAO dao = new DAO();
-	private JLabel lblHoras;
-	private JLabel lblUsuarios;
 
 	/**
 	 * Metodo responsavel por verificar o status da conexao com o banco

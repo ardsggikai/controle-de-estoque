@@ -43,6 +43,15 @@ public class Usuarios extends JDialog {
 	private JTextField txtId;
 	private JLabel lblId;
 	private JTextField txtUsuario;
+	private JButton btnCreate;
+	private JButton btnSearch;
+	private JButton btnDelete;
+	private JTextField txtLog;
+	private JButton btnUpdate;
+	private JPasswordField txtPassword;
+	@SuppressWarnings("rawtypes")
+	private JComboBox cboPerfil;
+	private JCheckBox chckbxSenha;
 
 	/**
 	 * Launch the application.
@@ -246,34 +255,25 @@ public class Usuarios extends JDialog {
 
 			}
 		});
-		
+
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
-				// txtLogin
-				RestrictedTextField log = new RestrictedTextField(txtLog);
-				log.setLimit(50);
-				// txtPassword
-				RestrictedTextField senha = new RestrictedTextField(txtPassword);
-				senha.setOnlyAlphaNumeric(true);
-				senha.setLimit(50);
-				// txtUsuario
-				RestrictedTextField usuario1 = new RestrictedTextField(txtUsuario);
-				usuario1.setOnlyText(true);
-				usuario1.setAcceptSpace(true);
-				usuario1.setLimit(50);
+		// txtLogin
+		RestrictedTextField log = new RestrictedTextField(txtLog);
+		log.setLimit(50);
+		// txtPassword
+		RestrictedTextField senha = new RestrictedTextField(txtPassword);
+		senha.setOnlyAlphaNumeric(true);
+		senha.setLimit(50);
+		// txtUsuario
+		RestrictedTextField usuario1 = new RestrictedTextField(txtUsuario);
+		usuario1.setOnlyText(true);
+		usuario1.setAcceptSpace(true);
+		usuario1.setLimit(50);
 
 	}// Fim do construtor
 
 	// Criar um objeto para acessar o metodo conectar() da classe DAO
 	DAO dao = new DAO();
-	private JButton btnCreate;
-	private JButton btnSearch;
-	private JButton btnDelete;
-	private JTextField txtLog;
-	private JButton btnUpdate;
-	private JPasswordField txtPassword;
-	@SuppressWarnings("rawtypes")
-	private JComboBox cboPerfil;
-	private JCheckBox chckbxSenha;
 
 	/**
 	 * Metodo responsavel pela pesquisa (select)
