@@ -328,6 +328,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblBairro);
 
 		txtBairro = new JTextField();
+		txtBairro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtBairro.setToolTipText("Coloque o Bairro");
 		txtBairro.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtBairro.setColumns(10);
@@ -340,6 +350,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblCidade);
 
 		txtCidade = new JTextField();
+		txtCidade.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCidade.setToolTipText("Coloque a Cidade");
 		txtCidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCidade.setColumns(10);
@@ -366,6 +386,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblContato);
 
 		txtContato = new JTextField();
+		txtContato.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtContato.setToolTipText("Coloque o Contato");
 		txtContato.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtContato.setColumns(10);
@@ -422,6 +452,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblSite);
 
 		txtSite = new JTextField();
+		txtSite.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtSite.setToolTipText("Coloque o Site");
 		txtSite.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtSite.setColumns(10);
@@ -434,6 +474,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblEmail);
 
 		txtEmail = new JTextField();
+		txtEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtEmail.setToolTipText("Coloque o E-mail");
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtEmail.setColumns(10);
@@ -441,6 +491,16 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(txtEmail);
 
 		txtObservacao = new JTextArea();
+		txtObservacao.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtObservacao.setToolTipText("Modifique a Observa\u00E7\u00E3o");
 		txtObservacao.setBounds(85, 403, 360, 40);
 		getContentPane().add(txtObservacao);
@@ -538,6 +598,31 @@ public class Fornecedores extends JDialog {
 		// txtComplemento
 		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
 		Complemento.setLimit(15);
+		// txtCep
+		RestrictedTextField Cep = new RestrictedTextField(txtComplemento);
+		Cep.setLimit(9);
+		// txtBairro
+		RestrictedTextField Bairro = new RestrictedTextField(txtBairro);
+		Bairro.setLimit(20);
+		// txtCidade
+		RestrictedTextField Cidade = new RestrictedTextField(txtCidade);
+		Cidade.setLimit(20);
+		// txtContato
+		RestrictedTextField Contato = new RestrictedTextField(txtContato);
+		Contato.setLimit(20);
+		// txtFone
+		RestrictedTextField Fone = new RestrictedTextField(txtFone);
+		Fone.setLimit(20);
+		// txtWhatsapp
+		RestrictedTextField Whatsapp = new RestrictedTextField(txtWhatsapp);
+		Whatsapp.setLimit(20);
+		// txtSite
+		RestrictedTextField Site = new RestrictedTextField(txtSite);
+		Site.setLimit(100);
+		// txtEmail
+		RestrictedTextField Email = new RestrictedTextField(txtEmail);
+		Email.setLimit(30);
+		
 		
 
 	} // Fim do construtor
