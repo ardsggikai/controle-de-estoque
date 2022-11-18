@@ -663,7 +663,7 @@ public class Fornecedores extends JDialog {
 	 */
 	private void pesquisarCliente() {
 
-		String read2 = "select idFor, fantasia, fone1, fone2, nomeContato from fornecedores where fantasia like ?";
+		String read2 = "select idFor as ID, fantasia as Fornecedor, fone1 as Telefone, fone2 as Whatsapp, nomeContato as Contato from fornecedores where fantasia like ?";
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(read2);
