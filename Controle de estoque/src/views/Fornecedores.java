@@ -24,8 +24,14 @@ import javax.swing.JTextField;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
+import net.proteanit.sql.DbUtils;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
 
 public class Fornecedores extends JDialog {
 
@@ -86,13 +92,20 @@ public class Fornecedores extends JDialog {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
-		JLabel lblFornecedor = new JLabel("Fornecedor");
+		JLabel lblFornecedor = new JLabel("Cliente");
 		lblFornecedor.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblFornecedor.setBounds(10, 14, 74, 14);
 		getContentPane().add(lblFornecedor);
 
 		txtFornecedor = new JTextField();
-		txtFornecedor.setBounds(94, 11, 150, 20);
+		txtFornecedor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				pesquisarCliente();
+			}
+		});
+		txtFornecedor.setToolTipText("Colocar Nome Fantasia");
+		txtFornecedor.setBounds(55, 11, 189, 20);
 		getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
 
@@ -621,6 +634,15 @@ public class Fornecedores extends JDialog {
 		Site.setLimit(100);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setToolTipText("Informa\u00E7\u00F5es Cruciais");
+		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
+		scrollPane.setBounds(10, 42, 735, 137);
+		getContentPane().add(scrollPane);
+
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		Email.setLimit(30);
 
 	} // Fim do construtor
@@ -634,6 +656,27 @@ public class Fornecedores extends JDialog {
 	private JComboBox<Object> cboUf;
 	private JTextArea txtObservacao;
 	private JButton btnLimpar;
+	private JTable table;
+
+	/**
+	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
+	 */
+	private void pesquisarCliente() {
+
+		String read2 = "select idFor, fantasia, fone1, fone2, nomeContato from fornecedores where fantasia like ?";
+		try {
+			Connection con = dao.conectar();
+			PreparedStatement pst = con.prepareStatement(read2);
+			pst.setString(1, txtFornecedor.getText() + "%"); // Atencao "%"
+			ResultSet rs = pst.executeQuery();
+			// Uso da Biblioteca rs2xml para "popular" da tabela //(população)
+			table.setModel(DbUtils.resultSetToTableModel(rs));
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
 
 	private void pesquisar() {
 

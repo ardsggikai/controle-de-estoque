@@ -72,6 +72,9 @@ insert into fornecedores (razaoSocial, fantasia, cnpj, ie, cep, endereco, numero
 -- Selecionar todos os Fornecedores
 select * from fornecedores;
 
+-- pesquisa avançada 
+select idFor, fantasia, fone1, fone2, nomeContato from fornecedores where fantasia like ('k%');
+
 -- CRUD Update
 update usuarios set usuario = 'teste1', login = 'teste1', senha = md5('teste1'), perfil = 'user' where id = 20;
 update fornecedores set razaoSocial = 'teste1', fantasia = 'teste1', cnpj = 'teste1', ie = 'teste1', cep = 'teste1', endereco = 'teste1', numero = 'teste1', complemento = 'teste1', bairro = 'teste1', cidade = 'teste1', uf = 'teste1', nomeContato = 'teste1', fone1 = 'teste1', fone2 = 'teste1', email = 'teste1', site = 'teste1', obs = 'teste1' where id = 20;
