@@ -61,6 +61,8 @@ values ('Mosquito','Mosquito',md5('45678'),'user');
 insert into usuarios (usuario,login,senha,perfil)
 values ('Vitao','Vitor',md5('56789'),'user');
 
+/*********** FIM CRUD usuarios ***********/
+
 /*********** CRUD fornecedores ***********/
 
 insert into fornecedores (razaoSocial, fantasia, cnpj, ie, cep, endereco, numero, complemento, bairro, cidade, uf, nomeContato, fone1, fone2, email, site, obs) values ('Kalunga', 'Kalunga', '43.283.811/0059-76', '206292929110', '70711-000', 'Rua dos Kalungas', '1000', '', 'Distrito Asa Norte', 'Brasilia', 'DF', 'Luiz Carlos', '1234-5678', '1234-0000', 'luiz.carlos@kalunga.com.br', 'www.kalunga.com.br', 'Pode pá');
@@ -80,6 +82,44 @@ update usuarios set usuario = 'teste1', login = 'teste1', senha = md5('teste1'),
 update fornecedores set razaoSocial = 'teste1', fantasia = 'teste1', cnpj = 'teste1', ie = 'teste1', cep = 'teste1', endereco = 'teste1', numero = 'teste1', complemento = 'teste1', bairro = 'teste1', cidade = 'teste1', uf = 'teste1', nomeContato = 'teste1', fone1 = 'teste1', fone2 = 'teste1', email = 'teste1', site = 'teste1', obs = 'teste1' where id = 20;
 
 /********** Fim fornecedores ***********/
+
+-- Criando Tabela clientes --
+create table clientes (
+idFor int primary key auto_increment,
+razaoSocial varchar(50) not null,
+fantasia varchar(50) not null,
+cnpj varchar(20) unique,
+ie varchar(20) unique,
+cep varchar(10) not null,
+endereco varchar(50) not null,
+numero varchar(6) not null,
+complemento varchar(20),
+bairro varchar(50) not null,
+cidade varchar(50) not null,
+uf char(2) not null,
+fone1 varchar(15) not null,
+email varchar(50) not null
+);
+/*********** CRUD fornecedores ***********/
+
+insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+
+-- Selecionar todos os clientes
+select * from clientes;
+
+-- pesquisa avançada 
+select idFor, Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1, email from clientes where Nome like ('A%');
+
+/********* Começo Clientes *********/
+
+
+
+/********* Fim Clientes *********/
+
 -- inserindo uma senha criptografada com md5
 insert into usuarios (usuario,login,senha,perfil)
 values ('Robson Vaamonde','vava', md5('123456'),'admin');

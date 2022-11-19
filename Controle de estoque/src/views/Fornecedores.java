@@ -31,6 +31,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Color;
 
 public class Fornecedores extends JDialog {
@@ -950,6 +952,8 @@ public class Fornecedores extends JDialog {
 		txtSite.setText(null);
 		txtEmail.setText(null);
 		txtObservacao.setText(null);
+		// Limpar a tabela
+		((DefaultTableModel) table.getModel()).setRowCount(0);
 
 	}
 } // Fim do codigo
