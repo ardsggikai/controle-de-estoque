@@ -45,6 +45,7 @@ obs varchar(250)
 describe usuarios;
 drop table usuarios;
 drop table fornecedores;
+drop table clientes;
 
 
 /*********** CRUD usuarios ***********/
@@ -86,33 +87,36 @@ update fornecedores set razaoSocial = 'teste1', fantasia = 'teste1', cnpj = 'tes
 -- Criando Tabela clientes --
 create table clientes (
 idFor int primary key auto_increment,
-razaoSocial varchar(50) not null,
-fantasia varchar(50) not null,
-cnpj varchar(20) unique,
-ie varchar(20) unique,
-cep varchar(10) not null,
-endereco varchar(50) not null,
-numero varchar(6) not null,
-complemento varchar(20),
-bairro varchar(50) not null,
-cidade varchar(50) not null,
-uf char(2) not null,
-fone1 varchar(15) not null,
-email varchar(50) not null
+Nome varchar(50) not null,
+CPF varchar(20) not null,
+Cep varchar(10) unique,
+Endereco varchar(50) not null,
+Numero varchar(6) not null,
+Complemento varchar(20) not null,
+Bairro varchar(50) not null,
+Cidade varchar(50),
+Uf char(2) not null,
+Telefone varchar(15) not null,
+Email varchar(50) not null
 );
 /*********** CRUD fornecedores ***********/
 
-insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
-insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
-insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
-insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
-insert into clientes (Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1,  email) values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
+values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
+values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email)  
+values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email)  
+values ('Allan','','','','','','','','','','','');
+insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
+values ('Allan','','','','','','','','','','','');
 
 -- Selecionar todos os clientes
 select * from clientes;
 
 -- pesquisa avançada 
-select idFor, Nome, CPF, cep, endereco, numero, complemento, bairro, cidade, uf, fone1, email from clientes where Nome like ('A%');
+select idFor, Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone, Email from clientes where Nome like ('A%');
 
 /********* Começo Clientes *********/
 
