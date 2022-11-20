@@ -63,7 +63,7 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
+		
 		btnUsuarios = new JButton("");
 		btnUsuarios.setEnabled(false);
 		btnUsuarios.setIcon(new ImageIcon(Main.class.getResource("/img/users.png")));
@@ -71,7 +71,7 @@ public class Main extends JFrame {
 		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Usuarios usuarios = new Usuarios();
+				Usuarios usuarios = new Usuarios ();
 				usuarios.setVisible(true);
 			}
 		});
@@ -79,7 +79,7 @@ public class Main extends JFrame {
 		btnUsuarios.setFocusPainted(false);
 		btnUsuarios.setBounds(57, 33, 70, 70);
 		contentPane.add(btnUsuarios);
-
+		
 		JButton btnFornecedores = new JButton("");
 		btnFornecedores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -93,7 +93,7 @@ public class Main extends JFrame {
 		btnFornecedores.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnFornecedores.setBounds(179, 33, 64, 64);
 		contentPane.add(btnFornecedores);
-
+		
 		JButton btnProdutos = new JButton("");
 		btnProdutos.setIcon(new ImageIcon(Main.class.getResource("/img/products.png")));
 		btnProdutos.setToolTipText("Aba Produtos");
@@ -101,15 +101,21 @@ public class Main extends JFrame {
 		btnProdutos.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnProdutos.setBounds(320, 33, 64, 64);
 		contentPane.add(btnProdutos);
-
+		
 		JButton btnClientes = new JButton("");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Clientes clientes = new Clientes ();
+				clientes.setVisible(true);
+			}
+		});
 		btnClientes.setIcon(new ImageIcon(Main.class.getResource("/img/clientes.png")));
 		btnClientes.setToolTipText("Aba Clientes");
 		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnClientes.setBounds(57, 173, 64, 64);
 		contentPane.add(btnClientes);
-
+		
 		btnRelatorios = new JButton("");
 		btnRelatorios.setEnabled(false);
 		btnRelatorios.setIcon(new ImageIcon(Main.class.getResource("/img/report.png")));
@@ -118,11 +124,11 @@ public class Main extends JFrame {
 		btnRelatorios.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnRelatorios.setBounds(179, 173, 64, 64);
 		contentPane.add(btnRelatorios);
-
+		
 		JButton btnSobre = new JButton("");
 		btnSobre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Sobre sobre = new Sobre();
+				Sobre sobre = new Sobre ();
 				sobre.setVisible(true);
 			}
 		});
@@ -132,33 +138,33 @@ public class Main extends JFrame {
 		btnSobre.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnSobre.setBounds(320, 173, 70, 70);
 		contentPane.add(btnSobre);
-
+		
 		panelUsuario = new JPanel();
 		panelUsuario.setBackground(Color.GRAY);
 		panelUsuario.setBounds(0, 259, 434, 52);
 		contentPane.add(panelUsuario);
 		panelUsuario.setLayout(null);
-
+		
 		JLabel lblHoras = new JLabel("");
 		lblHoras.setBounds(220, 11, 204, 28);
 		lblHoras.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHoras.setFont(new Font("Arial", Font.PLAIN, 11));
 		panelUsuario.add(lblHoras);
-
+		
 		JLabel lblUsuario = new JLabel("Usu\u00E1rio :");
 		lblUsuario.setForeground(SystemColor.text);
 		lblUsuario.setBounds(0, 11, 112, 27);
 		lblUsuario.setHorizontalAlignment(SwingConstants.CENTER);
 		lblUsuario.setFont(new Font("Arial", Font.PLAIN, 12));
 		panelUsuario.add(lblUsuario);
-
+		
 		lblUsuarios = new JLabel("");
 		lblUsuarios.setForeground(SystemColor.text);
 		lblUsuarios.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUsuarios.setFont(new Font("Arial", Font.BOLD, 11));
 		lblUsuarios.setBounds(86, 11, 112, 28);
 		panelUsuario.add(lblUsuarios);
-
+		
 		// Ativar Janela inferior
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -167,10 +173,14 @@ public class Main extends JFrame {
 				Date data = new Date();
 				DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
 				lblHoras.setText(formatador.format(data));
-
+				
+				
 			}
 		});
-
+		
 	}// Fim do construtor
-
+	
+	
+	
+	
 }// Fim Do Codigo

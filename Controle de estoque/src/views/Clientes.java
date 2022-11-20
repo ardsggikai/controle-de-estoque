@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
 import net.proteanit.sql.DbUtils;
 
@@ -25,6 +26,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
+import javax.swing.DefaultComboBoxModel;
 
 public class Clientes extends JDialog {
 
@@ -81,6 +84,10 @@ public class Clientes extends JDialog {
 	 * Create the dialog.
 	 */
 	public Clientes() {
+		setModal(true);
+		setTitle("Controle de Estoque - Clientes");
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Clientes.class.getResource("/img/IcoClientes.png")));
 		setBounds(100, 100, 740, 375);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
@@ -112,6 +119,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblId);
 
 		txtID = new JTextField();
+		txtID.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtID.setBounds(65, 113, 86, 20);
 		getContentPane().add(txtID);
 		txtID.setColumns(10);
@@ -132,6 +149,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblCpf);
 
 		txtCpf = new JTextField();
+		txtCpf.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321-.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCpf.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCpf.setBounds(189, 143, 86, 20);
 		getContentPane().add(txtCpf);
@@ -143,6 +170,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
+		txtCep.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtCep.setBounds(332, 143, 86, 20);
 		getContentPane().add(txtCep);
@@ -154,6 +191,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblEndereco);
 
 		txtEndereco = new JTextField();
+		txtEndereco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtEndereco.setBounds(65, 167, 240, 20);
 		getContentPane().add(txtEndereco);
 		txtEndereco.setColumns(10);
@@ -164,6 +211,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblN);
 
 		txtN = new JTextField();
+		txtN.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtN.setBounds(332, 167, 39, 20);
 		getContentPane().add(txtN);
 		txtN.setColumns(10);
@@ -174,6 +231,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblComplemento);
 
 		txtComplemento = new JTextField();
+		txtComplemento.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtComplemento.setBounds(457, 167, 147, 20);
 		getContentPane().add(txtComplemento);
 		txtComplemento.setColumns(10);
@@ -184,6 +251,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblBairro);
 
 		txtBairro = new JTextField();
+		txtBairro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtBairro.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtBairro.setBounds(457, 142, 86, 20);
 		getContentPane().add(txtBairro);
@@ -195,6 +272,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblCidade);
 
 		txtCidade = new JTextField();
+		txtCidade.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtCidade.setBounds(589, 142, 106, 20);
 		getContentPane().add(txtCidade);
 		txtCidade.setColumns(10);
@@ -205,6 +292,9 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblUf);
 
 		cboUf = new JComboBox<Object>();
+		cboUf.setModel(new DefaultComboBoxModel<Object>(
+				new String[] { "", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
+						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 		cboUf.setToolTipText("Coloque o Estado");
 		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUf.setBounds(635, 166, 60, 22);
@@ -216,6 +306,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblEmail);
 
 		txtEmail = new JTextField();
+		txtEmail.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// validação (aceita somente os caracteres da String)
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890@.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtEmail.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtEmail.setBounds(65, 198, 210, 20);
 		getContentPane().add(txtEmail);
@@ -227,6 +327,16 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblTelefone);
 
 		txtTelefone = new JTextField();
+		txtTelefone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321-";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		txtTelefone.setBounds(332, 197, 86, 20);
 		getContentPane().add(txtTelefone);
 		txtTelefone.setColumns(10);
@@ -234,15 +344,15 @@ public class Clientes extends JDialog {
 		btnCreate = new JButton("");
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pesquisar();
+				adicionar();
 			}
 		});
-		btnCreate.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnCreate.png")));
+		btnCreate.setIcon(new ImageIcon(Clientes.class.getResource("/img/BtnCadicionar.png")));
 		btnCreate.setToolTipText("Adicionar Cliente");
 		btnCreate.setEnabled(false);
 		btnCreate.setContentAreaFilled(false);
 		btnCreate.setBorderPainted(false);
-		btnCreate.setBounds(405, 228, 64, 64);
+		btnCreate.setBounds(404, 228, 64, 64);
 		getContentPane().add(btnCreate);
 
 		btnUpdate = new JButton("");
@@ -251,12 +361,12 @@ public class Clientes extends JDialog {
 				atualizar();
 			}
 		});
-		btnUpdate.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnUpdate.png")));
+		btnUpdate.setIcon(new ImageIcon(Clientes.class.getResource("/img/BtnCupdate.png")));
 		btnUpdate.setToolTipText("Atualizar Cliente");
 		btnUpdate.setEnabled(false);
 		btnUpdate.setContentAreaFilled(false);
 		btnUpdate.setBorderPainted(false);
-		btnUpdate.setBounds(491, 228, 64, 64);
+		btnUpdate.setBounds(483, 228, 64, 64);
 		getContentPane().add(btnUpdate);
 
 		btnDelete = new JButton("");
@@ -265,12 +375,12 @@ public class Clientes extends JDialog {
 				deleteByidFor();
 			}
 		});
-		btnDelete.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnDelete.png")));
+		btnDelete.setIcon(new ImageIcon(Clientes.class.getResource("/img/BtnCdelete.png")));
 		btnDelete.setToolTipText("Remover Cliente");
 		btnDelete.setEnabled(false);
 		btnDelete.setContentAreaFilled(false);
 		btnDelete.setBorderPainted(false);
-		btnDelete.setBounds(568, 228, 64, 64);
+		btnDelete.setBounds(560, 228, 64, 64);
 		getContentPane().add(btnDelete);
 
 		btnLimpar = new JButton("");
@@ -285,8 +395,63 @@ public class Clientes extends JDialog {
 		btnLimpar.setEnabled(false);
 		btnLimpar.setContentAreaFilled(false);
 		btnLimpar.setBorderPainted(false);
-		btnLimpar.setBounds(631, 229, 64, 64);
+		btnLimpar.setBounds(635, 229, 64, 64);
 		getContentPane().add(btnLimpar);
+
+		JButton btnBuscar = new JButton("");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pesquisar();
+			}
+		});
+		btnBuscar.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnSeach.png")));
+		btnBuscar.setToolTipText("Buscar ID");
+		btnBuscar.setContentAreaFilled(false);
+		btnBuscar.setBorderPainted(false);
+		btnBuscar.setBounds(160, 106, 32, 32);
+		getContentPane().add(btnBuscar);
+
+		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
+		// txtId
+		RestrictedTextField id = new RestrictedTextField(txtID);
+		id.setLimit(7);
+		// txtNome
+		RestrictedTextField Nome = new RestrictedTextField(txtNome);
+		Nome.setOnlyText(true);
+		Nome.setAcceptSpace(true);
+		Nome.setLimit(50);
+		// txtCep
+		RestrictedTextField CEP = new RestrictedTextField(txtCep);
+		CEP.setLimit(8);
+		// txtEndereco
+		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
+		Endereco.setLimit(50);
+		// txtNumero
+		RestrictedTextField NumeroCasa = new RestrictedTextField(txtN);
+		NumeroCasa.setLimit(4);
+		// txtComplemento
+		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
+		Complemento.setLimit(15);
+		// txtCep
+		RestrictedTextField Cep = new RestrictedTextField(txtComplemento);
+		Cep.setLimit(9);
+		// txtBairro
+		RestrictedTextField Bairro = new RestrictedTextField(txtBairro);
+		Bairro.setLimit(20);
+		// txtCidade
+		RestrictedTextField Cidade = new RestrictedTextField(txtCidade);
+		Cidade.setLimit(20);
+		// txtWhatsapp
+		RestrictedTextField Whatsapp = new RestrictedTextField(txtTelefone);
+		Whatsapp.setLimit(20);
+		// txtEmail
+		RestrictedTextField Email = new RestrictedTextField(txtEmail);
+		Email.setLimit(30);
+
+		/**
+		 * Uso da tecla <Enter> junto com um botao
+		 */
+		getRootPane().setDefaultButton(btnBuscar);
 
 	}// Fim do Construtor
 
@@ -300,7 +465,7 @@ public class Clientes extends JDialog {
 	 */
 	private void pesquisarCliente() {
 
-		String read2 = "select idFor as ID, fantasia as Cliente, fone1 as Telefone, fone2 as Whatsapp, nomeContato as Contato from clientes where fantasia like ?";
+		String read2 = "select idFor as ID, Nome, CPF, Cep as CEP, Telefone, Email from clientes where Nome like ?";
 		try {
 			Connection con = dao.conectar();
 			PreparedStatement pst = con.prepareStatement(read2);
@@ -352,7 +517,7 @@ public class Clientes extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Cliente n�o cadastrado");
+					JOptionPane.showMessageDialog(null, "Cliente nao cadastrado");
 					btnCreate.setEnabled(true);
 					limpar();
 					txtID.requestFocus();
@@ -400,7 +565,7 @@ public class Clientes extends JDialog {
 			JOptionPane.showMessageDialog(null, "Insira o Email");
 			txtEmail.requestFocus();
 		} else {
-		
+
 			// Logica Principal
 			String create = "insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone, Email) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
@@ -409,18 +574,17 @@ public class Clientes extends JDialog {
 				// Preparar a query (substitui�ao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
 
-				pst.setString(1, txtID.getText());
-				pst.setString(2, txtNome.getText());
-				pst.setString(3, txtCpf.getText());
-				pst.setString(4, txtCep.getText());
-				pst.setString(5, txtEndereco.getText());
-				pst.setString(6, txtN.getText());
-				pst.setString(7, txtComplemento.getText());
-				pst.setString(8, txtBairro.getText());
-				pst.setString(9, txtCidade.getText());
-				pst.setString(10, cboUf.getSelectedItem().toString());
-				pst.setString(11, txtTelefone.getText());
-				pst.setString(12, txtEmail.getText());
+				pst.setString(1, txtNome.getText());
+				pst.setString(2, txtCpf.getText());
+				pst.setString(3, txtCep.getText());
+				pst.setString(4, txtEndereco.getText());
+				pst.setString(5, txtN.getText());
+				pst.setString(6, txtComplemento.getText());
+				pst.setString(7, txtBairro.getText());
+				pst.setString(8, txtCidade.getText());
+				pst.setString(9, cboUf.getSelectedItem().toString());
+				pst.setString(10, txtTelefone.getText());
+				pst.setString(11, txtEmail.getText());
 
 				// Executar a query e atualizar as informa�oes no banco
 				int confirma = pst.executeUpdate();
@@ -472,14 +636,14 @@ public class Clientes extends JDialog {
 		} else {
 
 			// Logica Principal
-			String update = "update clientes set Nome = ?, CPF = ?, Cep = ?, Endereco = ?, Numero = ?, Complemento = ?, Bairro = ?, Cidade = ?, Uf = ?, Telefone = ?, Email = ?, where idFor = ?";
+			String update = "update clientes set Nome = ?, CPF = ?, Cep = ?, Endereco = ?, Numero = ?, Complemento = ?, Bairro = ?, Cidade = ?, Uf = ?, Telefone = ?, Email = ? where idFor = ?";
 
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
 				// Preparar a query (substitui�ao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
-				
+
 				pst.setString(1, txtNome.getText());
 				pst.setString(2, txtCpf.getText());
 				pst.setString(3, txtCep.getText());

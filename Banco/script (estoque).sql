@@ -102,15 +102,15 @@ Email varchar(50) not null
 /*********** CRUD fornecedores ***********/
 
 insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
-values ('Allan','','','','','','','','','','','');
+values ('Allan','111.111.111-11','11111-11','TESTE','111','Teste','TESTE','São Paulo','SP','11111-1111','Teste@teste.com');
 insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
-values ('Allan','','','','','','','','','','','');
+values ('Allan','','','','','','','','','','');
 insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email)  
-values ('Allan','','','','','','','','','','','');
+values ('Allan','','','','','','','','','','');
 insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email)  
-values ('Allan','','','','','','','','','','','');
+values ('Allan','','','','','','','','','','');
 insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone,  Email) 
-values ('Allan','','','','','','','','','','','');
+values ('Allan','','','','','','','','','','');
 
 -- Selecionar todos os clientes
 select * from clientes;
