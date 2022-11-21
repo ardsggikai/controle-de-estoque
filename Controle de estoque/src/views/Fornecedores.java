@@ -8,9 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -32,6 +34,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 import java.awt.Color;
 
@@ -94,7 +100,7 @@ public class Fornecedores extends JDialog {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
-		JLabel lblFornecedor = new JLabel("Cliente");
+		JLabel lblFornecedor = new JLabel("Fornecedor:");
 		lblFornecedor.setFont(new Font("Verdana", Font.PLAIN, 11));
 		lblFornecedor.setBounds(10, 14, 74, 14);
 		getContentPane().add(lblFornecedor);
@@ -107,7 +113,7 @@ public class Fornecedores extends JDialog {
 			}
 		});
 		txtFornecedor.setToolTipText("Colocar Nome Fantasia");
-		txtFornecedor.setBounds(55, 11, 189, 20);
+		txtFornecedor.setBounds(80, 12, 189, 20);
 		getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
 
@@ -263,6 +269,11 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(txtCep);
 
 		btnCep = new JButton("");
+		btnCep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buscarCep();
+			}
+		});
 		btnCep.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnCep.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/btnSeach.png")));
 		btnCep.setToolTipText("Buscar CEP");
@@ -603,7 +614,7 @@ public class Fornecedores extends JDialog {
 		NF.setLimit(50);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);
-		CEP.setLimit(8);
+		CEP.setLimit(9);
 		// txtEndereco
 		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
 		Endereco.setLimit(50);
@@ -932,6 +943,52 @@ public class Fornecedores extends JDialog {
 
 	}
 
+	/**
+	 * buscarCep
+	 */
+	private void buscarCep() {
+		String logradouro = "";
+		String tipoLogradouro = "";
+		String resultado = null;
+		String cep = txtCep.getText();
+		try {
+			URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
+			SAXReader xml = new SAXReader();
+			Document documento = xml.read(url);
+			Element root = documento.getRootElement();
+			for (Iterator<Element> it = root.elementIterator(); it.hasNext();) {
+				Element element = it.next();
+				if (element.getQualifiedName().equals("cidade")) {
+					txtCidade.setText(element.getText());
+				}
+				if (element.getQualifiedName().equals("bairro")) {
+					txtBairro.setText(element.getText());
+				}
+				if (element.getQualifiedName().equals("uf")) {
+					cboUf.setSelectedItem(element.getText());
+				}
+				if (element.getQualifiedName().equals("tipo_logradouro")) {
+					tipoLogradouro = element.getText();
+				}
+				if (element.getQualifiedName().equals("logradouro")) {
+					logradouro = element.getText();
+				}
+				if (element.getQualifiedName().equals("resultado")) {
+					resultado = element.getText();
+					if (resultado.equals("1")) {
+						// lblStatus.setIcon(new
+						// javax.swing.ImageIcon(getClass().getResource("/img/check.png")));
+					} else {
+						JOptionPane.showMessageDialog(null, "CEP não encontrado");
+					}
+				}
+			}
+			txtEndereco.setText(tipoLogradouro + " " + logradouro);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
 	public void limpar() {
 		txtFornecedor.setText(null);
 		txtId.setText(null);
@@ -956,4 +1013,5 @@ public class Fornecedores extends JDialog {
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
 	}
+
 } // Fim do codigo
