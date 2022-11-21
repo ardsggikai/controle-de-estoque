@@ -208,16 +208,6 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblRazaoSocial);
 
 		txtRazaoSocial = new JTextField();
-		txtRazaoSocial.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtRazaoSocial.setToolTipText("Coloque o Raz\u00E3o Social");
 		txtRazaoSocial.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtRazaoSocial.setColumns(10);
@@ -230,16 +220,6 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(lblNomeFantasia);
 
 		txtNomeFantasia = new JTextField();
-		txtNomeFantasia.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtNomeFantasia.setToolTipText("Coloque o Nome Fantasia");
 		txtNomeFantasia.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtNomeFantasia.setColumns(10);
@@ -608,9 +588,13 @@ public class Fornecedores extends JDialog {
 		Ie.setLimit(12);
 		// txtRazaoSocial
 		RestrictedTextField RS = new RestrictedTextField(txtRazaoSocial);
+		RS.setOnlyText(true);
+		RS.setAcceptSpace(true);
 		RS.setLimit(50);
 		// txtNomeFantasia
 		RestrictedTextField NF = new RestrictedTextField(txtNomeFantasia);
+		NF.setOnlyText(true);
+		NF.setAcceptSpace(true);
 		NF.setLimit(50);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);

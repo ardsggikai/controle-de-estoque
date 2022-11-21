@@ -88,7 +88,7 @@ update fornecedores set razaoSocial = 'teste1', fantasia = 'teste1', cnpj = 'tes
 create table clientes (
 idFor int primary key auto_increment,
 Nome varchar(50) not null,
-CPF varchar(20) not null,
+CPF varchar(20) unique,
 Cep varchar(10) unique,
 Endereco varchar(50) not null,
 Numero varchar(6) not null,
