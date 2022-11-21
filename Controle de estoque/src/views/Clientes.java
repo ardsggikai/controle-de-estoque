@@ -9,6 +9,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
 import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
 import net.proteanit.sql.DbUtils;
@@ -18,12 +22,14 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -145,7 +151,7 @@ public class Clientes extends JDialog {
 
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCpf.setBounds(161, 145, 33, 14);
+		lblCpf.setBounds(155, 145, 33, 14);
 		getContentPane().add(lblCpf);
 
 		txtCpf = new JTextField();
@@ -160,13 +166,13 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCpf.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCpf.setBounds(189, 143, 86, 20);
+		txtCpf.setBounds(177, 143, 86, 20);
 		getContentPane().add(txtCpf);
 		txtCpf.setColumns(10);
 
 		lblCep = new JLabel("Cep");
 		lblCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCep.setBounds(306, 148, 46, 14);
+		lblCep.setBounds(270, 147, 46, 14);
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
@@ -181,7 +187,7 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCep.setBounds(332, 143, 86, 20);
+		txtCep.setBounds(295, 142, 86, 20);
 		getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 
@@ -422,7 +428,7 @@ public class Clientes extends JDialog {
 		Nome.setLimit(50);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);
-		CEP.setLimit(8);
+		CEP.setLimit(9);
 		// txtEndereco
 		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
 		Endereco.setLimit(50);
@@ -452,6 +458,18 @@ public class Clientes extends JDialog {
 		 * Uso da tecla <Enter> junto com um botao
 		 */
 		getRootPane().setDefaultButton(btnBuscar);
+		
+		JButton btnCep = new JButton("");
+		btnCep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buscarCep();
+			}
+		});
+		btnCep.setContentAreaFilled(false);
+		btnCep.setBorderPainted(false);
+		btnCep.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnSeach.png")));
+		btnCep.setBounds(386, 136, 32, 32);
+		getContentPane().add(btnCep);
 
 	}// Fim do Construtor
 
@@ -708,6 +726,52 @@ public class Clientes extends JDialog {
 
 		}
 
+	}
+	
+	/**
+	 * buscarCep
+	 */
+	private void buscarCep() {
+		String logradouro = "";
+		String tipoLogradouro = "";
+		String resultado = null;
+		String cep = txtCep.getText();
+		try {
+			URL url = new URL("http://cep.republicavirtual.com.br/web_cep.php?cep=" + cep + "&formato=xml");
+			SAXReader xml = new SAXReader();
+			Document documento = xml.read(url);
+			Element root = documento.getRootElement();
+			for (Iterator<Element> it = root.elementIterator(); it.hasNext();) {
+				Element element = it.next();
+				if (element.getQualifiedName().equals("cidade")) {
+					txtCidade.setText(element.getText());
+				}
+				if (element.getQualifiedName().equals("bairro")) {
+					txtBairro.setText(element.getText());
+				}
+				if (element.getQualifiedName().equals("uf")) {
+					cboUf.setSelectedItem(element.getText());
+				}
+				if (element.getQualifiedName().equals("tipo_logradouro")) {
+					tipoLogradouro = element.getText();
+				}
+				if (element.getQualifiedName().equals("logradouro")) {
+					logradouro = element.getText();
+				}
+				if (element.getQualifiedName().equals("resultado")) {
+					resultado = element.getText();
+					if (resultado.equals("1")) {
+						// lblStatus.setIcon(new
+						// javax.swing.ImageIcon(getClass().getResource("/img/check.png")));
+					} else {
+						JOptionPane.showMessageDialog(null, "CEP não encontrado");
+					}
+				}
+			}
+			txtEndereco.setText(tipoLogradouro + " " + logradouro);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 	/**
