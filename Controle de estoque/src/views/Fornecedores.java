@@ -799,7 +799,7 @@ public class Fornecedores extends JDialog {
 				// Executar a query e atualizar as informaçoes no banco
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!");
+					JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
 					limpar();
 					// Encerrar a conexao
 					con.close();
