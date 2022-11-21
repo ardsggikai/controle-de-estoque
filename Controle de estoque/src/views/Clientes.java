@@ -227,13 +227,13 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtN.setBounds(332, 167, 39, 20);
+		txtN.setBounds(332, 167, 49, 20);
 		getContentPane().add(txtN);
 		txtN.setColumns(10);
 
 		lblComplemento = new JLabel("Complemento");
 		lblComplemento.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblComplemento.setBounds(375, 170, 72, 14);
+		lblComplemento.setBounds(395, 173, 72, 14);
 		getContentPane().add(lblComplemento);
 
 		txtComplemento = new JTextField();
@@ -247,13 +247,13 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtComplemento.setBounds(457, 167, 147, 20);
+		txtComplemento.setBounds(477, 170, 147, 20);
 		getContentPane().add(txtComplemento);
 		txtComplemento.setColumns(10);
 
 		lblBairro = new JLabel("Bairro");
 		lblBairro.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblBairro.setBounds(422, 148, 46, 14);
+		lblBairro.setBounds(10, 231, 46, 14);
 		getContentPane().add(lblBairro);
 
 		txtBairro = new JTextField();
@@ -268,13 +268,13 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtBairro.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtBairro.setBounds(457, 142, 86, 20);
+		txtBairro.setBounds(65, 229, 147, 20);
 		getContentPane().add(txtBairro);
 		txtBairro.setColumns(10);
 
 		lblCidade = new JLabel("Cidade");
 		lblCidade.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCidade.setBounds(550, 145, 46, 14);
+		lblCidade.setBounds(286, 231, 46, 14);
 		getContentPane().add(lblCidade);
 
 		txtCidade = new JTextField();
@@ -288,13 +288,13 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtCidade.setBounds(589, 142, 106, 20);
+		txtCidade.setBounds(329, 228, 72, 20);
 		getContentPane().add(txtCidade);
 		txtCidade.setColumns(10);
 
 		lblUf = new JLabel("UF");
 		lblUf.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblUf.setBounds(614, 169, 20, 14);
+		lblUf.setBounds(455, 140, 20, 14);
 		getContentPane().add(lblUf);
 
 		cboUf = new JComboBox<Object>();
@@ -303,7 +303,7 @@ public class Clientes extends JDialog {
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 		cboUf.setToolTipText("Coloque o Estado");
 		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
-		cboUf.setBounds(635, 166, 60, 22);
+		cboUf.setBounds(476, 137, 60, 22);
 		getContentPane().add(cboUf);
 
 		JLabel lblEmail = new JLabel("Email");
