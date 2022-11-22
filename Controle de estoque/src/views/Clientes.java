@@ -201,7 +201,7 @@ public class Clientes extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -241,7 +241,7 @@ public class Clientes extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -261,7 +261,7 @@ public class Clientes extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -282,7 +282,7 @@ public class Clientes extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -316,7 +316,7 @@ public class Clientes extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890@.";
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890@.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -449,7 +449,7 @@ public class Clientes extends JDialog {
 		Cidade.setLimit(20);
 		// txtWhatsapp
 		RestrictedTextField Whatsapp = new RestrictedTextField(txtTelefone);
-		Whatsapp.setLimit(20);
+		Whatsapp.setLimit(11);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
 		Email.setLimit(30);
@@ -604,13 +604,28 @@ public class Clientes extends JDialog {
 				// Executar a query e atualizar as informa�oes no banco
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso!");
+					JOptionPane.showMessageDialog(null, "Cliente adicionado.");
 					limpar();
-					// Encerrar a conexao
-					con.close();
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Cliente Não Adicionado");
+					limpar();
 				}
-			} catch (Exception e) {
-				System.out.println(e);
+
+				// Encerrar a conexÃ£o
+				con.close();
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showMessageDialog(null, "Cliente não adicionado - CPF Duplicado");
+				txtCpf.setText(null);
+				txtCpf.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
+				limpar();
 			}
 		}
 	}

@@ -131,7 +131,7 @@ public class Fornecedores extends JDialog {
 		txtId.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -167,7 +167,7 @@ public class Fornecedores extends JDialog {
 		txtCnpj.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321./-";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -189,7 +189,7 @@ public class Fornecedores extends JDialog {
 		txtIe.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -235,7 +235,7 @@ public class Fornecedores extends JDialog {
 		txtCep.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321-";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -271,8 +271,8 @@ public class Fornecedores extends JDialog {
 		txtEndereco.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -293,7 +293,7 @@ public class Fornecedores extends JDialog {
 		txtNumero.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -315,8 +315,8 @@ public class Fornecedores extends JDialog {
 		txtComplemento.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -337,8 +337,8 @@ public class Fornecedores extends JDialog {
 		txtBairro.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -359,8 +359,8 @@ public class Fornecedores extends JDialog {
 		txtCidade.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -395,8 +395,8 @@ public class Fornecedores extends JDialog {
 		txtContato.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -417,7 +417,7 @@ public class Fornecedores extends JDialog {
 		txtFone.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -439,7 +439,7 @@ public class Fornecedores extends JDialog {
 		txtWhatsapp.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -461,8 +461,8 @@ public class Fornecedores extends JDialog {
 		txtSite.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -483,8 +483,8 @@ public class Fornecedores extends JDialog {
 		txtEmail.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -500,8 +500,8 @@ public class Fornecedores extends JDialog {
 		txtObservacao.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
+				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -666,7 +666,7 @@ public class Fornecedores extends JDialog {
 			PreparedStatement pst = con.prepareStatement(read2);
 			pst.setString(1, txtFornecedor.getText() + "%"); // Atencao "%"
 			ResultSet rs = pst.executeQuery();
-			// Uso da Biblioteca rs2xml para "popular" da tabela //(população)
+			// Uso da Biblioteca rs2xml para "popular" da tabela //(populaï¿½ï¿½o)
 			table.setModel(DbUtils.resultSetToTableModel(rs));
 			con.close();
 
@@ -717,7 +717,7 @@ public class Fornecedores extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Fornecedor não cadastrado");
+					JOptionPane.showMessageDialog(null, "Fornecedor nï¿½o cadastrado");
 					btnCreate.setEnabled(true);
 					limpar();
 					txtId.requestFocus();
@@ -776,7 +776,7 @@ public class Fornecedores extends JDialog {
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituiçao de parametros)
+				// Preparar a query (substituiï¿½ao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
 				pst.setString(1, txtRazaoSocial.getText());
 				pst.setString(2, txtNomeFantasia.getText());
@@ -796,7 +796,7 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 
-				// Executar a query e confirmar a inserção no banco
+				// Executar a query e confirmar a inserï¿½ï¿½o no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
@@ -804,7 +804,7 @@ public class Fornecedores extends JDialog {
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Fornecedor Não Adicionado");
+					JOptionPane.showMessageDialog(null, "Fornecedor Nï¿½o Adicionado");
 					limpar();
 				}
 
@@ -813,7 +813,7 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
+				JOptionPane.showMessageDialog(null, "Fornecedor nï¿½o adicionado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}
@@ -828,7 +828,7 @@ public class Fornecedores extends JDialog {
 
 	public void atualizar() {
 
-		// Validaçao
+		// Validaï¿½ao
 		if (txtRazaoSocial.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a Razao Social");
 			txtRazaoSocial.requestFocus();
@@ -873,7 +873,7 @@ public class Fornecedores extends JDialog {
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituiçao de parametros)
+				// Preparar a query (substituiï¿½ao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
 				pst.setString(1, txtRazaoSocial.getText());
 				pst.setString(2, txtNomeFantasia.getText());
@@ -893,7 +893,7 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 				pst.setString(18, txtId.getText());
-				// Executar a query e confirmar a inserção no banco
+				// Executar a query e confirmar a inserï¿½ï¿½o no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
@@ -901,7 +901,7 @@ public class Fornecedores extends JDialog {
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Funcionario Não Adicionado");
+					JOptionPane.showMessageDialog(null, "Funcionario Nï¿½o Adicionado");
 					limpar();
 				}
 
@@ -910,7 +910,7 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
+				JOptionPane.showConfirmDialog(null, "Fornecedor nï¿½o adicionado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}
@@ -925,8 +925,8 @@ public class Fornecedores extends JDialog {
 
 	public void deleteByidFor() {
 
-		// Validação
-		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusão deste Fornecedor?", "Atenção",
+		// Validaï¿½ï¿½o
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusï¿½o deste Fornecedor?", "Atenï¿½ï¿½o",
 				JOptionPane.YES_NO_OPTION);
 		if (confirma == JOptionPane.YES_OPTION) {
 
@@ -937,7 +937,7 @@ public class Fornecedores extends JDialog {
 				// preparar a query
 				PreparedStatement pst = con.prepareStatement(delete);
 				pst.setString(1, txtId.getText());
-				// executar o comando sql e confirmar a exclusão
+				// executar o comando sql e confirmar a exclusï¿½o
 				int confirmaExcluir = pst.executeUpdate();
 				if (confirmaExcluir == 1) {
 					limpar();
@@ -993,7 +993,7 @@ public class Fornecedores extends JDialog {
 						// lblStatus.setIcon(new
 						// javax.swing.ImageIcon(getClass().getResource("/img/check.png")));
 					} else {
-						JOptionPane.showMessageDialog(null, "CEP não encontrado");
+						JOptionPane.showMessageDialog(null, "CEP nï¿½o encontrado");
 					}
 				}
 			}
