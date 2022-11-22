@@ -103,11 +103,20 @@ idFor (chave estrangeira) usar mesmo nome e tipo de dados da chave primaria (PK)
  custo decimal(10,2) not null,
  lucro decimal(10,2),
  idFor int not null,
- foreign key (idFor) references fornecedores(idFor) -- comando que linka uma na outra/Relacionamento (PRESERVAR INTEGRIDADE DOS DADOS/Segurança, Não deixar produto sem fornecedor vise versa)
+ foreign key (idFor) references fornecedores(idFor) -- comando que linka uma na outra/Relacionamento (PRESERVAR INTEGRIDADE DOS DADOS/Segurança, Não deixar produto sem fornecedor vise versa (( MEIO QUE UMA HERANÇA PAI e Filho)))
  );
  
  -- Descrever produtos
 describe produtos;
+
+-- inserir produto
+insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
+values ('11111111','Caneta BIC Azul','Caneta BIC Cor Azul,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 2',38.50,20,14);
+
+-- delete
+delete from produtos where codigo = 1;
+-- pesquisar
+ select * from produtos;
  
  /* Fim */
 
