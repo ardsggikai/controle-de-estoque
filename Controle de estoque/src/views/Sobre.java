@@ -61,6 +61,7 @@ public class Sobre extends JDialog {
 		setBounds(100, 100, 450, 300);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(Color.LIGHT_GRAY);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -92,7 +93,7 @@ public class Sobre extends JDialog {
 		txtpnEmDesenvolvimento.setText("Prazer Meu Nome \u00E9 Allan e eu estou estudando no senac tatuape \r\nTurma TI/Senac      \r\nClique no Logo do Github para mostrar os arquivos do repositorio");
 		txtpnEmDesenvolvimento.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtpnEmDesenvolvimento.setEditable(false);
-		txtpnEmDesenvolvimento.setBackground(Color.LIGHT_GRAY);
+		txtpnEmDesenvolvimento.setBackground(Color.GRAY);
 		txtpnEmDesenvolvimento.setBounds(10, 43, 286, 69);
 		contentPanel.add(txtpnEmDesenvolvimento);
 		

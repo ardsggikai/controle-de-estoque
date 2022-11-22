@@ -86,6 +86,7 @@ public class Fornecedores extends JDialog {
 	 * Create the dialog.
 	 */
 	public Fornecedores() {
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {

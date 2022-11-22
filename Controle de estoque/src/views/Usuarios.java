@@ -76,6 +76,7 @@ public class Usuarios extends JDialog {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Usuarios() {
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Usuarios.class.getResource("/img/icoUsuarios.png")));
 		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
