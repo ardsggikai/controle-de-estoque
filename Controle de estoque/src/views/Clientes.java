@@ -691,11 +691,11 @@ public class Clientes extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Cliente adicionado.");
+					JOptionPane.showMessageDialog(null, "Cliente Não Atualizado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Cliente Não Adicionado");
+					JOptionPane.showMessageDialog(null, "Cliente Não Atualizado");
 					limpar();
 				}
 

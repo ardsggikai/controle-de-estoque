@@ -897,11 +897,11 @@ public class Fornecedores extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Funcionario adicionado.");
+					JOptionPane.showMessageDialog(null, "Funcionario Atualizado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Funcionario Nï¿½o Adicionado");
+					JOptionPane.showMessageDialog(null, "Funcionario Não Atualizado");
 					limpar();
 				}
 
@@ -910,7 +910,7 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Fornecedor nï¿½o adicionado - CNPJ Duplicado");
+				JOptionPane.showConfirmDialog(null, "Fornecedor nao adicionado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}
