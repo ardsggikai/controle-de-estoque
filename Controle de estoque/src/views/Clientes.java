@@ -355,7 +355,6 @@ public class Clientes extends JDialog {
 		});
 		btnCreate.setIcon(new ImageIcon(Clientes.class.getResource("/img/BtnCadicionar.png")));
 		btnCreate.setToolTipText("Adicionar Cliente");
-		btnCreate.setEnabled(false);
 		btnCreate.setContentAreaFilled(false);
 		btnCreate.setBorderPainted(false);
 		btnCreate.setBounds(404, 228, 64, 64);
@@ -535,7 +534,7 @@ public class Clientes extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Cliente nao cadastrado");
+					JOptionPane.showMessageDialog(null, "Cliente Nao Cadastrado");
 					btnCreate.setEnabled(true);
 					limpar();
 					txtID.requestFocus();
@@ -724,7 +723,7 @@ public class Clientes extends JDialog {
 	public void deleteByidFor() {
 
 		// Valida��o
-		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclus�o deste Cliente?", "Atençao",
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusao deste Cliente?", "Atençao",
 				JOptionPane.YES_NO_OPTION);
 		if (confirma == JOptionPane.YES_OPTION) {
 
@@ -739,7 +738,7 @@ public class Clientes extends JDialog {
 				int confirmaExcluir = pst.executeUpdate();
 				if (confirmaExcluir == 1) {
 					limpar();
-					JOptionPane.showMessageDialog(null, "Cliente excluido com sucesso");
+					JOptionPane.showMessageDialog(null, "Cliente Excluido com Sucesso");
 				}
 				// Encerrar a conexao
 				con.close();

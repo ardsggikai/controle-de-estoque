@@ -517,7 +517,6 @@ public class Fornecedores extends JDialog {
 				adicionar();
 			}
 		});
-		btnCreate.setEnabled(false);
 		btnCreate.setToolTipText("Adicionar fornecedor");
 		btnCreate.setIcon(new ImageIcon(Fornecedores.class.getResource("/img/btnCreate.png")));
 		btnCreate.setContentAreaFilled(false);
@@ -804,7 +803,7 @@ public class Fornecedores extends JDialog {
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Fornecedor N�o Adicionado");
+					JOptionPane.showMessageDialog(null, "Fornecedor Nao Adicionado");
 					limpar();
 				}
 
@@ -813,7 +812,7 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Fornecedor n�o adicionado - CNPJ Duplicado");
+				JOptionPane.showMessageDialog(null, "Fornecedor nao adicionado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}
