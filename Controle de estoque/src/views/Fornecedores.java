@@ -813,7 +813,7 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
+				JOptionPane.showMessageDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}

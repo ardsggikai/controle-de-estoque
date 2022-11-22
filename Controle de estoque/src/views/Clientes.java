@@ -689,7 +689,7 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Cliente não adicionado - CPF Duplicado");
+				JOptionPane.showMessageDialog(null, "Cliente não adicionado - CPF Duplicado");
 				txtCpf.setText(null);
 				txtCpf.requestFocus();
 			}
