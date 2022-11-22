@@ -1,7 +1,7 @@
 /**
 * Projeto de um sistema para gestão de estoque
 * @author Allan Gomes
-* @version 1.2 
+* @version 1.3 
 */
 
 show databases;
@@ -77,6 +77,39 @@ select * from fornecedores;
 
 -- pesquisa avançada 
 select idFor, fantasia, fone1, fone2, nomeContato from fornecedores where fantasia like ('k%');
+
+/* (Aula 18)(Anotação)
+Relacionamento de tabelas 1 - N (um para muitos)
+Chave estrangeira (FK) - (PK)
+idFor (chave estrangeira) usar mesmo nome e tipo de dados da chave primaria (PK) da tabela pai
+ */
+ 
+ -- timestamp default current_timestamp (obtém automaticamente a data e hora)
+ -- date (tipo de dados relacionado a data)
+ -- decimal(10,2) (tipo de dados relacionados a números não inteiros)
+ -- decimal(10,2) (10 digitos com 2 casas decimais)
+ create table produtos ( 
+ codigo int primary key auto_increment,
+ barcode varchar(255) unique,
+ produto varchar(50) not null,
+ descricao varchar(255),
+ fabricante varchar(50)not null,
+ datacad timestamp default current_timestamp,
+ dataval date,
+ estoque int not null,
+ estoquemin int not null,
+ unidade char(2) not null,
+ localizacao varchar(50) not null,
+ custo decimal(10,2) not null,
+ lucro decimal(10,2),
+ idFor int not null,
+ foreign key (idFor) references fornecedores(idFor) -- comando que linka uma na outra/Relacionamento (PRESERVAR INTEGRIDADE DOS DADOS/Segurança, Não deixar produto sem fornecedor vise versa)
+ );
+ 
+ -- Descrever produtos
+describe produtos;
+ 
+ /* Fim */
 
 -- CRUD Update
 update usuarios set usuario = 'teste1', login = 'teste1', senha = md5('teste1'), perfil = 'user' where id = 20;
