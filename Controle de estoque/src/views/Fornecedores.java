@@ -272,7 +272,7 @@ public class Fornecedores extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validação (aceita somente os caracteres da String)
-				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
+				String caracteres = "AaBbCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
