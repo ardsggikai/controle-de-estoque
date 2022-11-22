@@ -691,7 +691,7 @@ public class Clientes extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Cliente Não Atualizado.");
+					JOptionPane.showMessageDialog(null, "Cliente Atualizado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
