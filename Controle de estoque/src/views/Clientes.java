@@ -145,13 +145,13 @@ public class Clientes extends JDialog {
 		getContentPane().add(lblNome);
 
 		txtNome = new JTextField();
-		txtNome.setBounds(65, 142, 86, 20);
+		txtNome.setBounds(65, 142, 147, 20);
 		getContentPane().add(txtNome);
 		txtNome.setColumns(10);
 
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCpf.setBounds(155, 145, 33, 14);
+		lblCpf.setBounds(214, 144, 33, 14);
 		getContentPane().add(lblCpf);
 
 		txtCpf = new JTextField();
@@ -166,13 +166,13 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCpf.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCpf.setBounds(177, 143, 86, 20);
+		txtCpf.setBounds(236, 142, 86, 20);
 		getContentPane().add(txtCpf);
 		txtCpf.setColumns(10);
 
 		lblCep = new JLabel("Cep");
 		lblCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCep.setBounds(270, 147, 46, 14);
+		lblCep.setBounds(329, 142, 46, 14);
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
@@ -187,7 +187,7 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCep.setBounds(295, 142, 86, 20);
+		txtCep.setBounds(354, 142, 86, 20);
 		getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 
@@ -294,7 +294,7 @@ public class Clientes extends JDialog {
 
 		lblUf = new JLabel("UF");
 		lblUf.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblUf.setBounds(455, 140, 20, 14);
+		lblUf.setBounds(514, 142, 20, 14);
 		getContentPane().add(lblUf);
 
 		cboUf = new JComboBox<Object>();
@@ -303,7 +303,7 @@ public class Clientes extends JDialog {
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 		cboUf.setToolTipText("Coloque o Estado");
 		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
-		cboUf.setBounds(476, 137, 60, 22);
+		cboUf.setBounds(535, 137, 60, 22);
 		getContentPane().add(cboUf);
 
 		JLabel lblEmail = new JLabel("Email");
@@ -458,7 +458,7 @@ public class Clientes extends JDialog {
 		 * Uso da tecla <Enter> junto com um botao
 		 */
 		getRootPane().setDefaultButton(btnBuscar);
-		
+
 		JButton btnCep = new JButton("");
 		btnCep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -468,7 +468,7 @@ public class Clientes extends JDialog {
 		btnCep.setContentAreaFilled(false);
 		btnCep.setBorderPainted(false);
 		btnCep.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnSeach.png")));
-		btnCep.setBounds(386, 136, 32, 32);
+		btnCep.setBounds(445, 137, 32, 32);
 		getContentPane().add(btnCep);
 
 	}// Fim do Construtor
@@ -567,9 +567,6 @@ public class Clientes extends JDialog {
 		} else if (txtN.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Numero");
 			txtN.requestFocus();
-		} else if (txtComplemento.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Complemento");
-			txtComplemento.requestFocus();
 		} else if (txtBairro.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Bairro");
 			txtBairro.requestFocus();
@@ -692,7 +689,7 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CPF Duplicado");
+				JOptionPane.showConfirmDialog(null, "Cliente não adicionado - CPF Duplicado");
 				txtCpf.setText(null);
 				txtCpf.requestFocus();
 			}
@@ -740,7 +737,7 @@ public class Clientes extends JDialog {
 		}
 
 	}
-	
+
 	/**
 	 * buscarCep
 	 */

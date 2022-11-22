@@ -800,11 +800,11 @@ public class Fornecedores extends JDialog {
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Funcionario adicionado.");
+					JOptionPane.showMessageDialog(null, "Fornecedor adicionado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Funcionario Não Adicionado");
+					JOptionPane.showMessageDialog(null, "Fornecedor Não Adicionado");
 					limpar();
 				}
 
