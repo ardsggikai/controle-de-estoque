@@ -796,16 +796,32 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 
-				// Executar a query e atualizar as informaçoes no banco
+				// Executar a query e confirmar a inserção no banco
 				int confirma = pst.executeUpdate();
+				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
+					JOptionPane.showMessageDialog(null, "Funcionario adicionado.");
 					limpar();
-					// Encerrar a conexao
-					con.close();
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Funcionario Não Adicionado");
+					limpar();
 				}
-			} catch (Exception e) {
-				System.out.println(e);
+
+				// Encerrar a conexÃ£o
+				con.close();
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
+				txtCnpj.setText(null);
+				txtCnpj.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
+				limpar();
 			}
 		}
 	}
@@ -877,19 +893,31 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 				pst.setString(18, txtId.getText());
-				// Executar a query e atualizar as informaçoes no banco
+				// Executar a query e confirmar a inserção no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Informaçoes do Fornecedores Atualizados com Sucesso.");
+					JOptionPane.showMessageDialog(null, "Funcionario adicionado.");
+					limpar();
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Funcionario Não Adicionado");
 					limpar();
 				}
 
-				// Encerrar a conexao
+				// Encerrar a conexÃ£o
 				con.close();
-			} catch (Exception e) {
-				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Fornecedores Não Atualizado");
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CNPJ Duplicado");
+				txtCnpj.setText(null);
+				txtCnpj.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
 				limpar();
 			}
 		}
@@ -913,16 +941,18 @@ public class Fornecedores extends JDialog {
 				int confirmaExcluir = pst.executeUpdate();
 				if (confirmaExcluir == 1) {
 					limpar();
-					JOptionPane.showMessageDialog(null, "Fornecedor excluido com sucesso");
+					JOptionPane.showMessageDialog(null, "Fornecedor excluido com sucesso!");
+					btnUpdate.setEnabled(false);
+					btnDelete.setEnabled(false);
 				}
-				// Encerrar a conexao
+				/**
+				 * FECHAR CONEXAO
+				 */
 				con.close();
+
 			} catch (Exception e) {
 				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "Fornecedor Não Foi Excluido");
-				limpar();
 			}
-
 		}
 
 	}

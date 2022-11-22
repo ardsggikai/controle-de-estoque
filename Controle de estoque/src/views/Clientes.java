@@ -674,19 +674,32 @@ public class Clientes extends JDialog {
 				pst.setString(10, txtTelefone.getText());
 				pst.setString(11, txtEmail.getText());
 				pst.setString(12, txtID.getText());
-				// Executar a query e atualizar as informa�oes no banco
+				// Executar a query e atualizar as informacoes no banco
+				// Executar a query e confirmar a inserção no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Informaçoes do clientes Atualizados com Sucesso.");
+					JOptionPane.showMessageDialog(null, "Cliente adicionado.");
+					limpar();
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Cliente Não Adicionado");
 					limpar();
 				}
 
-				// Encerrar a conexao
+				// Encerrar a conexÃ£o
 				con.close();
-			} catch (Exception e) {
-				System.out.println(e);
-				JOptionPane.showMessageDialog(null, "clientes Nao Atualizado");
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showConfirmDialog(null, "Fornecedor não adicionado - CPF Duplicado");
+				txtCpf.setText(null);
+				txtCpf.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
 				limpar();
 			}
 		}
