@@ -38,12 +38,13 @@ public class Produtos extends JDialog {
 	private JTextField txtEstoquemin;
 	private JTextField txtLocal;
 	private JTextField txtIdFor;
-	private JComboBox<Object> comboBox;
+	private JComboBox<Object> cboUnidade;
 	private JButton btnAddProduto;
 	private JButton btnUpdateProduto;
 	private JButton btnDeleteProduto;
 	private JButton btnPesquisar;
 	private JLabel lblLupaPesquisar;
+	private JTextArea txtaDescricao;
 
 	/**
 	 * Launch the application.
@@ -171,10 +172,10 @@ public class Produtos extends JDialog {
 		btnDeleteProduto.setBounds(643, 356, 64, 64);
 		getContentPane().add(btnDeleteProduto);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		textArea.setBounds(73, 215, 242, 64);
-		getContentPane().add(textArea);
+		txtaDescricao = new JTextArea();
+		txtaDescricao.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		txtaDescricao.setBounds(73, 215, 242, 64);
+		getContentPane().add(txtaDescricao);
 		
 		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o");
 		lblDescricao.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -258,11 +259,11 @@ public class Produtos extends JDialog {
 		lblUnidade.setBounds(10, 406, 46, 14);
 		getContentPane().add(lblUnidade);
 		
-		comboBox = new JComboBox<Object>();
-		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "(k)\t", "(h)\t", "(da)\t\t ", "(d)\t ", "(c)\t", "(m)", "(kl)\t", "(hl)\t", "(dal)\t", "(l)\t", "(dl)", "(cl)\t", "(ml)", "(km)\t", "(hm)\t", "(dam)\t", "(m)\t", "(dm)\t", "(cm)\t", "(ml)", "(kg)\t", "(hg)\t", "(dag)\t", "(g)\t", "(dg)\t", "(cg)\t", "(mg)", "(km3)\t", "hm3)\t", "(dam3)\t", "(m3)\t", "(dm3)\t", "(cm3)\t", "(mm3)"}));
-		comboBox.setFont(new Font("Arial", Font.PLAIN, 11));
-		comboBox.setBounds(73, 398, 64, 22);
-		getContentPane().add(comboBox);
+		cboUnidade = new JComboBox<Object>();
+		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "(k)\t", "(h)\t", "(da)\t\t ", "(d)\t ", "(c)\t", "(m)", "(kl)\t", "(hl)\t", "(dal)\t", "(l)\t", "(dl)", "(cl)\t", "(ml)", "(km)\t", "(hm)\t", "(dam)\t", "(m)\t", "(dm)\t", "(cm)\t", "(ml)", "(kg)\t", "(hg)\t", "(dag)\t", "(g)\t", "(dg)\t", "(cg)\t", "(mg)", "(km3)\t", "hm3)\t", "(dam3)\t", "(m3)\t", "(dm3)\t", "(cm3)\t", "(mm3)"}));
+		cboUnidade.setFont(new Font("Arial", Font.PLAIN, 11));
+		cboUnidade.setBounds(73, 398, 64, 22);
+		getContentPane().add(cboUnidade);
 		
 		JLabel lblLocal = new JLabel("Local");
 		lblLocal.setFont(new Font("Arial", Font.PLAIN, 11));
