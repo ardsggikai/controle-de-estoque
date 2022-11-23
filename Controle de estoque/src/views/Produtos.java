@@ -20,6 +20,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
+import java.awt.Toolkit;
 
 public class Produtos extends JDialog {
 
@@ -67,6 +68,9 @@ public class Produtos extends JDialog {
 	 * Create the dialog.
 	 */
 	public Produtos() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IcoProdutos.png")));
+		getContentPane().setBackground(Color.LIGHT_GRAY);
+		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
 		setTitle("Produtos");
 		setResizable(false);
 		setModal(true);
