@@ -28,7 +28,7 @@ public class Produtos extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField txtCodigoBarras;
+	private JTextField txtBarcode;
 	private JTextField txtCodigo;
 	private JTextField txtPesquisaridFor;
 	private JTextField txtProduto;
@@ -87,11 +87,11 @@ public class Produtos extends JDialog {
 		lblCodigoBarras.setBounds(0, 24, 64, 45);
 		getContentPane().add(lblCodigoBarras);
 		
-		txtCodigoBarras = new JTextField();
-		txtCodigoBarras.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCodigoBarras.setBounds(73, 37, 240, 20);
-		getContentPane().add(txtCodigoBarras);
-		txtCodigoBarras.setColumns(10);
+		txtBarcode = new JTextField();
+		txtBarcode.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtBarcode.setBounds(73, 37, 240, 20);
+		getContentPane().add(txtBarcode);
+		txtBarcode.setColumns(10);
 		
 		JLabel lblCodigo = new JLabel("C\u00F3digo");
 		lblCodigo.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -218,7 +218,7 @@ public class Produtos extends JDialog {
 		JLabel lblPorcentagem = new JLabel("%");
 		lblPorcentagem.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPorcentagem.setFont(new Font("Arial", Font.PLAIN, 15));
-		lblPorcentagem.setBounds(699, 237, 46, 14);
+		lblPorcentagem.setBounds(716, 233, 46, 14);
 		getContentPane().add(lblPorcentagem);
 		
 		JLabel lblFabricante = new JLabel("Fabricante");
