@@ -129,8 +129,46 @@ values ('88888888','Régua 30cm','Régua de acrílico 30cm','Faber-Castell',2025
 
 -- delete
 delete from produtos where codigo = 1;
--- pesquisar
+-- select
  select * from produtos;
+ 
+ /*
+ Relatórios (select especial)
+ */
+ 
+ -- relatório 1 (unificar produtos com fornecedores)
+ select * from produtos inner join fornecedores
+ on produtos.idFor = fornecedores.idFor; -- FILHO/FK = PAI/PK
+ 
+ -- relatório 2 (fornecedor relacionado ao produto)
+ select 
+ produtos.codigo as Código,produtos.produto as Produto,
+ fornecedores.fantasia as Fornecedor
+ from produtos
+ inner join fornecedores on produtos.idFor = fornecedores.idFor;
+ 
+-- relatório 3 ((inventário do estoque)(Dinheiro parado no Estoque/Custo/Gasto))
+select sum(estoque * custo) as Total from produtos;
+
+-- relatório 4 (Calcular o preço de venda)
+select codigo as Código,produto as Produto,custo as Custo,
+(custo + (custo * lucro)/100) as Venda
+from produtos;
+
+-- relatório 5 (Reposição de Estoque)
+select codigo as Código, produto as Produto, 
+date_format(dataval,'%d/%m/%Y') as Data_Validade, -- Y Grande ano com 4 digitos e y com 2 (Dia/Mes/Ano)
+estoque as Estoque, estoquemin as Estoque_Minimo
+from produtos where estoque < estoquemin;
+
+-- relatório 6 (Produtos Vencidos)
+-- datediff() (calcula a diferenças de datas)
+select codigo as Código, produto as Produto, localizacao as Localização, 
+date_format(dataval,'%d/%m/%Y') as Data_Validade,
+datediff(dataval,curdate()) as Dias_Vencidos
+from produtos where datediff(dataval,curdate()) <0;
+ 
+ /* Fim select especial */
  
  /* Fim */
 
