@@ -1,26 +1,25 @@
 package views;
 
-import java.awt.EventQueue;
-
-import javax.swing.JDialog;
-import com.toedter.calendar.JDateChooser;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.EtchedBorder;
 import java.awt.Color;
-import javax.swing.JScrollBar;
+import java.awt.EventQueue;
+import java.awt.Font;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import com.toedter.calendar.JDateChooser;
 
 public class Produtos extends JDialog {
 
@@ -39,7 +38,7 @@ public class Produtos extends JDialog {
 	private JTextField txtEstoquemin;
 	private JTextField txtLocal;
 	private JTextField txtIdFor;
-	private JComboBox comboBox;
+	private JComboBox<Object> comboBox;
 	private JButton btnAddProduto;
 	private JButton btnUpdateProduto;
 	private JButton btnDeleteProduto;
@@ -73,13 +72,13 @@ public class Produtos extends JDialog {
 		setBounds(100, 100, 800, 485);
 		getContentPane().setLayout(null);
 		
-		JDateChooser dateChooser = new JDateChooser();
-		dateChooser.setBounds(397, 191, 134, 20);
-		getContentPane().add(dateChooser);
+		JDateChooser dateEntrada = new JDateChooser();
+		dateEntrada.setBounds(397, 191, 134, 20);
+		getContentPane().add(dateEntrada);
 		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(611, 191, 134, 20);
-		getContentPane().add(dateChooser_1);
+		JDateChooser dateValidade = new JDateChooser();
+		dateValidade.setBounds(611, 191, 134, 20);
+		getContentPane().add(dateValidade);
 		
 		JLabel lblCodigoBarras = new JLabel("");
 		lblCodigoBarras.setIcon(new ImageIcon(Produtos.class.getResource("/img/barcode.png")));
@@ -173,7 +172,7 @@ public class Produtos extends JDialog {
 		getContentPane().add(btnDeleteProduto);
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		textArea.setBounds(73, 215, 242, 64);
 		getContentPane().add(textArea);
 		
@@ -259,8 +258,8 @@ public class Produtos extends JDialog {
 		lblUnidade.setBounds(10, 406, 46, 14);
 		getContentPane().add(lblUnidade);
 		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"", "(k)\t", "(h)\t", "(da)\t\t ", "(d)\t ", "(c)\t", "(m)", "(kl)\t", "(hl)\t", "(dal)\t", "(l)\t", "(dl)", "(cl)\t", "(ml)", "(km)\t", "(hm)\t", "(dam)\t", "(m)\t", "(dm)\t", "(cm)\t", "(ml)", "(kg)\t", "(hg)\t", "(dag)\t", "(g)\t", "(dg)\t", "(cg)\t", "(mg)", "(km3)\t", "hm3)\t", "(dam3)\t", "(m3)\t", "(dm3)\t", "(cm3)\t", "(mm3)"}));
+		comboBox = new JComboBox<Object>();
+		comboBox.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "(k)\t", "(h)\t", "(da)\t\t ", "(d)\t ", "(c)\t", "(m)", "(kl)\t", "(hl)\t", "(dal)\t", "(l)\t", "(dl)", "(cl)\t", "(ml)", "(km)\t", "(hm)\t", "(dam)\t", "(m)\t", "(dm)\t", "(cm)\t", "(ml)", "(kg)\t", "(hg)\t", "(dag)\t", "(g)\t", "(dg)\t", "(cg)\t", "(mg)", "(km3)\t", "hm3)\t", "(dam3)\t", "(m3)\t", "(dm3)\t", "(cm3)\t", "(mm3)"}));
 		comboBox.setFont(new Font("Arial", Font.PLAIN, 11));
 		comboBox.setBounds(73, 398, 64, 22);
 		getContentPane().add(comboBox);
