@@ -3,6 +3,12 @@ package views;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -12,6 +18,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -20,7 +27,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import com.toedter.calendar.JDateChooser;
-import java.awt.Toolkit;
+
+import models.DAO;
+import net.proteanit.sql.DbUtils;
 
 public class Produtos extends JDialog {
 
@@ -30,7 +39,7 @@ public class Produtos extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtBarcode;
 	private JTextField txtCodigo;
-	private JTextField txtPesquisaridFor;
+	private JTextField txtFornecedor;
 	private JTextField txtProduto;
 	private JTextField txtCusto;
 	private JTextField txtLucro;
@@ -124,18 +133,24 @@ public class Produtos extends JDialog {
 		lblLupaPesquisar.setBounds(165, 11, 32, 32);
 		panel.add(lblLupaPesquisar);
 		
-		txtPesquisaridFor = new JTextField();
-		txtPesquisaridFor.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtPesquisaridFor.setBounds(10, 24, 86, 20);
-		panel.add(txtPesquisaridFor);
-		txtPesquisaridFor.setColumns(10);
+		txtFornecedor = new JTextField();
+		txtFornecedor.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				pesquisarCliente();
+			}
+		});
+		txtFornecedor.setFont(new Font("Arial", Font.PLAIN, 11));
+		txtFornecedor.setBounds(10, 24, 86, 20);
+		panel.add(txtFornecedor);
+		txtFornecedor.setColumns(10);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 50, 390, 76);
 		panel.add(scrollPane);
 		
-		JPanel panel_1 = new JPanel();
-		scrollPane.setViewportView(panel_1);
+		table = new JTable();
+		scrollPane.setViewportView(table);
 		
 		txtIdFor = new JTextField();
 		txtIdFor.setBounds(290, 23, 86, 20);
@@ -280,5 +295,28 @@ public class Produtos extends JDialog {
 		getContentPane().add(txtLocal);
 		txtLocal.setColumns(10);
 
+	}// Fim Construtor
+	
+	DAO dao = new DAO();
+	private JTable table;
+	
+	/**
+	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
+	 */
+	private void pesquisarCliente() {
+
+		String read3 = "select idFor as ID, fantasia as Fornecedor from fornecedores where fantasia like ?";
+		try {
+			Connection con = dao.conectar();
+			PreparedStatement pst = con.prepareStatement(read3);
+			pst.setString(1, txtFornecedor.getText() + "%"); // Atencao "%"
+			ResultSet rs = pst.executeQuery();
+			// Uso da Biblioteca rs2xml para "popular" da tabela //(popula��o)
+			table.setModel(DbUtils.resultSetToTableModel(rs));
+			con.close();
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 }

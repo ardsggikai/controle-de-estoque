@@ -75,6 +75,9 @@ insert into fornecedores (razaoSocial, fantasia, cnpj, ie, cep, endereco, numero
 -- Selecionar todos os Fornecedores
 select * from fornecedores;
 
+-- delete selecionado por ID
+delete from forncedores where id = ?;
+
 -- pesquisa avançada 
 select idFor, fantasia, fone1, fone2, nomeContato from fornecedores where fantasia like ('k%');
 
@@ -169,6 +172,8 @@ datediff(dataval,curdate()) as Dias_Vencidos
 from produtos where datediff(dataval,curdate()) <0;
  
  /* Fim select especial */
+ 
+
  
  /* Fim */
 
