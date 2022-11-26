@@ -395,10 +395,7 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblUnidade);
 
 		cboUnidade = new JComboBox<Object>();
-		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] { "", "(k)\t", "(h)\t", "(da)\t\t ", "(d)\t ",
-				"(c)\t", "(m)", "(kl)\t", "(hl)\t", "(dal)\t", "(l)\t", "(dl)", "(cl)\t", "(ml)", "(km)\t", "(hm)\t",
-				"(dam)\t", "(m)\t", "(dm)\t", "(cm)\t", "(ml)", "(kg)\t", "(hg)\t", "(dag)\t", "(g)\t", "(dg)\t",
-				"(cg)\t", "(mg)", "(km3)\t", "hm3)\t", "(dam3)\t", "(m3)\t", "(dm3)\t", "(cm3)\t", "(mm3)" }));
+		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "CX", "UN", "k\t", "h", "da\t ", "d\t ", "c", "m", "kl", "hl", "dal", "l", "dl", "cl", "ml", "km", "hm", "dam", "m", "dm", "cm", "ml", "kg", "hg", "dag", "g", "dg", "cg", "mg", "km3", "hm3", "dam3", "m3", "dm3", "cm3", "mm3"}));
 		cboUnidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUnidade.setBounds(73, 398, 64, 22);
 		getContentPane().add(cboUnidade);
@@ -516,20 +513,22 @@ public class Produtos extends JDialog {
 				ResultSet rs = pst.executeQuery();
 				if (rs.next()) {
 					
-					txtCodigo.setText(rs.getString(1));
+					
 					txtBarcode.setText(rs.getString(2));
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
-					txtFabricante.setText(rs.getString(5));
-					txtCodigo.setText(rs.getString(6));
-					txtEstoque.setText(rs.getString(7));
-					txtEstoquemin.setText(rs.getString(8));
-					cboUnidade.setSelectedItem(rs.getString(9));
-					txtLocal.setText(rs.getString(10));
-					txtFornecedor.setText(rs.getString(11));
-					txtIdFor.setText(rs.getString(12));
-					txtCusto.setText(rs.getString(13));;
-					txtLucro.setText(rs.getString(14));
+					txtFabricante.setText(rs.getString(5));	
+					//dateValidade numero 6
+					//dateEntrada numero 7
+					txtEstoque.setText(rs.getString(8));
+					txtEstoquemin.setText(rs.getString(9));
+					cboUnidade.setSelectedItem(rs.getString(10));
+					txtLocal.setText(rs.getString(11));
+					txtCusto.setText(rs.getString(12));;
+					txtLucro.setText(rs.getString(13));
+					txtIdFor.setText(rs.getString(14));
+					
+				
 					
 					/**
 					 * Habilitar botoes alterar e excluir
