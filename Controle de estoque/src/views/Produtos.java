@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,12 +26,15 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
 import models.DAO;
 import net.proteanit.sql.DbUtils;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Produtos extends JDialog {
 
@@ -140,6 +144,11 @@ public class Produtos extends JDialog {
 		txtCodigo.setColumns(10);
 
 		btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pesquisar();
+			}
+		});
 		btnPesquisar.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnPesquisar.setBounds(217, 92, 96, 23);
 		getContentPane().add(btnPesquisar);
@@ -161,7 +170,7 @@ public class Produtos extends JDialog {
 		txtFornecedor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				pesquisarCliente();
+				pesquisarProdutos();
 			}
 		});
 		txtFornecedor.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -208,21 +217,24 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblValidade);
 
 		btnAddProduto = new JButton("");
+		btnAddProduto.setEnabled(false);
 		btnAddProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxadd.png")));
 		btnAddProduto.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnAddProduto.setBounds(423, 356, 64, 64);
+		btnAddProduto.setBounds(341, 358, 64, 64);
 		getContentPane().add(btnAddProduto);
 
 		btnUpdateProduto = new JButton("");
+		btnUpdateProduto.setEnabled(false);
 		btnUpdateProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxupdate.png")));
 		btnUpdateProduto.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnUpdateProduto.setBounds(533, 356, 64, 64);
+		btnUpdateProduto.setBounds(451, 358, 64, 64);
 		getContentPane().add(btnUpdateProduto);
 
 		btnDeleteProduto = new JButton("");
+		btnDeleteProduto.setEnabled(false);
 		btnDeleteProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxdel.png")));
 		btnDeleteProduto.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnDeleteProduto.setBounds(643, 356, 64, 64);
+		btnDeleteProduto.setBounds(561, 358, 64, 64);
 		getContentPane().add(btnDeleteProduto);
 
 		txtaDescricao = new JTextArea();
@@ -412,6 +424,11 @@ public class Produtos extends JDialog {
 		getContentPane().add(txtLocal);
 		txtLocal.setColumns(10);
 
+		/**
+		 * Uso da tecla <Enter> junto com um botao
+		 */
+		getRootPane().setDefaultButton(btnPesquisar);
+
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
 		// txtBarcode
 		RestrictedTextField Barcode = new RestrictedTextField(txtBarcode);
@@ -448,17 +465,24 @@ public class Produtos extends JDialog {
 
 		// txtLucro
 		RestrictedTextField Lucro = new RestrictedTextField(txtLucro);
+		
+		btnLimpar = new JButton("");
+		btnLimpar.setIcon(new ImageIcon(Produtos.class.getResource("/img/BtnEraser.png")));
+		btnLimpar.setFont(new Font("Arial", Font.PLAIN, 11));
+		btnLimpar.setBounds(671, 358, 64, 64);
+		getContentPane().add(btnLimpar);
 		Lucro.setLimit(99);
 
 	}// Fim Construtor
 
 	DAO dao = new DAO();
 	private JTable table;
+	private JButton btnLimpar;
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
 	 */
-	private void pesquisarCliente() {
+	private void pesquisarProdutos() {
 
 		String read3 = "select idFor as ID, fantasia as Fornecedor from fornecedores where fantasia like ?";
 		try {
@@ -474,4 +498,78 @@ public class Produtos extends JDialog {
 			System.out.println(e);
 		}
 	}
+
+	private void pesquisar() {
+
+		/**
+		 * validacao
+		 */
+		if (txtCodigo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Id do Produto");
+			txtCodigo.requestFocus();
+		} else {
+			String read = "select * from produtos where idFor = ?";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(read);
+				pst.setString(1, txtCodigo.getText());
+				ResultSet rs = pst.executeQuery();
+				if (rs.next()) {
+					
+					txtCodigo.setText(rs.getString(1));
+					txtBarcode.setText(rs.getString(2));
+					txtProduto.setText(rs.getString(3));
+					txtaDescricao.setText(rs.getString(4));
+					txtFabricante.setText(rs.getString(5));
+					txtCodigo.setText(rs.getString(6));
+					txtEstoque.setText(rs.getString(7));
+					txtEstoquemin.setText(rs.getString(8));
+					cboUnidade.setSelectedItem(rs.getString(9));
+					txtLocal.setText(rs.getString(10));
+					txtFornecedor.setText(rs.getString(11));
+					txtIdFor.setText(rs.getString(12));
+					txtCusto.setText(rs.getString(13));;
+					txtLucro.setText(rs.getString(14));
+					
+					/**
+					 * Habilitar botoes alterar e excluir
+					 */
+					btnUpdateProduto.setEnabled(true);
+					btnDeleteProduto.setEnabled(true);
+					btnLimpar.setEnabled(true);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+					txtCodigo.setEnabled(true);
+					limpar();
+					txtCodigo.requestFocus();
+				}
+				con.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+	}
+
+	public void limpar() {
+		txtFornecedor.setText(null);
+		txtBarcode.setText(null);
+		txtCodigo.setText(null);
+		txtProduto.setText(null);
+		txtaDescricao.setText(null);
+		txtFabricante.setText(null);
+		txtEstoque.setText(null);
+		txtEstoquemin.setText(null);
+		cboUnidade.setSelectedItem("");
+		txtLocal.setText(null);
+		txtFornecedor.setText(null);
+		txtIdFor.setText(null);
+		txtCusto.setText(null);
+		txtLucro.setText(null);
+		
+		// Limpar a tabela
+		((DefaultTableModel) table.getModel()).setRowCount(0);
+
+	}
+
 }
