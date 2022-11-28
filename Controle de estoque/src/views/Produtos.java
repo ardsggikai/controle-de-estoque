@@ -9,6 +9,8 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -35,6 +37,7 @@ import models.DAO;
 import net.proteanit.sql.DbUtils;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Cursor;
 
 public class Produtos extends JDialog {
 
@@ -62,6 +65,8 @@ public class Produtos extends JDialog {
 	private JTextArea txtaDescricao;
 	private JTable table;
 	private JButton btnLimpar;
+	private JDateChooser dateValidade;
+	private JDateChooser dateEntrada;
 
 	/**
 	 * Launch the application.
@@ -94,11 +99,11 @@ public class Produtos extends JDialog {
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
-		JDateChooser dateEntrada = new JDateChooser();
+		dateEntrada = new JDateChooser();
 		dateEntrada.setBounds(397, 191, 134, 20);
 		getContentPane().add(dateEntrada);
 
-		JDateChooser dateValidade = new JDateChooser();
+		dateValidade = new JDateChooser();
 		dateValidade.setBounds(611, 191, 134, 20);
 		getContentPane().add(dateValidade);
 
@@ -148,7 +153,7 @@ public class Produtos extends JDialog {
 		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				pesquisar();
+				pesquisarProduto();
 			}
 		});
 		btnPesquisar.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -219,12 +224,16 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblValidade);
 
 		btnAddProduto = new JButton("");
+		btnAddProduto.setToolTipText("Adicionar o Produto");
+		btnAddProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxadd.png")));
 		btnAddProduto.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnAddProduto.setBounds(341, 358, 64, 64);
 		getContentPane().add(btnAddProduto);
 
 		btnUpdateProduto = new JButton("");
+		btnUpdateProduto.setToolTipText("Atualizar informa\u00E7\u00F5es do Produto");
+		btnUpdateProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUpdateProduto.setEnabled(false);
 		btnUpdateProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxupdate.png")));
 		btnUpdateProduto.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -232,6 +241,8 @@ public class Produtos extends JDialog {
 		getContentPane().add(btnUpdateProduto);
 
 		btnDeleteProduto = new JButton("");
+		btnDeleteProduto.setToolTipText("Deletar Produto");
+		btnDeleteProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDeleteProduto.setEnabled(false);
 		btnDeleteProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxdel.png")));
 		btnDeleteProduto.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -468,6 +479,9 @@ public class Produtos extends JDialog {
 		Lucro.setLimit(99);
 
 		btnLimpar = new JButton("");
+		btnLimpar.setToolTipText("Limpar Campos de Texto");
+		btnLimpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnLimpar.setEnabled(false);
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpar();
@@ -481,6 +495,7 @@ public class Produtos extends JDialog {
 	}// Fim Construtor
 
 	DAO dao = new DAO();
+	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
@@ -502,7 +517,7 @@ public class Produtos extends JDialog {
 		}
 	}
 
-	private void pesquisar() {
+	private void pesquisarProduto() {
 
 		/**
 		 * validacao
@@ -523,15 +538,22 @@ public class Produtos extends JDialog {
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
-					// dateValidade numero 6
-					// dateEntrada numero 7
+					// Formatação da Data para compatibilizar Mysql <-> JCalendar
+					//apoio a lógica
+					//System.out.println(setarData);
+					String setarData = rs.getString(6);
+					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
+					dateEntrada.setDate(dataFormatada);
+					String setarData2 = rs.getString(7);
+					Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
+					dateValidade.setDate(dataFormatada2);
 					txtEstoque.setText(rs.getString(8));
 					txtEstoquemin.setText(rs.getString(9));
 					cboUnidade.setSelectedItem(rs.getString(10));
 					txtLocal.setText(rs.getString(11));
 					txtCusto.setText(rs.getString(12));
-					;
 					txtLucro.setText(rs.getString(13));
+					txtIdFor.setText(rs.getString(14));
 
 					/**
 					 * Habilitar botoes alterar e excluir
@@ -552,6 +574,8 @@ public class Produtos extends JDialog {
 			}
 		}
 	}
+	
+	
 
 	public void limpar() {
 		txtFornecedor.setText(null);
