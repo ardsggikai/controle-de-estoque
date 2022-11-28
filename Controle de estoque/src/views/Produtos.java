@@ -100,10 +100,30 @@ public class Produtos extends JDialog {
 		getContentPane().setLayout(null);
 
 		dateEntrada = new JDateChooser();
+		dateEntrada.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		dateEntrada.setBounds(397, 191, 134, 20);
 		getContentPane().add(dateEntrada);
 
 		dateValidade = new JDateChooser();
+		dateValidade.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// valida��o (aceita somente os caracteres da String)
+				String caracteres = "0987654321.";
+				if (!caracteres.contains(e.getKeyChar() + "")) {
+					e.consume();
+				}
+			}
+		});
 		dateValidade.setBounds(611, 191, 134, 20);
 		getContentPane().add(dateValidade);
 
