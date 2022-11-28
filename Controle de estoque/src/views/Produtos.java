@@ -60,6 +60,8 @@ public class Produtos extends JDialog {
 	private JButton btnPesquisar;
 	private JLabel lblLupaPesquisar;
 	private JTextArea txtaDescricao;
+	private JTable table;
+	private JButton btnLimpar;
 
 	/**
 	 * Launch the application.
@@ -217,7 +219,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblValidade);
 
 		btnAddProduto = new JButton("");
-		btnAddProduto.setEnabled(false);
 		btnAddProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxadd.png")));
 		btnAddProduto.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnAddProduto.setBounds(341, 358, 64, 64);
@@ -395,7 +396,9 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblUnidade);
 
 		cboUnidade = new JComboBox<Object>();
-		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "CX", "UN", "k\t", "h", "da\t ", "d\t ", "c", "m", "kl", "hl", "dal", "l", "dl", "cl", "ml", "km", "hm", "dam", "m", "dm", "cm", "ml", "kg", "hg", "dag", "g", "dg", "cg", "mg", "km3", "hm3", "dam3", "m3", "dm3", "cm3", "mm3"}));
+		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] { "", "CX", "UN", "k\t", "h", "da\t ", "d\t ",
+				"c", "m", "kl", "hl", "dal", "l", "dl", "cl", "ml", "km", "hm", "dam", "m", "dm", "cm", "ml", "kg",
+				"hg", "dag", "g", "dg", "cg", "mg", "km3", "hm3", "dam3", "m3", "dm3", "cm3", "mm3" }));
 		cboUnidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUnidade.setBounds(73, 398, 64, 22);
 		getContentPane().add(cboUnidade);
@@ -462,19 +465,22 @@ public class Produtos extends JDialog {
 
 		// txtLucro
 		RestrictedTextField Lucro = new RestrictedTextField(txtLucro);
-		
+		Lucro.setLimit(99);
+
 		btnLimpar = new JButton("");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+			}
+		});
 		btnLimpar.setIcon(new ImageIcon(Produtos.class.getResource("/img/BtnEraser.png")));
 		btnLimpar.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnLimpar.setBounds(671, 358, 64, 64);
 		getContentPane().add(btnLimpar);
-		Lucro.setLimit(99);
 
 	}// Fim Construtor
 
 	DAO dao = new DAO();
-	private JTable table;
-	private JButton btnLimpar;
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
@@ -505,31 +511,28 @@ public class Produtos extends JDialog {
 			JOptionPane.showMessageDialog(null, "Insira o Id do Produto");
 			txtCodigo.requestFocus();
 		} else {
-			String read = "select * from produtos where idFor = ?";
+			String read = "select * from produtos where codigo = ?";
 			try {
 				Connection con = dao.conectar();
 				PreparedStatement pst = con.prepareStatement(read);
 				pst.setString(1, txtCodigo.getText());
 				ResultSet rs = pst.executeQuery();
 				if (rs.next()) {
-					
-					
+
 					txtBarcode.setText(rs.getString(2));
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
-					txtFabricante.setText(rs.getString(5));	
-					//dateValidade numero 6
-					//dateEntrada numero 7
+					txtFabricante.setText(rs.getString(5));
+					// dateValidade numero 6
+					// dateEntrada numero 7
 					txtEstoque.setText(rs.getString(8));
 					txtEstoquemin.setText(rs.getString(9));
 					cboUnidade.setSelectedItem(rs.getString(10));
 					txtLocal.setText(rs.getString(11));
-					txtCusto.setText(rs.getString(12));;
+					txtCusto.setText(rs.getString(12));
+					;
 					txtLucro.setText(rs.getString(13));
-					txtIdFor.setText(rs.getString(14));
-					
-				
-					
+
 					/**
 					 * Habilitar botoes alterar e excluir
 					 */
@@ -538,7 +541,7 @@ public class Produtos extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto n√£o cadastrado");
+					JOptionPane.showMessageDialog(null, "Produto n„o cadastrado");
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
@@ -565,7 +568,7 @@ public class Produtos extends JDialog {
 		txtIdFor.setText(null);
 		txtCusto.setText(null);
 		txtLucro.setText(null);
-		
+
 		// Limpar a tabela
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
