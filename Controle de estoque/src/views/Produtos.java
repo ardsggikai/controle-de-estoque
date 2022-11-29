@@ -230,6 +230,7 @@ public class Produtos extends JDialog {
 		scrollPane.setViewportView(table);
 
 		txtIdFor = new JTextField();
+		txtIdFor.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtIdFor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -261,6 +262,11 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblValidade);
 
 		btnAddProduto = new JButton("");
+		btnAddProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inserirProduto();
+			}
+		});
 		btnAddProduto.setToolTipText("Adicionar o Produto");
 		btnAddProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnAddProduto.setIcon(new ImageIcon(Produtos.class.getResource("/img/boxadd.png")));
@@ -444,7 +450,7 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblUnidade);
 
 		cboUnidade = new JComboBox<Object>();
-		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "CX", "UN", "PC", "KG"}));
+		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] { "", "CX", "UN", "PC", "KG" }));
 		cboUnidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUnidade.setBounds(73, 398, 64, 22);
 		getContentPane().add(cboUnidade);
@@ -653,7 +659,7 @@ public class Produtos extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto nï¿½o cadastrado");
+					JOptionPane.showMessageDialog(null, "Produto nao cadastrado");
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
@@ -662,6 +668,45 @@ public class Produtos extends JDialog {
 			} catch (Exception e) {
 				System.out.println(e);
 			}
+		}
+	}
+
+	private void inserirProduto() {
+
+		// validacao
+		String insert = "insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,IdFor)values (?,?,?,?,?,?,?,?,?,?,?,?)";
+
+		try {
+			// Abrir a conexao
+			Connection con = dao.conectar();
+			// Preparar a query (substituiï¿½ao de parametros)
+			PreparedStatement pst = con.prepareStatement(insert);
+			pst.setString(1, txtBarcode.getText());
+			pst.setString(2, txtProduto.getText());
+			pst.setString(3, txtaDescricao.getText());
+			pst.setString(4, txtFabricante.getText());
+			// Formatar o valor do JCalendar para inserção correta no banco
+			SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
+			String dataFormatada = formatador.format(dateValidade.getDate());
+			pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
+			pst.setString(6, txtEstoque.getText());
+			pst.setString(7, txtEstoquemin.getText());
+			pst.setString(8, cboUnidade.getSelectedItem().toString());
+			pst.setString(9, txtLocal.getText());
+			pst.setString(10, txtCusto.getText());
+			pst.setString(11, txtLucro.getText());
+			pst.setString(12, txtIdFor.getText());
+			int confirm = pst.executeUpdate();
+			if (confirm == 1) {
+				JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
+
+			} else {
+				JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
+
+			}
+			con.close();
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 
