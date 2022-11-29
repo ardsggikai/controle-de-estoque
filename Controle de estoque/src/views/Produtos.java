@@ -151,6 +151,7 @@ public class Produtos extends JDialog {
 					e.consume();
 				}
 			}
+
 			// Leitor de Códico de Barras
 			// Evento Ao Pressionar um tecla especifica (ENTER)
 			@Override
@@ -470,12 +471,10 @@ public class Produtos extends JDialog {
 		txtLocal.setBounds(205, 400, 108, 20);
 		getContentPane().add(txtLocal);
 		txtLocal.setColumns(10);
-		
+
 		/**
 		 * Uso da tecla <Enter> junto com um botao
 		 */
-		
-
 
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
 		// txtBarcode
@@ -532,7 +531,6 @@ public class Produtos extends JDialog {
 	}// Fim Construtor
 
 	DAO dao = new DAO();
-	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
@@ -571,13 +569,13 @@ public class Produtos extends JDialog {
 				ResultSet rs = pst.executeQuery();
 				if (rs.next()) {
 
-					txtBarcode.setText(rs.getString(2));
+					txtCodigo.setText(rs.getString(1));
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
 					// Formatação da Data para compatibilizar Mysql <-> JCalendar
-					//apoio a lógica
-					//System.out.println(setarData);
+					// apoio a lógica
+					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
 					dateEntrada.setDate(dataFormatada);
@@ -590,7 +588,6 @@ public class Produtos extends JDialog {
 					txtLocal.setText(rs.getString(11));
 					txtCusto.setText(rs.getString(12));
 					txtLucro.setText(rs.getString(13));
-					txtIdFor.setText(rs.getString(14));
 
 					/**
 					 * Habilitar botoes alterar e excluir
@@ -611,7 +608,7 @@ public class Produtos extends JDialog {
 			}
 		}
 	}
-	
+
 	private void pesquisarBarcode() {
 
 		/**
@@ -629,13 +626,13 @@ public class Produtos extends JDialog {
 				ResultSet rs = pst.executeQuery();
 				if (rs.next()) {
 
-					txtCodigo.setText(rs.getString(2));
+					txtCodigo.setText(rs.getString(1));
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
 					// Formatação da Data para compatibilizar Mysql <-> JCalendar
-					//apoio a lógica
-					//System.out.println(setarData);
+					// apoio a lógica
+					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
 					dateEntrada.setDate(dataFormatada);
@@ -669,7 +666,6 @@ public class Produtos extends JDialog {
 			}
 		}
 	}
-	
 
 	public void limpar() {
 		txtFornecedor.setText(null);
