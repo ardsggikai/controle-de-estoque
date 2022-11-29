@@ -152,7 +152,7 @@ public class Produtos extends JDialog {
 				}
 			}
 
-			// Leitor de Códico de Barras
+			// Leitor de Cï¿½dico de Barras
 			// Evento Ao Pressionar um tecla especifica (ENTER)
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -571,8 +571,8 @@ public class Produtos extends JDialog {
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
-					// Formatação da Data para compatibilizar Mysql <-> JCalendar
-					// apoio a lógica
+					// Formataï¿½ï¿½o da Data para compatibilizar Mysql <-> JCalendar
+					// apoio a lï¿½gica
 					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
@@ -595,7 +595,7 @@ public class Produtos extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+					JOptionPane.showMessageDialog(null, "Produto nï¿½o cadastrado");
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
@@ -628,8 +628,8 @@ public class Produtos extends JDialog {
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
-					// Formatação da Data para compatibilizar Mysql <-> JCalendar
-					// apoio a lógica
+					// Formataï¿½ï¿½o da Data para compatibilizar Mysql <-> JCalendar
+					// apoio a lï¿½gica
 					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
@@ -653,7 +653,7 @@ public class Produtos extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+					JOptionPane.showMessageDialog(null, "Produto nï¿½o cadastrado");
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
@@ -680,6 +680,8 @@ public class Produtos extends JDialog {
 		txtIdFor.setText(null);
 		txtCusto.setText(null);
 		txtLucro.setText(null);
+		dateEntrada.setDate(null);
+		dateValidade.setDate(null);
 
 		// Limpar a tabela
 		((DefaultTableModel) table.getModel()).setRowCount(0);
