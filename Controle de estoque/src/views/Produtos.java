@@ -601,7 +601,7 @@ public class Produtos extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto nï¿½o cadastrado");
+					JOptionPane.showMessageDialog(null, "Produto nao Cadastrado");
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
@@ -708,6 +708,130 @@ public class Produtos extends JDialog {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+	}
+
+	public void atualizarProdutos() {
+
+		// Validacao
+		if (txtBarcode.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Codigo De Barras");
+			txtBarcode.requestFocus();
+		} else if (txtCodigo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Codigo");
+			txtCodigo.requestFocus();
+		} else if (txtProduto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Produto");
+			txtProduto.requestFocus();
+		} else if (txtaDescricao.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira a Descricao");
+			txtaDescricao.requestFocus();
+		} else if (txtFabricante.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
+			txtFabricante.requestFocus();
+		} else if (txtEstoque.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque");
+			txtEstoque.requestFocus();
+		} else if (txtEstoquemin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque Minimo");
+			txtEstoquemin.requestFocus();
+		} else if (txtLocal.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Local");
+			txtLocal.requestFocus();
+		} else if (txtCusto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Custo");
+			txtCusto.requestFocus();
+		} else if (txtLucro.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Lucro");
+			txtLucro.requestFocus();
+		} else {
+
+			// Logica Principal
+			String update = "update fornecedores set razaoSocial = ?, fantasia = ?, cnpj = ?, ie = ?, cep = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, nomeContato = ?, fone1 = ?, fone2 = ?, email = ?, site = ?, obs = ? where idFor = ?";
+
+			try {
+				// Abrir a conexao
+				Connection con = dao.conectar();
+				// Preparar a query (substituiï¿½ao de parametros)
+				PreparedStatement pst = con.prepareStatement(update);
+				pst.setString(1, txtBarcode.getText());
+				pst.setString(2, txtProduto.getText());
+				pst.setString(3, txtaDescricao.getText());
+				pst.setString(4, txtFabricante.getText());
+				// Formatar o valor do JCalendar para inserção correta no banco
+				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
+				String dataFormatada = formatador.format(dateValidade.getDate());
+				pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
+				pst.setString(6, txtEstoque.getText());
+				pst.setString(7, txtEstoquemin.getText());
+				pst.setString(8, cboUnidade.getSelectedItem().toString());
+				pst.setString(9, txtLocal.getText());
+				pst.setString(10, txtCusto.getText());
+				pst.setString(11, txtLucro.getText());
+				pst.setString(12, txtIdFor.getText());
+
+				// Executar a query e confirmar a inserir no banco
+				int confirma = pst.executeUpdate();
+				// System.out.println(confirma);
+				if (confirma == 1) {
+					JOptionPane.showMessageDialog(null, "Produto Atualizado.");
+					limpar();
+				} else {
+					// System.out.println(e1);
+					JOptionPane.showMessageDialog(null, "Produto Não Atualizado");
+					limpar();
+				}
+
+				// Encerrar a conexÃ£o
+				con.close();
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showConfirmDialog(null, "Campo Selecionado Duplicado");
+				txtBarcode.setText(null);
+				txtBarcode.requestFocus();
+				txtCodigo.setText(null);
+				txtCodigo.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
+				limpar();
+			}
+		}
+	}
+
+	public void deleteByidFor() {
+
+		// Validacao
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusao deste Produto?", "Atenção",
+				JOptionPane.YES_NO_OPTION);
+		if (confirma == JOptionPane.YES_OPTION) {
+
+			String delete = "delete from produtos where codigo = ?";
+			try {
+				// abrir a conexao
+				Connection con = dao.conectar();
+				// preparar a query
+				PreparedStatement pst = con.prepareStatement(delete);
+				pst.setString(1, txtCodigo.getText());
+				// executar o comando sql e confirmar a exclusï¿½o
+				int confirmaExcluir = pst.executeUpdate();
+				if (confirmaExcluir == 1) {
+					limpar();
+					JOptionPane.showMessageDialog(null, "Produto excluido com sucesso!");
+
+				}
+				/**
+				 * FECHAR CONEXAO
+				 */
+				con.close();
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+
 	}
 
 	public void limpar() {
