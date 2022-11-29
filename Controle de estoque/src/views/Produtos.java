@@ -38,6 +38,8 @@ import net.proteanit.sql.DbUtils;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Cursor;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Produtos extends JDialog {
 
@@ -89,6 +91,12 @@ public class Produtos extends JDialog {
 	 * Create the dialog.
 	 */
 	public Produtos() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				txtBarcode.requestFocus();
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Produtos.class.getResource("/img/IcoProdutos.png")));
 		getContentPane().setBackground(Color.LIGHT_GRAY);
 		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
@@ -137,10 +145,18 @@ public class Produtos extends JDialog {
 		txtBarcode.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				// validacao (aceita somente os caracteres da String)
 				String caracteres = "0987654321";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
+				}
+			}
+			// Leitor de Códico de Barras
+			// Evento Ao Pressionar um tecla especifica (ENTER)
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					pesquisarBarcode();
 				}
 			}
 		});
@@ -197,7 +213,7 @@ public class Produtos extends JDialog {
 		txtFornecedor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
-				pesquisarProdutos();
+				pesquisarFornecedor();
 			}
 		});
 		txtFornecedor.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -454,11 +470,12 @@ public class Produtos extends JDialog {
 		txtLocal.setBounds(205, 400, 108, 20);
 		getContentPane().add(txtLocal);
 		txtLocal.setColumns(10);
-
+		
 		/**
 		 * Uso da tecla <Enter> junto com um botao
 		 */
-		getRootPane().setDefaultButton(btnPesquisar);
+		
+
 
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
 		// txtBarcode
@@ -520,7 +537,7 @@ public class Produtos extends JDialog {
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
 	 */
-	private void pesquisarProdutos() {
+	private void pesquisarFornecedor() {
 
 		String read3 = "select idFor as ID, fantasia as Fornecedor from fornecedores where fantasia like ?";
 		try {
@@ -595,6 +612,63 @@ public class Produtos extends JDialog {
 		}
 	}
 	
+	private void pesquisarBarcode() {
+
+		/**
+		 * validacao
+		 */
+		if (txtBarcode.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Barcode do Produto");
+			txtBarcode.requestFocus();
+		} else {
+			String read = "select * from produtos where barcode = ?";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(read);
+				pst.setString(1, txtBarcode.getText());
+				ResultSet rs = pst.executeQuery();
+				if (rs.next()) {
+
+					txtCodigo.setText(rs.getString(2));
+					txtProduto.setText(rs.getString(3));
+					txtaDescricao.setText(rs.getString(4));
+					txtFabricante.setText(rs.getString(5));
+					// Formatação da Data para compatibilizar Mysql <-> JCalendar
+					//apoio a lógica
+					//System.out.println(setarData);
+					String setarData = rs.getString(6);
+					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
+					dateEntrada.setDate(dataFormatada);
+					String setarData2 = rs.getString(7);
+					Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
+					dateValidade.setDate(dataFormatada2);
+					txtEstoque.setText(rs.getString(8));
+					txtEstoquemin.setText(rs.getString(9));
+					cboUnidade.setSelectedItem(rs.getString(10));
+					txtLocal.setText(rs.getString(11));
+					txtCusto.setText(rs.getString(12));
+					txtLucro.setText(rs.getString(13));
+					txtIdFor.setText(rs.getString(14));
+
+					/**
+					 * Habilitar botoes alterar e excluir
+					 */
+					btnUpdateProduto.setEnabled(true);
+					btnDeleteProduto.setEnabled(true);
+					btnLimpar.setEnabled(true);
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+					txtCodigo.setEnabled(true);
+					limpar();
+					txtCodigo.requestFocus();
+				}
+				con.close();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+	}
 	
 
 	public void limpar() {
