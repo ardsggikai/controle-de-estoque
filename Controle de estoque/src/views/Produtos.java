@@ -444,9 +444,7 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblUnidade);
 
 		cboUnidade = new JComboBox<Object>();
-		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] { "", "CX", "UN", "k\t", "h", "da\t ", "d\t ",
-				"c", "m", "kl", "hl", "dal", "l", "dl", "cl", "ml", "km", "hm", "dam", "m", "dm", "cm", "ml", "kg",
-				"hg", "dag", "g", "dg", "cg", "mg", "km3", "hm3", "dam3", "m3", "dm3", "cm3", "mm3" }));
+		cboUnidade.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "CX", "UN", "PC", "KG"}));
 		cboUnidade.setFont(new Font("Arial", Font.PLAIN, 11));
 		cboUnidade.setBounds(73, 398, 64, 22);
 		getContentPane().add(cboUnidade);
@@ -460,7 +458,7 @@ public class Produtos extends JDialog {
 		txtLocal.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// valida��o (aceita somente os caracteres da String)
+				// validacao (aceita somente os caracteres da String)
 				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
