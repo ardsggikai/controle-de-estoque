@@ -744,41 +744,41 @@ public class Produtos extends JDialog {
 		} else {
 
 			// Logica Principal
-			String update = "update produtos set barcode = ?, produto = ?, descricao = ?, fabricante = ?, dataval = ?, estoque = ?, estoquemin = ?, unidade = ?, localizacao = ?, custo = ?, lucro = ? where idFor = ?";
+			String update = "update produtos set produto = ?, descricao = ?, fabricante = ?, dataval = ?, estoque = ?, estoquemin = ?, unidade = ?, localizacao = ?, custo = ?, lucro = ? where idFor = ?";
 
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
 				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
-				pst.setString(1, txtBarcode.getText());
-				pst.setString(2, txtProduto.getText());
-				pst.setString(3, txtaDescricao.getText());
-				pst.setString(4, txtFabricante.getText());
+				
+				pst.setString(1, txtProduto.getText());
+				pst.setString(2, txtaDescricao.getText());
+				pst.setString(3, txtFabricante.getText());
 				// Formatar o valor do JCalendar para inserção correta no banco
 				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
 				String dataFormatada = formatador.format(dateValidade.getDate());
-				pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
-				pst.setString(6, txtEstoque.getText());
-				pst.setString(7, txtEstoquemin.getText());
-				pst.setString(8, cboUnidade.getSelectedItem().toString());
-				pst.setString(9, txtLocal.getText());
-				pst.setString(10, txtCusto.getText());
-				pst.setString(11, txtLucro.getText());
-				pst.setString(12, txtIdFor.getText());
+				pst.setString(4, dataFormatada); // x -> parâmetro do componente dateChooser
+				pst.setString(5, txtEstoque.getText());
+				pst.setString(6, txtEstoquemin.getText());
+				pst.setString(7, cboUnidade.getSelectedItem().toString());
+				pst.setString(8, txtLocal.getText());
+				pst.setString(9, txtCusto.getText());
+				pst.setString(10, txtLucro.getText());
+				pst.setString(11, txtIdFor.getText());
 				int confirm = pst.executeUpdate();
 				if (confirm == 1) {
-					JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
+					JOptionPane.showMessageDialog(null, "Produto Atualizado Com Sucesso");
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
+					JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto");
 
 				}
 				con.close();
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
+				JOptionPane.showMessageDialog(null, "Produto nao Atualizado - Campo Duplicado");
 				txtBarcode.setText(null);
 				txtBarcode.requestFocus();
 			}
