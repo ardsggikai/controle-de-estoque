@@ -102,7 +102,6 @@ public class Produtos extends JDialog {
 		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
 		setTitle("Produtos");
 		setResizable(false);
-		setModal(true);
 		setBounds(100, 100, 800, 485);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
@@ -111,7 +110,7 @@ public class Produtos extends JDialog {
 		dateEntrada.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				// validacao (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -230,11 +229,12 @@ public class Produtos extends JDialog {
 		scrollPane.setViewportView(table);
 
 		txtIdFor = new JTextField();
+		txtIdFor.setEditable(false);
 		txtIdFor.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtIdFor.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
+				// validacao (aceita somente os caracteres da String)
 				String caracteres = "0987654321.";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
@@ -275,6 +275,11 @@ public class Produtos extends JDialog {
 		getContentPane().add(btnAddProduto);
 
 		btnUpdateProduto = new JButton("");
+		btnUpdateProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnUpdateProduto.setToolTipText("Atualizar informa\u00E7\u00F5es do Produto");
 		btnUpdateProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUpdateProduto.setEnabled(false);
@@ -284,6 +289,11 @@ public class Produtos extends JDialog {
 		getContentPane().add(btnUpdateProduto);
 
 		btnDeleteProduto = new JButton("");
+		btnDeleteProduto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deleteByidFor();
+			}
+		});
 		btnDeleteProduto.setToolTipText("Deletar Produto");
 		btnDeleteProduto.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnDeleteProduto.setEnabled(false);
@@ -293,16 +303,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(btnDeleteProduto);
 
 		txtaDescricao = new JTextArea();
-		txtaDescricao.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
-				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtaDescricao.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		txtaDescricao.setBounds(73, 215, 242, 64);
 		getContentPane().add(txtaDescricao);
@@ -318,16 +318,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblProduto);
 
 		txtProduto = new JTextField();
-		txtProduto.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
-				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtProduto.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtProduto.setBounds(73, 156, 240, 20);
 		getContentPane().add(txtProduto);
@@ -387,16 +377,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblFabricante);
 
 		txtFabricante = new JTextField();
-		txtFabricante.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validaï¿½ï¿½o (aceita somente os caracteres da String)
-				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtFabricante.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtFabricante.setBounds(73, 308, 242, 20);
 		getContentPane().add(txtFabricante);
@@ -486,13 +466,15 @@ public class Produtos extends JDialog {
 		Barcode.setLimit(255);
 		// txtCodigo
 		RestrictedTextField Codigo = new RestrictedTextField(txtCodigo);
-		Codigo.setLimit(30);
+		Codigo.setLimit(15);
 		// txtProduto
 		RestrictedTextField Produto = new RestrictedTextField(txtProduto);
 		Produto.setLimit(55);
+
 		// txtFabricante
 		RestrictedTextField Fabricante = new RestrictedTextField(txtFabricante);
 		Fabricante.setLimit(50);
+		// txtaDescricao
 		// txtEstoque
 		RestrictedTextField Estoque = new RestrictedTextField(txtEstoque);
 		Estoque.setLimit(1000);
@@ -547,7 +529,7 @@ public class Produtos extends JDialog {
 			PreparedStatement pst = con.prepareStatement(read3);
 			pst.setString(1, txtFornecedor.getText() + "%"); // Atencao "%"
 			ResultSet rs = pst.executeQuery();
-			// Uso da Biblioteca rs2xml para "popular" da tabela //(populaï¿½ï¿½o)
+			// Uso da Biblioteca rs2xml para "popular" da tabela //(populacao)
 			table.setModel(DbUtils.resultSetToTableModel(rs));
 			con.close();
 
@@ -562,7 +544,7 @@ public class Produtos extends JDialog {
 		 * validacao
 		 */
 		if (txtCodigo.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Id do Produto");
+			JOptionPane.showMessageDialog(null, "Insira o Codigo");
 			txtCodigo.requestFocus();
 		} else {
 			String read = "select * from produtos where codigo = ?";
@@ -577,8 +559,8 @@ public class Produtos extends JDialog {
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
-					// Formataï¿½ï¿½o da Data para compatibilizar Mysql <-> JCalendar
-					// apoio a lï¿½gica
+					// Formatacao da Data para compatibilizar Mysql <-> JCalendar
+					// apoio a logica
 					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
@@ -634,8 +616,8 @@ public class Produtos extends JDialog {
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
-					// Formataï¿½ï¿½o da Data para compatibilizar Mysql <-> JCalendar
-					// apoio a lï¿½gica
+					// Formatacao da Data para compatibilizar Mysql <-> JCalendar
+					// apoio a logica
 					// System.out.println(setarData);
 					String setarData = rs.getString(6);
 					Date dataFormatada = new SimpleDateFormat("yyyy-MM-dd").parse(setarData);
@@ -707,97 +689,6 @@ public class Produtos extends JDialog {
 			con.close();
 		} catch (Exception e) {
 			System.out.println(e);
-		}
-	}
-
-	public void atualizarProdutos() {
-
-		// Validacao
-		if (txtBarcode.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Codigo De Barras");
-			txtBarcode.requestFocus();
-		} else if (txtCodigo.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Codigo");
-			txtCodigo.requestFocus();
-		} else if (txtProduto.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Produto");
-			txtProduto.requestFocus();
-		} else if (txtaDescricao.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira a Descricao");
-			txtaDescricao.requestFocus();
-		} else if (txtFabricante.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
-			txtFabricante.requestFocus();
-		} else if (txtEstoque.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Estoque");
-			txtEstoque.requestFocus();
-		} else if (txtEstoquemin.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Estoque Minimo");
-			txtEstoquemin.requestFocus();
-		} else if (txtLocal.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Local");
-			txtLocal.requestFocus();
-		} else if (txtCusto.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Custo");
-			txtCusto.requestFocus();
-		} else if (txtLucro.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Lucro");
-			txtLucro.requestFocus();
-		} else {
-
-			// Logica Principal
-			String update = "update fornecedores set razaoSocial = ?, fantasia = ?, cnpj = ?, ie = ?, cep = ?, endereco = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, uf = ?, nomeContato = ?, fone1 = ?, fone2 = ?, email = ?, site = ?, obs = ? where idFor = ?";
-
-			try {
-				// Abrir a conexao
-				Connection con = dao.conectar();
-				// Preparar a query (substituiï¿½ao de parametros)
-				PreparedStatement pst = con.prepareStatement(update);
-				pst.setString(1, txtBarcode.getText());
-				pst.setString(2, txtProduto.getText());
-				pst.setString(3, txtaDescricao.getText());
-				pst.setString(4, txtFabricante.getText());
-				// Formatar o valor do JCalendar para inserção correta no banco
-				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
-				String dataFormatada = formatador.format(dateValidade.getDate());
-				pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
-				pst.setString(6, txtEstoque.getText());
-				pst.setString(7, txtEstoquemin.getText());
-				pst.setString(8, cboUnidade.getSelectedItem().toString());
-				pst.setString(9, txtLocal.getText());
-				pst.setString(10, txtCusto.getText());
-				pst.setString(11, txtLucro.getText());
-				pst.setString(12, txtIdFor.getText());
-
-				// Executar a query e confirmar a inserir no banco
-				int confirma = pst.executeUpdate();
-				// System.out.println(confirma);
-				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Produto Atualizado.");
-					limpar();
-				} else {
-					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Produto Não Atualizado");
-					limpar();
-				}
-
-				// Encerrar a conexÃ£o
-				con.close();
-			}
-
-			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showConfirmDialog(null, "Campo Selecionado Duplicado");
-				txtBarcode.setText(null);
-				txtBarcode.requestFocus();
-				txtCodigo.setText(null);
-				txtCodigo.requestFocus();
-			}
-
-			catch (Exception e2) {
-				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
-				limpar();
-			}
 		}
 	}
 

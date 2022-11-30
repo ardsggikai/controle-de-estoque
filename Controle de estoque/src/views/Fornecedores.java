@@ -64,6 +64,15 @@ public class Fornecedores extends JDialog {
 	private JTextField txtWhatsapp;
 	private JTextField txtSite;
 	private JTextField txtEmail;
+	private JButton btnBuscar;
+	private JButton btnCep;
+	private JButton btnCreate;
+	private JButton btnUpdate;
+	private JButton btnDelete;
+	private JComboBox<Object> cboUf;
+	private JTextArea txtObservacao;
+	private JButton btnLimpar;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -419,7 +428,7 @@ public class Fornecedores extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validaï¿½ï¿½o (aceita somente os caracteres da String)
-				String caracteres = "0987654321.";
+				String caracteres = "0987654321-";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -441,7 +450,7 @@ public class Fornecedores extends JDialog {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// validaï¿½ï¿½o (aceita somente os caracteres da String)
-				String caracteres = "0987654321.";
+				String caracteres = "0987654321-";
 				if (!caracteres.contains(e.getKeyChar() + "")) {
 					e.consume();
 				}
@@ -582,10 +591,10 @@ public class Fornecedores extends JDialog {
 		id.setLimit(7);
 		// txtCnpj
 		RestrictedTextField cnpj = new RestrictedTextField(txtCnpj);
-		cnpj.setLimit(18);
+		cnpj.setLimit(20);
 		// txtIe
 		RestrictedTextField Ie = new RestrictedTextField(txtIe);
-		Ie.setLimit(12);
+		Ie.setLimit(20);
 		// txtRazaoSocial
 		RestrictedTextField RS = new RestrictedTextField(txtRazaoSocial);
 		RS.setOnlyText(true);
@@ -598,39 +607,41 @@ public class Fornecedores extends JDialog {
 		NF.setLimit(50);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);
-		CEP.setLimit(9);
+		CEP.setLimit(10);
 		// txtEndereco
 		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
 		Endereco.setLimit(50);
 		// txtNumero
 		RestrictedTextField NumeroCasa = new RestrictedTextField(txtNumero);
-		NumeroCasa.setLimit(4);
+		NumeroCasa.setLimit(6);
 		// txtComplemento
 		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
-		Complemento.setLimit(15);
+		Complemento.setLimit(20);
 		// txtCep
 		RestrictedTextField Cep = new RestrictedTextField(txtComplemento);
-		Cep.setLimit(9);
+		Cep.setLimit(10);
 		// txtBairro
 		RestrictedTextField Bairro = new RestrictedTextField(txtBairro);
-		Bairro.setLimit(20);
+		Bairro.setLimit(50);
 		// txtCidade
 		RestrictedTextField Cidade = new RestrictedTextField(txtCidade);
-		Cidade.setLimit(20);
+		Cidade.setLimit(50);
 		// txtContato
 		RestrictedTextField Contato = new RestrictedTextField(txtContato);
-		Contato.setLimit(20);
+		Contato.setLimit(30);
 		// txtFone
 		RestrictedTextField Fone = new RestrictedTextField(txtFone);
-		Fone.setLimit(20);
+		Fone.setLimit(15);
 		// txtWhatsapp
 		RestrictedTextField Whatsapp = new RestrictedTextField(txtWhatsapp);
-		Whatsapp.setLimit(20);
+		Whatsapp.setLimit(15);
 		// txtSite
 		RestrictedTextField Site = new RestrictedTextField(txtSite);
-		Site.setLimit(100);
+		Site.setLimit(50);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
+		Email.setLimit(50);
+		
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setToolTipText("Informa\u00E7\u00F5es Cruciais");
@@ -645,15 +656,7 @@ public class Fornecedores extends JDialog {
 	} // Fim do construtor
 
 	DAO dao = new DAO();
-	private JButton btnBuscar;
-	private JButton btnCep;
-	private JButton btnCreate;
-	private JButton btnUpdate;
-	private JButton btnDelete;
-	private JComboBox<Object> cboUf;
-	private JTextArea txtObservacao;
-	private JButton btnLimpar;
-	private JTable table;
+	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
@@ -776,7 +779,7 @@ public class Fornecedores extends JDialog {
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituiï¿½ao de parametros)
+				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
 				pst.setString(1, txtRazaoSocial.getText());
 				pst.setString(2, txtNomeFantasia.getText());
@@ -796,7 +799,7 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 
-				// Executar a query e confirmar a inserï¿½ï¿½o no banco
+				// Executar a query e confirmar a insercao no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
@@ -828,7 +831,7 @@ public class Fornecedores extends JDialog {
 
 	public void atualizar() {
 
-		// Validaï¿½ao
+		// Validacao
 		if (txtRazaoSocial.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a Razao Social");
 			txtRazaoSocial.requestFocus();
@@ -873,7 +876,7 @@ public class Fornecedores extends JDialog {
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituiï¿½ao de parametros)
+				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
 				pst.setString(1, txtRazaoSocial.getText());
 				pst.setString(2, txtNomeFantasia.getText());
@@ -893,15 +896,15 @@ public class Fornecedores extends JDialog {
 				pst.setString(16, txtSite.getText());
 				pst.setString(17, txtObservacao.getText());
 				pst.setString(18, txtId.getText());
-				// Executar a query e confirmar a inserï¿½ï¿½o no banco
+				// Executar a query e confirmar a insercao no banco
 				int confirma = pst.executeUpdate();
 				// System.out.println(confirma);
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Funcionario Atualizado.");
+					JOptionPane.showMessageDialog(null, "Fornecedor Atualizado.");
 					limpar();
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Funcionario Não Atualizado");
+					JOptionPane.showMessageDialog(null, "Fornecedor Não Atualizado");
 					limpar();
 				}
 
@@ -925,8 +928,8 @@ public class Fornecedores extends JDialog {
 
 	public void deleteByidFor() {
 
-		// Validaï¿½ï¿½o
-		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusï¿½o deste Fornecedor?", "Atenï¿½ï¿½o",
+		// Validacao
+		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusao deste Fornecedor?", "Atencao",
 				JOptionPane.YES_NO_OPTION);
 		if (confirma == JOptionPane.YES_OPTION) {
 
