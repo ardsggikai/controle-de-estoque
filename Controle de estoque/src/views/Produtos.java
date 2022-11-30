@@ -556,6 +556,7 @@ public class Produtos extends JDialog {
 				if (rs.next()) {
 
 					txtCodigo.setText(rs.getString(1));
+					txtBarcode.setText(rs.getString(2));
 					txtProduto.setText(rs.getString(3));
 					txtaDescricao.setText(rs.getString(4));
 					txtFabricante.setText(rs.getString(5));
@@ -574,6 +575,7 @@ public class Produtos extends JDialog {
 					txtLocal.setText(rs.getString(11));
 					txtCusto.setText(rs.getString(12));
 					txtLucro.setText(rs.getString(13));
+					
 
 					/**
 					 * Habilitar botoes alterar e excluir

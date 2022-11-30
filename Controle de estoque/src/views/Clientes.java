@@ -429,31 +429,28 @@ public class Clientes extends JDialog {
 		Nome.setLimit(50);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);
-		CEP.setLimit(9);
+		CEP.setLimit(10);
 		// txtEndereco
 		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
 		Endereco.setLimit(50);
 		// txtNumero
 		RestrictedTextField NumeroCasa = new RestrictedTextField(txtN);
-		NumeroCasa.setLimit(4);
+		NumeroCasa.setLimit(6);
 		// txtComplemento
 		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
-		Complemento.setLimit(15);
-		// txtCep
-		RestrictedTextField Cep = new RestrictedTextField(txtComplemento);
-		Cep.setLimit(9);
+		Complemento.setLimit(20);
 		// txtBairro
 		RestrictedTextField Bairro = new RestrictedTextField(txtBairro);
-		Bairro.setLimit(20);
+		Bairro.setLimit(50);
 		// txtCidade
 		RestrictedTextField Cidade = new RestrictedTextField(txtCidade);
-		Cidade.setLimit(20);
+		Cidade.setLimit(50);
 		// txtWhatsapp
 		RestrictedTextField Whatsapp = new RestrictedTextField(txtTelefone);
-		Whatsapp.setLimit(11);
+		Whatsapp.setLimit(15);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
-		Email.setLimit(30);
+		Email.setLimit(50);
 
 		/**
 		 * Uso da tecla <Enter> junto com um botao

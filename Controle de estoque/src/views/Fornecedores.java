@@ -122,7 +122,7 @@ public class Fornecedores extends JDialog {
 				pesquisarCliente();
 			}
 		});
-		txtFornecedor.setToolTipText("Colocar Nome Fantasia");
+		txtFornecedor.setToolTipText("Colocar Fornecedor");
 		txtFornecedor.setBounds(80, 12, 189, 20);
 		getContentPane().add(txtFornecedor);
 		txtFornecedor.setColumns(10);
@@ -597,12 +597,10 @@ public class Fornecedores extends JDialog {
 		Ie.setLimit(20);
 		// txtRazaoSocial
 		RestrictedTextField RS = new RestrictedTextField(txtRazaoSocial);
-		RS.setOnlyText(true);
 		RS.setAcceptSpace(true);
 		RS.setLimit(50);
 		// txtNomeFantasia
 		RestrictedTextField NF = new RestrictedTextField(txtNomeFantasia);
-		NF.setOnlyText(true);
 		NF.setAcceptSpace(true);
 		NF.setLimit(50);
 		// txtCep

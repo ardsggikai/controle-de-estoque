@@ -260,11 +260,11 @@ public class Usuarios extends JDialog {
 		// Uso da biblioteca atxy2k para restringir o maximo de caracteres
 		// txtLogin
 		RestrictedTextField log = new RestrictedTextField(txtLog);
-		log.setLimit(50);
+		log.setLimit(20);
 		// txtPassword
 		RestrictedTextField senha = new RestrictedTextField(txtPassword);
 		senha.setOnlyAlphaNumeric(true);
-		senha.setLimit(50);
+		senha.setLimit(250);
 		// txtUsuario
 		RestrictedTextField usuario1 = new RestrictedTextField(txtUsuario);
 		usuario1.setOnlyText(true);
