@@ -40,6 +40,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Cursor;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Produtos extends JDialog {
 
@@ -91,6 +93,7 @@ public class Produtos extends JDialog {
 	 * Create the dialog.
 	 */
 	public Produtos() {
+		setModal(true);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -226,6 +229,13 @@ public class Produtos extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int setar = table.getSelectedRow();
+				txtIdFor.setText(table.getModel().getValueAt(setar, 0).toString());
+			}
+		});
 		scrollPane.setViewportView(table);
 
 		txtIdFor = new JTextField();
@@ -277,7 +287,7 @@ public class Produtos extends JDialog {
 		btnUpdateProduto = new JButton("");
 		btnUpdateProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				atualizarDados();
 			}
 		});
 		btnUpdateProduto.setToolTipText("Atualizar informa\u00E7\u00F5es do Produto");
@@ -575,7 +585,7 @@ public class Produtos extends JDialog {
 					txtLocal.setText(rs.getString(11));
 					txtCusto.setText(rs.getString(12));
 					txtLucro.setText(rs.getString(13));
-					
+					txtIdFor.setText(rs.getString(14));
 
 					/**
 					 * Habilitar botoes alterar e excluir
@@ -689,8 +699,95 @@ public class Produtos extends JDialog {
 
 			}
 			con.close();
-		} catch (Exception e) {
-			System.out.println(e);
+		}
+
+		catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+			JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
+			txtBarcode.setText(null);
+			txtBarcode.requestFocus();
+		}
+
+		catch (Exception e2) {
+			System.out.println(e2);
+			// JOptionPane.showConfirmDialog(null, e2);
+			limpar();
+		}
+	}
+
+	public void atualizarDados() {
+
+		// Validacao
+		if (txtProduto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insirao o Produto");
+			txtProduto.requestFocus();
+		} else if (txtFabricante.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
+			txtFabricante.requestFocus();
+		} else if (txtEstoque.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque");
+			txtEstoque.requestFocus();
+		} else if (txtEstoquemin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque Minimo");
+			txtEstoquemin.requestFocus();
+		} else if (((String) cboUnidade.getSelectedItem()).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Tipo de Unidade");
+			cboUnidade.requestFocus();
+		} else if (txtLocal.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Local Armazenado");
+			txtLocal.requestFocus();
+		} else if (txtCusto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Custo");
+			txtCusto.requestFocus();
+		} else if (txtIdFor.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o ID");
+			txtIdFor.requestFocus();
+		} else {
+
+			// Logica Principal
+			String update = "update produtos set barcode = ?, produto = ?, descricao = ?, fabricante = ?, dataval = ?, estoque = ?, estoquemin = ?, unidade = ?, localizacao = ?, custo = ?, lucro = ? where idFor = ?";
+
+			try {
+				// Abrir a conexao
+				Connection con = dao.conectar();
+				// Preparar a query (substituicao de parametros)
+				PreparedStatement pst = con.prepareStatement(update);
+				pst.setString(1, txtBarcode.getText());
+				pst.setString(2, txtProduto.getText());
+				pst.setString(3, txtaDescricao.getText());
+				pst.setString(4, txtFabricante.getText());
+				// Formatar o valor do JCalendar para inserção correta no banco
+				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
+				String dataFormatada = formatador.format(dateValidade.getDate());
+				pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
+				pst.setString(6, txtEstoque.getText());
+				pst.setString(7, txtEstoquemin.getText());
+				pst.setString(8, cboUnidade.getSelectedItem().toString());
+				pst.setString(9, txtLocal.getText());
+				pst.setString(10, txtCusto.getText());
+				pst.setString(11, txtLucro.getText());
+				pst.setString(12, txtIdFor.getText());
+				int confirm = pst.executeUpdate();
+				if (confirm == 1) {
+					JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
+
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
+
+				}
+				con.close();
+			}
+
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
+				txtBarcode.setText(null);
+				txtBarcode.requestFocus();
+			}
+
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
+				limpar();
+			}
 		}
 	}
 
