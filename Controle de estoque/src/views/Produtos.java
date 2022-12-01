@@ -675,7 +675,7 @@ public class Produtos extends JDialog {
 			txtBarcode.requestFocus();
 		} else if (txtCodigo.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insirao o Codigo");
-			txtProduto.requestFocus();
+			txtCodigo.requestFocus();
 		} else if (txtFabricante.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
 			txtFabricante.requestFocus();
