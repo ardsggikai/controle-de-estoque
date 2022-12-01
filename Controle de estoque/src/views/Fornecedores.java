@@ -40,6 +40,8 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Fornecedores extends JDialog {
 
@@ -648,6 +650,13 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+		    int setar = table.getSelectedRow();
+			txtId.setText(table.getModel().getValueAt(setar, 0).toString());
+				}
+			});
 		table.setFont(new Font("Arial", Font.PLAIN, 11));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {

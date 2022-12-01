@@ -652,13 +652,18 @@ public class Produtos extends JDialog {
 					 */
 					btnUpdateProduto.setEnabled(true);
 					btnDeleteProduto.setEnabled(true);
-					btnLimpar.setEnabled(true);
+					btnPesquisar.setEnabled(false);
+					txtCodigo.setEnabled(false);
+					dateValidade.setEnabled(false);
+					txtBarcode.setEnabled(false);
+
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Produto nao cadastrado");
-					txtCodigo.setEnabled(true);
-					limpar();
-					txtCodigo.requestFocus();
+					JOptionPane.showMessageDialog(null, "Produto não cadastrado");
+					txtCodigo.setEnabled(false);
+					btnAddProduto.setEnabled(true);
+					btnPesquisar.setEnabled(false);
+					txtProduto.requestFocus();
 				}
 				con.close();
 			} catch (Exception e) {
@@ -802,7 +807,9 @@ public class Produtos extends JDialog {
 				int confirm = pst.executeUpdate();
 				if (confirm == 1) {
 					JOptionPane.showMessageDialog(null, "Produto Atualizado Com Sucesso");
-
+					limpar();
+					btnUpdateProduto.setEnabled(false);
+					btnDeleteProduto.setEnabled(false);
 				} else {
 					JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto");
 				}
@@ -837,7 +844,8 @@ public class Produtos extends JDialog {
 				if (confirmaExcluir == 1) {
 					limpar();
 					JOptionPane.showMessageDialog(null, "Produto excluido com sucesso!");
-
+					btnUpdateProduto.setEnabled(false);
+					btnDeleteProduto.setEnabled(false);
 				}
 				/**
 				 * FECHAR CONEXAO
@@ -852,22 +860,30 @@ public class Produtos extends JDialog {
 	}
 
 	public void limpar() {
-		txtFornecedor.setText(null);
+		txtIdFor.setText(null);
 		txtBarcode.setText(null);
-		txtCodigo.setText(null);
 		txtProduto.setText(null);
 		txtaDescricao.setText(null);
 		txtFabricante.setText(null);
 		txtEstoque.setText(null);
 		txtEstoquemin.setText(null);
+		dateValidade.setDate(null);
+		dateValidade.setEnabled(true);
+		dateEntrada.setDate(null);
 		cboUnidade.setSelectedItem("");
 		txtLocal.setText(null);
-		txtFornecedor.setText(null);
-		txtIdFor.setText(null);
 		txtCusto.setText(null);
 		txtLucro.setText(null);
-		dateEntrada.setDate(null);
+		txtIdFor.setText(null);
+		txtFornecedor.setText(null);
+		txtIdFor.setEnabled(true);
+		txtBarcode.setEnabled(true);
+		txtBarcode.requestFocus();
+		btnPesquisar.setEnabled(true);
+		btnAddProduto.setEnabled(false);
+		((DefaultTableModel) table.getModel()).setRowCount(0);
 		dateValidade.setDate(null);
+		dateEntrada.setDate(null);
 
 		// Limpar a tabela
 		((DefaultTableModel) table.getModel()).setRowCount(0);
