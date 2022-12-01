@@ -641,7 +641,6 @@ public class Fornecedores extends JDialog {
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
 		Email.setLimit(50);
-		
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setToolTipText("Informa\u00E7\u00F5es Cruciais");
@@ -653,30 +652,22 @@ public class Fornecedores extends JDialog {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-		    int setar = table.getSelectedRow();
-			txtId.setText(table.getModel().getValueAt(setar, 0).toString());
-				}
-			});
+				int setar = table.getSelectedRow();
+				txtId.setText(table.getModel().getValueAt(setar, 0).toString());
+			}
+		});
 		table.setFont(new Font("Arial", Font.PLAIN, 11));
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "Fornecedor", "Telefone", "Whatsapp", "Contato"
-			}
-		));
+				new Object[][] { { null, null, null, null, null }, { null, null, null, null, null },
+						{ null, null, null, null, null }, { null, null, null, null, null },
+						{ null, null, null, null, null }, },
+				new String[] { "ID", "Fornecedor", "Telefone", "Whatsapp", "Contato" }));
 		scrollPane.setViewportView(table);
 		Email.setLimit(30);
 
 	} // Fim do construtor
 
 	DAO dao = new DAO();
-	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do fornecedor usando filtro
@@ -740,7 +731,7 @@ public class Fornecedores extends JDialog {
 					btnLimpar.setEnabled(true);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Fornecedor nï¿½o cadastrado");
+					JOptionPane.showMessageDialog(null, "Fornecedor nao cadastrado");
 					btnCreate.setEnabled(true);
 					limpar();
 					txtId.requestFocus();
@@ -926,21 +917,22 @@ public class Fornecedores extends JDialog {
 					// System.out.println(e1);
 					JOptionPane.showMessageDialog(null, "Fornecedor Não Atualizado");
 					limpar();
-				}
+				} 
 
 				// Encerrar a conexÃ£o
 				con.close();
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Fornecedor nao adicionado - CNPJ Duplicado");
+				JOptionPane.showMessageDialog(null, "Fornecedor nao atualizado - CNPJ Duplicado");
 				txtCnpj.setText(null);
 				txtCnpj.requestFocus();
 			}
 
 			catch (Exception e2) {
-				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
+				JOptionPane.showMessageDialog(null, "Fornecedor nao atualizado - IE Duplicado");
+				txtIe.setText(null);
+				txtIe.requestFocus();
 				limpar();
 			}
 		}
@@ -1050,13 +1042,13 @@ public class Fornecedores extends JDialog {
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
 	}
-	
+
 	/**
 	 * SETAR CAMPOS DO FORMULARIO COM OS DADOS DA TABELA
 	 */
-	//private void setarCampos() {
-	//	int setar = table.getSelectedRow();
-	//	txtId.setText(table.getModel().getValueAt(setar, 0).toString());
-	//} // FIM SETAR CAMPOS
+	// private void setarCampos() {
+	// int setar = table.getSelectedRow();
+	// txtId.setText(table.getModel().getValueAt(setar, 0).toString());
+	// } // FIM SETAR CAMPOS
 
 } // Fim do codigo
