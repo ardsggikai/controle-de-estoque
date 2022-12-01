@@ -670,8 +670,11 @@ public class Produtos extends JDialog {
 	private void inserirProduto() {
 
 		// Validacao
-		if (txtProduto.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insirao o Produto");
+		if (txtBarcode.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insirao o Codigo de Barras");
+			txtBarcode.requestFocus();
+		} else if (txtCodigo.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insirao o Codigo");
 			txtProduto.requestFocus();
 		} else if (txtFabricante.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
