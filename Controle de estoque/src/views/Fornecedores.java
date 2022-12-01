@@ -441,7 +441,7 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(txtFone);
 
 		JLabel lblWhatsapp = new JLabel("Whatsapp");
-		lblWhatsapp.setFont(new Font("Verdana", Font.PLAIN, 11));
+		lblWhatsapp.setFont(new Font("Arial", Font.PLAIN, 11));
 		lblWhatsapp.setBounds(495, 333, 60, 20);
 		getContentPane().add(lblWhatsapp);
 
@@ -648,6 +648,19 @@ public class Fornecedores extends JDialog {
 		getContentPane().add(scrollPane);
 
 		table = new JTable();
+		table.setFont(new Font("Arial", Font.PLAIN, 11));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"ID", "Fornecedor", "Telefone", "Whatsapp", "Contato"
+			}
+		));
 		scrollPane.setViewportView(table);
 		Email.setLimit(30);
 

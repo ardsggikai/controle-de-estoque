@@ -229,6 +229,8 @@ public class Produtos extends JDialog {
 		panel.add(scrollPane);
 
 		table = new JTable();
+		table.setModel(new DefaultTableModel(new Object[][] { { null, null }, { null, null }, { null, null }, },
+				new String[] { "ID", "Fornecedor" }));
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -667,50 +669,78 @@ public class Produtos extends JDialog {
 
 	private void inserirProduto() {
 
-		// validacao
-		String insert = "insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,IdFor)values (?,?,?,?,?,?,?,?,?,?,?,?)";
+		// Validacao
+		if (txtProduto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insirao o Produto");
+			txtProduto.requestFocus();
+		} else if (txtFabricante.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
+			txtFabricante.requestFocus();
+		} else if (txtEstoque.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque");
+			txtEstoque.requestFocus();
+		} else if (txtEstoquemin.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estoque Minimo");
+			txtEstoquemin.requestFocus();
+		} else if (((String) cboUnidade.getSelectedItem()).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Tipo de Unidade");
+			cboUnidade.requestFocus();
+		} else if (txtLocal.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Local Armazenado");
+			txtLocal.requestFocus();
+		} else if (txtCusto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Custo");
+			txtCusto.requestFocus();
+		} else if (txtIdFor.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o ID");
+			txtIdFor.requestFocus();
+		} else {
 
-		try {
-			// Abrir a conexao
-			Connection con = dao.conectar();
-			// Preparar a query (substituiï¿½ao de parametros)
-			PreparedStatement pst = con.prepareStatement(insert);
-			pst.setString(1, txtBarcode.getText());
-			pst.setString(2, txtProduto.getText());
-			pst.setString(3, txtaDescricao.getText());
-			pst.setString(4, txtFabricante.getText());
-			// Formatar o valor do JCalendar para inserção correta no banco
-			SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
-			String dataFormatada = formatador.format(dateValidade.getDate());
-			pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
-			pst.setString(6, txtEstoque.getText());
-			pst.setString(7, txtEstoquemin.getText());
-			pst.setString(8, cboUnidade.getSelectedItem().toString());
-			pst.setString(9, txtLocal.getText());
-			pst.setString(10, txtCusto.getText());
-			pst.setString(11, txtLucro.getText());
-			pst.setString(12, txtIdFor.getText());
-			int confirm = pst.executeUpdate();
-			if (confirm == 1) {
-				JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
+			// logica principal
+			String insert = "insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,IdFor)values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
-			} else {
-				JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
+			try {
+				// Abrir a conexao
+				Connection con = dao.conectar();
+				// Preparar a query (substituiï¿½ao de parametros)
+				PreparedStatement pst = con.prepareStatement(insert);
+				pst.setString(1, txtBarcode.getText());
+				pst.setString(2, txtProduto.getText());
+				pst.setString(3, txtaDescricao.getText());
+				pst.setString(4, txtFabricante.getText());
+				// Formatar o valor do JCalendar para inserção correta no banco
+				SimpleDateFormat formatador = new SimpleDateFormat("yyyyMMdd");
+				String dataFormatada = formatador.format(dateValidade.getDate());
+				pst.setString(5, dataFormatada); // x -> parâmetro do componente dateChooser
+				pst.setString(6, txtEstoque.getText());
+				pst.setString(7, txtEstoquemin.getText());
+				pst.setString(8, cboUnidade.getSelectedItem().toString());
+				pst.setString(9, txtLocal.getText());
+				pst.setString(10, txtCusto.getText());
+				pst.setString(11, txtLucro.getText());
+				pst.setString(12, txtIdFor.getText());
+				int confirm = pst.executeUpdate();
+				if (confirm == 1) {
+					JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
 
+				} else {
+					JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
+
+				}
+				con.close();
 			}
-			con.close();
-		}
 
-		catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-			JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
-			txtBarcode.setText(null);
-			txtBarcode.requestFocus();
-		}
+			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
+				txtBarcode.setText(null);
+				txtBarcode.requestFocus();
+			}
 
-		catch (Exception e2) {
-			System.out.println(e2);
-			// JOptionPane.showConfirmDialog(null, e2);
-			limpar();
+			catch (Exception e2) {
+				System.out.println(e2);
+				// JOptionPane.showConfirmDialog(null, e2);
+				limpar();
+			}
 		}
 	}
 
@@ -744,14 +774,13 @@ public class Produtos extends JDialog {
 		} else {
 
 			// Logica Principal
-			String update = "update produtos set produto = ?, descricao = ?, fabricante = ?, dataval = ?, estoque = ?, estoquemin = ?, unidade = ?, localizacao = ?, custo = ?, lucro = ? where idFor = ?";
+			String update = "update produtos set produto = ?, descricao = ?, fabricante = ?, dataval = ?, estoque = ?, estoquemin = ?, unidade = ?, localizacao = ?, custo = ?, lucro = ?, idFor = ? where codigo = ?";
 
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
 				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
-				
 				pst.setString(1, txtProduto.getText());
 				pst.setString(2, txtaDescricao.getText());
 				pst.setString(3, txtFabricante.getText());
@@ -766,27 +795,22 @@ public class Produtos extends JDialog {
 				pst.setString(9, txtCusto.getText());
 				pst.setString(10, txtLucro.getText());
 				pst.setString(11, txtIdFor.getText());
+				pst.setString(12, txtCodigo.getText());
 				int confirm = pst.executeUpdate();
 				if (confirm == 1) {
 					JOptionPane.showMessageDialog(null, "Produto Atualizado Com Sucesso");
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto");
-
 				}
 				con.close();
-			}
-
-			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Produto nao Atualizado - Campo Duplicado");
+			} catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+				JOptionPane.showMessageDialog(null, "Produto Nao Atualizado - Campo Duplicado");
 				txtBarcode.setText(null);
 				txtBarcode.requestFocus();
-			}
-
-			catch (Exception e2) {
-				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
 				limpar();
+			} catch (Exception e2) {
+				System.out.println(e2);
 			}
 		}
 	}
