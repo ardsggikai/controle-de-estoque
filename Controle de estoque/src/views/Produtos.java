@@ -601,6 +601,7 @@ public class Produtos extends JDialog {
 					txtCodigo.setEnabled(true);
 					limpar();
 					txtCodigo.requestFocus();
+					btnAddProduto.setEnabled(true);
 				}
 				con.close();
 			} catch (Exception e) {
@@ -862,6 +863,7 @@ public class Produtos extends JDialog {
 	public void limpar() {
 		txtIdFor.setText(null);
 		txtBarcode.setText(null);
+		txtCodigo.setText(null);
 		txtProduto.setText(null);
 		txtaDescricao.setText(null);
 		txtFabricante.setText(null);

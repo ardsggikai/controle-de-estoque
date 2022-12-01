@@ -405,7 +405,7 @@ public class Clientes extends JDialog {
 		btnLimpar.setBounds(635, 229, 64, 64);
 		getContentPane().add(btnLimpar);
 
-		JButton btnBuscar = new JButton("");
+		btnBuscar = new JButton("");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pesquisar();
@@ -457,7 +457,7 @@ public class Clientes extends JDialog {
 		 */
 		getRootPane().setDefaultButton(btnBuscar);
 
-		JButton btnCep = new JButton("");
+		btnCep = new JButton("");
 		btnCep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buscarCep();
@@ -475,6 +475,8 @@ public class Clientes extends JDialog {
 	 * Conexao
 	 */
 	DAO dao = new DAO();
+	private JButton btnBuscar;
+	private JButton btnCep;
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do Cliente usando filtro
@@ -530,8 +532,27 @@ public class Clientes extends JDialog {
 					 */
 					btnUpdate.setEnabled(true);
 					btnDelete.setEnabled(true);
+					btnBuscar.setEnabled(false);
+					btnCep.setEnabled(true);
 					btnLimpar.setEnabled(true);
 
+					/**
+					 * HABILITAR CAMPOS
+					 */
+					txtNome.setEnabled(true);
+					txtCpf.setEnabled(true);
+					txtNome.setEnabled(true);
+					txtCep.setEnabled(true);
+					txtEndereco.setEnabled(true);
+					txtN.setEnabled(true);
+					txtComplemento.setEnabled(true);
+					txtBairro.setEnabled(true);
+					txtCidade.setEnabled(true);
+					cboUf.setEnabled(true);
+					txtTelefone.setEnabled(true);
+					txtEmail.setEnabled(true);
+					txtID.setEnabled(false);
+					
 				} else {
 					JOptionPane.showMessageDialog(null, "Cliente Nao Cadastrado");
 					btnCreate.setEnabled(true);
@@ -691,6 +712,8 @@ public class Clientes extends JDialog {
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Cliente Atualizado.");
 					limpar();
+					btnUpdate.setEnabled(false);
+					btnDelete.setEnabled(false);
 				} else {
 					// System.out.println(e1);
 					JOptionPane.showMessageDialog(null, "Cliente Não Atualizado");
@@ -738,6 +761,8 @@ public class Clientes extends JDialog {
 				if (confirmaExcluir == 1) {
 					limpar();
 					JOptionPane.showMessageDialog(null, "Cliente Excluido com Sucesso");
+					btnUpdate.setEnabled(false);
+					btnDelete.setEnabled(false);
 				}
 				// Encerrar a conexao
 				con.close();
