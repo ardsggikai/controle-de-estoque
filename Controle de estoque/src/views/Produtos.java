@@ -891,5 +891,5 @@ public class Produtos extends JDialog {
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
 	}
-
+	
 }

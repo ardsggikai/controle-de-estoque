@@ -1050,5 +1050,13 @@ public class Fornecedores extends JDialog {
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
 	}
+	
+	/**
+	 * SETAR CAMPOS DO FORMULARIO COM OS DADOS DA TABELA
+	 */
+	//private void setarCampos() {
+	//	int setar = table.getSelectedRow();
+	//	txtId.setText(table.getModel().getValueAt(setar, 0).toString());
+	//} // FIM SETAR CAMPOS
 
 } // Fim do codigo
