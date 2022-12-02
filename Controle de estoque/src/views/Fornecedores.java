@@ -392,9 +392,7 @@ public class Fornecedores extends JDialog {
 		cboUf = new JComboBox<Object>();
 		cboUf.setToolTipText("Coloque o Estado");
 		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
-		cboUf.setModel(new DefaultComboBoxModel<Object>(
-				new String[] { "", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
-						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
+		cboUf.setModel(new DefaultComboBoxModel<Object>(new String[] {"", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
 		cboUf.setBounds(663, 297, 60, 22);
 		getContentPane().add(cboUf);
 
@@ -869,6 +867,9 @@ public class Fornecedores extends JDialog {
 		} else if (txtCidade.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a cidade");
 			txtCidade.requestFocus();
+		} else if (cboUf.getSelectedItem() == "") {
+			JOptionPane.showMessageDialog(null, "Selecione o estado");
+			cboUf.requestFocus();
 		} else if (txtContato.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
 			txtContato.requestFocus();
@@ -937,35 +938,44 @@ public class Fornecedores extends JDialog {
 
 	public void deleteByidFor() {
 
-		// Validacao
-		int confirma = JOptionPane.showConfirmDialog(null, "Confirma a Exclusao deste Fornecedor?", "Atencao",
-				JOptionPane.YES_NO_OPTION);
-		if (confirma == JOptionPane.YES_OPTION) {
+			int confirma = JOptionPane.showConfirmDialog(null, "Confirma a exclusao do fornecedor ?", "ATENCAO",
+					JOptionPane.YES_NO_OPTION);
+			if (confirma == JOptionPane.YES_OPTION) {
+				String delete = "delete from fornecedores where idFor = ?";
+				try {
+					/**
+					 * ESTABELECER A CONEXAO
+					 */
+					Connection con = dao.conectar();
 
-			String delete = "delete from fornecedores where idFor = ?";
-			try {
-				// abrir a conexao
-				Connection con = dao.conectar();
-				// preparar a query
-				PreparedStatement pst = con.prepareStatement(delete);
-				pst.setString(1, txtId.getText());
-				// executar o comando sql e confirmar a exclusï¿½o
-				int confirmaExcluir = pst.executeUpdate();
-				if (confirmaExcluir == 1) {
-					limpar();
-					JOptionPane.showMessageDialog(null, "Fornecedor excluido com sucesso!");
-					btnUpdate.setEnabled(false);
-					btnDelete.setEnabled(false);
+					/**
+					 * PREPARAR SQL PARA EXECUCAO
+					 */
+					PreparedStatement pst = con.prepareStatement(delete);
+					pst.setString(1, txtId.getText());
+					/**
+					 * EXECUTAR QUERY E CONFIRMAR EXCLUSAO
+					 */
+					int exclui = pst.executeUpdate();
+					if (exclui == 1) {
+						limpar();
+						JOptionPane.showMessageDialog(null, "Fornecedor excluido com sucesso!");
+						btnUpdate.setEnabled(false);
+						btnDelete.setEnabled(false);
+					}
+					/**
+					 * FECHAR CONEXAO
+					 */
+					con.close();
+
+					
+					
+				}catch (java.sql.SQLIntegrityConstraintViolationException e2) {
+					JOptionPane.showMessageDialog(null, "Fornecedor Não Pode ser Excluido Pois Existem Produtos no Estoque");
+				} catch (Exception e) {
+					System.out.println(e);
 				}
-				/**
-				 * FECHAR CONEXAO
-				 */
-				con.close();
-
-			} catch (Exception e) {
-				System.out.println(e);
 			}
-		}
 
 	}
 
