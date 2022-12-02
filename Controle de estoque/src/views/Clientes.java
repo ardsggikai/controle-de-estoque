@@ -35,6 +35,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Clientes extends JDialog {
 
@@ -105,6 +107,13 @@ public class Clientes extends JDialog {
 		getContentPane().add(scrollPane);
 
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int setar = table.getSelectedRow();
+				txtID.setText(table.getModel().getValueAt(setar, 0).toString());
+			}
+		});
 		scrollPane.setViewportView(table);
 
 		JLabel lblClientes = new JLabel("Cliente");
@@ -725,9 +734,10 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente não adicionado - CPF Duplicado");
+				JOptionPane.showMessageDialog(null, "Cliente não adicionado - Campo Duplicado");
 				txtCpf.setText(null);
 				txtCpf.requestFocus();
+				
 			}
 
 			catch (Exception e2) {
