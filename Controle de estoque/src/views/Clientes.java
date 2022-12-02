@@ -734,7 +734,7 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente não adicionado - Campo Duplicado");
+				JOptionPane.showMessageDialog(null, "Cliente não Atualizado - Campo Duplicado");
 				txtCpf.setText(null);
 				txtCpf.requestFocus();
 				
