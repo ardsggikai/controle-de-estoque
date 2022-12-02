@@ -581,6 +581,7 @@ public class Produtos extends JDialog {
 					String setarData2 = rs.getString(7);
 					Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
 					dateValidade.setDate(dataFormatada2);
+					dateValidade.setEnabled(false);
 					txtEstoque.setText(rs.getString(8));
 					txtEstoquemin.setText(rs.getString(9));
 					cboUnidade.setSelectedItem(rs.getString(10));
@@ -640,6 +641,7 @@ public class Produtos extends JDialog {
 					String setarData2 = rs.getString(7);
 					Date dataFormatada2 = new SimpleDateFormat("yyyy-MM-dd").parse(setarData2);
 					dateValidade.setDate(dataFormatada2);
+					dateValidade.setEnabled(false);
 					txtEstoque.setText(rs.getString(8));
 					txtEstoquemin.setText(rs.getString(9));
 					cboUnidade.setSelectedItem(rs.getString(10));

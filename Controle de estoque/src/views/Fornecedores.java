@@ -912,7 +912,7 @@ public class Fornecedores extends JDialog {
 				// System.out.println(confirma);
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Fornecedor Atualizado.");
-					limpar();
+					
 				} else {
 					// System.out.println(e1);
 					JOptionPane.showMessageDialog(null, "Fornecedor Não Atualizado");
@@ -924,16 +924,15 @@ public class Fornecedores extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Fornecedor nao atualizado - CNPJ Duplicado");
-				txtCnpj.setText(null);
-				txtCnpj.requestFocus();
-			}
-
-			catch (Exception e2) {
 				JOptionPane.showMessageDialog(null, "Fornecedor nao atualizado - IE Duplicado");
 				txtIe.setText(null);
 				txtIe.requestFocus();
-				limpar();
+			}
+
+			catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "Fornecedor nao atualizado - CNPJ Duplicado");
+				txtCnpj.setText(null);
+				txtCnpj.requestFocus();
 			}
 		}
 	}
