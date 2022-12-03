@@ -71,6 +71,8 @@ public class Clientes extends JDialog {
 	private JButton btnDelete;
 	private JButton btnLimpar;
 	private JComboBox<Object> cboUf;
+	private JButton btnBuscar;
+	private JButton btnCep;
 
 	/**
 	 * Launch the application.
@@ -484,8 +486,7 @@ public class Clientes extends JDialog {
 	 * Conexao
 	 */
 	DAO dao = new DAO();
-	private JButton btnBuscar;
-	private JButton btnCep;
+	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do Cliente usando filtro
@@ -601,6 +602,9 @@ public class Clientes extends JDialog {
 		} else if (txtCidade.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira A Cidade");
 			txtCidade.requestFocus();
+		} else if (((String) cboUf.getSelectedItem()).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estado");
+			cboUf.requestFocus();
 		} else if (txtTelefone.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Telefone");
 			txtTelefone.requestFocus();

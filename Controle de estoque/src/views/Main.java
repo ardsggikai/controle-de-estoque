@@ -68,7 +68,7 @@ public class Main extends JFrame {
 		btnUsuarios = new JButton("");
 		btnUsuarios.setEnabled(false);
 		btnUsuarios.setIcon(new ImageIcon(Main.class.getResource("/img/users.png")));
-		btnUsuarios.setToolTipText("Aba Us\u00FAarios");
+		btnUsuarios.setToolTipText("Usúarios");
 		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,7 +89,7 @@ public class Main extends JFrame {
 			}
 		});
 		btnFornecedores.setIcon(new ImageIcon(Main.class.getResource("/img/supliers.png")));
-		btnFornecedores.setToolTipText("Aba Fornecedores");
+		btnFornecedores.setToolTipText("Fornecedores");
 		btnFornecedores.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnFornecedores.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnFornecedores.setBounds(179, 33, 64, 64);
@@ -103,7 +103,7 @@ public class Main extends JFrame {
 			}
 		});
 		btnProdutos.setIcon(new ImageIcon(Main.class.getResource("/img/products.png")));
-		btnProdutos.setToolTipText("Aba Produtos");
+		btnProdutos.setToolTipText("Produtos");
 		btnProdutos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnProdutos.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnProdutos.setBounds(320, 33, 64, 64);
@@ -117,7 +117,7 @@ public class Main extends JFrame {
 			}
 		});
 		btnClientes.setIcon(new ImageIcon(Main.class.getResource("/img/clientes.png")));
-		btnClientes.setToolTipText("Aba Clientes");
+		btnClientes.setToolTipText("Clientes");
 		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnClientes.setBounds(57, 173, 64, 64);
@@ -126,7 +126,7 @@ public class Main extends JFrame {
 		btnRelatorios = new JButton("");
 		btnRelatorios.setEnabled(false);
 		btnRelatorios.setIcon(new ImageIcon(Main.class.getResource("/img/report.png")));
-		btnRelatorios.setToolTipText("Aba Relat\u00F3rios");
+		btnRelatorios.setToolTipText("Relatórios");
 		btnRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRelatorios.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnRelatorios.setBounds(179, 173, 64, 64);
@@ -140,7 +140,7 @@ public class Main extends JFrame {
 			}
 		});
 		btnSobre.setIcon(new ImageIcon(Main.class.getResource("/img/about.png")));
-		btnSobre.setToolTipText("Aba Sobre");
+		btnSobre.setToolTipText("Sobre");
 		btnSobre.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnSobre.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnSobre.setBounds(320, 173, 70, 70);

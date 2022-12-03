@@ -773,6 +773,9 @@ public class Fornecedores extends JDialog {
 		} else if (txtCidade.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a cidade");
 			txtCidade.requestFocus();
+		} else if (((String) cboUf.getSelectedItem()).isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o Estado");
+			cboUf.requestFocus();
 		} else if (txtContato.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira a nome do contato");
 			txtContato.requestFocus();
@@ -915,7 +918,7 @@ public class Fornecedores extends JDialog {
 
 				} else {
 					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Fornecedor Não Atualizado");
+					JOptionPane.showMessageDialog(null, "Fornecedor Nï¿½o Atualizado");
 					limpar();
 				}
 
@@ -971,7 +974,7 @@ public class Fornecedores extends JDialog {
 					
 					
 				}catch (java.sql.SQLIntegrityConstraintViolationException e2) {
-					JOptionPane.showMessageDialog(null, "Fornecedor Não Pode ser Excluido Pois Existem Produtos no Estoque");
+					JOptionPane.showMessageDialog(null, "Fornecedor Nï¿½o Pode ser Excluido Pois Existem Produtos no Estoque");
 				} catch (Exception e) {
 					System.out.println(e);
 				}
