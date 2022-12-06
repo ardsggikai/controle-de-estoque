@@ -458,7 +458,7 @@ public class Clientes extends JDialog {
 		Cidade.setLimit(50);
 		// txtWhatsapp
 		RestrictedTextField Whatsapp = new RestrictedTextField(txtTelefone);
-		Whatsapp.setLimit(15);
+		Whatsapp.setLimit(12);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
 		Email.setLimit(50);
@@ -847,6 +847,8 @@ public class Clientes extends JDialog {
 		cboUf.setSelectedItem("");
 		txtTelefone.setText(null);
 		txtEmail.setText(null);
+		txtID.setEnabled(true);
+		btnBuscar.setEnabled(true);
 		// Limpar a tabela
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
