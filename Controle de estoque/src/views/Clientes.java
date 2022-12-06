@@ -356,7 +356,7 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtTelefone.setBounds(332, 197, 86, 20);
+		txtTelefone.setBounds(332, 197, 108, 20);
 		getContentPane().add(txtTelefone);
 		txtTelefone.setColumns(10);
 
@@ -486,7 +486,6 @@ public class Clientes extends JDialog {
 	 * Conexao
 	 */
 	DAO dao = new DAO();
-	
 
 	/**
 	 * Metodo Responsavel pela pesquisa avancada do Cliente usando filtro
@@ -562,7 +561,7 @@ public class Clientes extends JDialog {
 					txtTelefone.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtID.setEnabled(false);
-					
+
 				} else {
 					JOptionPane.showMessageDialog(null, "Cliente Nao Cadastrado");
 					btnCreate.setEnabled(true);
@@ -649,8 +648,7 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente não adicionado - CPF Duplicado");
-				txtCpf.setText(null);
+				JOptionPane.showMessageDialog(null, "Cliente nao adicionado - CPF Duplicado");
 				txtCpf.requestFocus();
 			}
 
@@ -738,8 +736,7 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente não Atualizado - Campo Duplicado");
-				txtCpf.setText(null);
+				JOptionPane.showMessageDialog(null, "Cliente nao adicionado - CPF Duplicado");
 				txtCpf.requestFocus();
 				
 			}
