@@ -648,14 +648,13 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente nao adicionado - CPF Duplicado");
-				txtCpf.requestFocus();
-			}
 
-			catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "CPF duplicado");
+				txtCpf.setText(null);
+				txtCpf.requestFocus();
+
+			} catch (Exception e2) {
 				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
-				limpar();
 			}
 		}
 	}
@@ -736,19 +735,16 @@ public class Clientes extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Cliente nao adicionado - CPF Duplicado");
-				txtCpf.requestFocus();
-				
-			}
 
-			catch (Exception e2) {
+				JOptionPane.showMessageDialog(null, "CPF duplicado");
+				txtCpf.setText(null);
+				txtCpf.requestFocus();
+
+			} catch (Exception e2) {
 				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
-				limpar();
 			}
 		}
 	}
-
 	/**
 	 * Metodo De Deletar
 	 */
