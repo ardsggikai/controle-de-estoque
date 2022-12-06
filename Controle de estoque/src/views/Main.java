@@ -124,6 +124,12 @@ public class Main extends JFrame {
 		contentPane.add(btnClientes);
 		
 		btnRelatorios = new JButton("");
+		btnRelatorios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Relatorios relatorios = new Relatorios();
+				relatorios.setVisible(true);
+			}
+		});
 		btnRelatorios.setEnabled(false);
 		btnRelatorios.setIcon(new ImageIcon(Main.class.getResource("/img/report.png")));
 		btnRelatorios.setToolTipText("Relatórios");
