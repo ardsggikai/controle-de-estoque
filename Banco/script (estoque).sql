@@ -164,6 +164,13 @@ date_format(dataval,'%d/%m/%Y') as Data_Validade, -- Y Grande ano com 4 digitos 
 estoque as Estoque, estoquemin as Estoque_Minimo
 from produtos where estoque < estoquemin;
 
+-- relatório 5.1 (versão impressão)
+select codigo,produto,
+date_format(dataval,'%d/%m/%Y'),
+estoque, estoquemin
+from produtos where estoque < estoquemin;
+	
+
 -- relatório 6 (Produtos Vencidos)
 -- datediff() (calcula a diferenças de datas)
 select codigo as Código, produto as Produto, localizacao as Localização, 
@@ -229,6 +236,7 @@ values ('Robson Vaamonde','vava', md5('123456'),'admin');
 
 -- READ1 (selecionar todos os usuarios)
 select * from usuarios;
+select * from produtos;
 
 -- login (usuário e senha correspondente)
 select * from usuarios where perfil='user';
