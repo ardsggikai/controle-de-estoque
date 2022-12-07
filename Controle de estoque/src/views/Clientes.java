@@ -617,7 +617,7 @@ public class Clientes extends JDialog {
 			try {
 				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substitui�ao de parametros)
+				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
 
 				pst.setString(1, txtNome.getText());

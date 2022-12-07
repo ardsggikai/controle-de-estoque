@@ -27,6 +27,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import models.DAO;
 import java.awt.Color;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class Relatorios extends JDialog {
 
@@ -56,83 +57,86 @@ public class Relatorios extends JDialog {
 	 * Create the dialog.
 	 */
 	public Relatorios() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Relatorios.class.getResource("/img/icoRelatorios.png")));
 		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("Relatórios");
-		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 663, 295);
+		setBounds(100, 100, 663, 160);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 
-		JButton btnReposicao = new JButton("Reposição");
+		JButton btnReposicao = new JButton("");
+		btnReposicao.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnReposicao.png")));
+		btnReposicao.setToolTipText("Reposição");
 		btnReposicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				reposicaoEstoque();
 			}
 		});
 		btnReposicao.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnReposicao.setBounds(10, 59, 200, 23);
+		btnReposicao.setBounds(530, 32, 64, 64);
 		getContentPane().add(btnReposicao);
 
-		JButton btnClientes = new JButton("Clientes");
+		JButton btnClientes = new JButton("");
+		btnClientes.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnClientes.png")));
+		btnClientes.setToolTipText("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				relatorioClientes();
 			}
 		});
 		btnClientes.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnClientes.setBounds(430, 25, 200, 23);
+		btnClientes.setBounds(330, 32, 64, 64);
 		getContentPane().add(btnClientes);
 
-		JButton btnPrecoDeVenda = new JButton("Preço de Venda");
+		JButton btnPrecoDeVenda = new JButton("");
+		btnPrecoDeVenda.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnPrecoDeVenda.png")));
+		btnPrecoDeVenda.setToolTipText("Preço de Venda");
 		btnPrecoDeVenda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				precoDeVenda();
 			}
 		});
-		btnPrecoDeVenda.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnPrecoDeVenda.setBounds(10, 25, 200, 23);
+		btnPrecoDeVenda.setFont(new Font("Arial", Font.BOLD, 12));
+		btnPrecoDeVenda.setBounds(30, 32, 64, 64);
 		getContentPane().add(btnPrecoDeVenda);
 
-		JButton btnProdutosVencidos = new JButton("Produtos Vencidos");
+		JButton btnProdutosVencidos = new JButton("");
+		btnProdutosVencidos.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnProdutosVencidos.png")));
+		btnProdutosVencidos.setToolTipText("Produtos Vencidos");
 		btnProdutosVencidos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				produtosVencidos();
 			}
 		});
 		btnProdutosVencidos.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnProdutosVencidos.setBounds(220, 25, 200, 23);
+		btnProdutosVencidos.setBounds(130, 32, 64, 64);
 		getContentPane().add(btnProdutosVencidos);
 
-		JButton btnValorTotalMercadorias = new JButton("Valor Total Mercadorias");
+		JButton btnValorTotalMercadorias = new JButton("");
+		btnValorTotalMercadorias.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnValorTotalMercadorias.png")));
+		btnValorTotalMercadorias.setToolTipText("Valor Total Mercadorias");
 		btnValorTotalMercadorias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				valorTotalMercadorias();
 			}
 		});
 		btnValorTotalMercadorias.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnValorTotalMercadorias.setBounds(220, 59, 200, 23);
+		btnValorTotalMercadorias.setBounds(230, 32, 64, 64);
 		getContentPane().add(btnValorTotalMercadorias);
 
-		JButton btnUsuarios = new JButton("Usuários");
+		JButton btnUsuarios = new JButton("");
+		btnUsuarios.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnUsuarios.png")));
+		btnUsuarios.setToolTipText("Usuários");
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				relatorioUsuarios();
 			}
 		});
 		btnUsuarios.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnUsuarios.setBounds(430, 59, 200, 23);
+		btnUsuarios.setBounds(430, 32, 64, 64);
 		getContentPane().add(btnUsuarios);
-		
-		JButton btnTeste = new JButton("Teste");
-		btnTeste.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				teste();
-			}
-		});
-		btnTeste.setFont(new Font("Verdana", Font.BOLD, 12));
-		btnTeste.setBounds(10, 114, 200, 23);
-		getContentPane().add(btnTeste);
 
 	} // FIM DO CONSTRUTOR
 
@@ -585,10 +589,5 @@ public class Relatorios extends JDialog {
 			System.out.println(e);
 		}
 	} // FIM RELATORIO DE USUARIOS
-	
-	private void teste() {
-		
-		
-	}
 
 } // FIM DO CODIGO

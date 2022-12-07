@@ -68,7 +68,7 @@ public class Main extends JFrame {
 		btnUsuarios = new JButton("");
 		btnUsuarios.setEnabled(false);
 		btnUsuarios.setIcon(new ImageIcon(Main.class.getResource("/img/users.png")));
-		btnUsuarios.setToolTipText("Usúarios");
+		btnUsuarios.setToolTipText("Usuarios");
 		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -132,7 +132,7 @@ public class Main extends JFrame {
 		});
 		btnRelatorios.setEnabled(false);
 		btnRelatorios.setIcon(new ImageIcon(Main.class.getResource("/img/report.png")));
-		btnRelatorios.setToolTipText("Relatórios");
+		btnRelatorios.setToolTipText("Relatorios");
 		btnRelatorios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRelatorios.setFont(new Font("Arial", Font.PLAIN, 11));
 		btnRelatorios.setBounds(179, 173, 64, 64);
