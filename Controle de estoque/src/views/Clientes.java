@@ -661,7 +661,7 @@ public class Clientes extends JDialog {
 
 	public void atualizar() {
 
-		// Valida�ao
+		// Validacao
 		if (txtNome.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira O Nome");
 			txtNome.requestFocus();
