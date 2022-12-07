@@ -1,7 +1,20 @@
-package views;
+package view;
 
+import java.awt.Desktop;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import com.itextpdf.text.Document;
@@ -11,21 +24,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import models.DAO;
-
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.Color;
-import java.awt.Desktop;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.text.DateFormat;
-import java.util.Date;
-import java.awt.event.ActionEvent;
+import model.DAO;
 
 public class Relatorios extends JDialog {
 
@@ -33,7 +32,6 @@ public class Relatorios extends JDialog {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton btnReposicao;
 
 	/**
 	 * Launch the application.
@@ -56,63 +54,120 @@ public class Relatorios extends JDialog {
 	 * Create the dialog.
 	 */
 	public Relatorios() {
-		getContentPane().setBackground(Color.LIGHT_GRAY);
-		getContentPane().setFont(new Font("Arial", Font.PLAIN, 11));
-		setTitle("Relat\u00F3rios");
+		setTitle("Relatórios");
 		setResizable(false);
 		setModal(true);
-		setBounds(100, 100, 450, 300);
-		setLocationRelativeTo(null);
+		setBounds(100, 100, 663, 295);
 		getContentPane().setLayout(null);
 
-		btnReposicao = new JButton("Reposi\u00E7\u00E3o");
-		btnReposicao.setFont(new Font("Arial", Font.PLAIN, 11));
+		JButton btnReposicao = new JButton("Reposição");
 		btnReposicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				reposicaoEstoque();
 			}
 		});
-		btnReposicao.setFocusPainted(false);
-		btnReposicao.setContentAreaFilled(false);
-		btnReposicao.setBounds(29, 40, 105, 23);
+		btnReposicao.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnReposicao.setBounds(10, 59, 200, 23);
 		getContentPane().add(btnReposicao);
-		
+
 		JButton btnClientes = new JButton("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				relatorioClientes();
 			}
 		});
-		btnClientes.setFont(new Font("Arial", Font.PLAIN, 11));
-		btnClientes.setFocusPainted(false);
-		btnClientes.setContentAreaFilled(false);
-		btnClientes.setBounds(29, 83, 105, 23);
+		btnClientes.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnClientes.setBounds(430, 25, 200, 23);
 		getContentPane().add(btnClientes);
 
-	}// fim do Construtor
+		JButton btnPrecoDeVenda = new JButton("Preço de Venda");
+		btnPrecoDeVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				precoDeVenda();
+			}
+		});
+		btnPrecoDeVenda.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnPrecoDeVenda.setBounds(10, 25, 200, 23);
+		getContentPane().add(btnPrecoDeVenda);
+
+		JButton btnProdutosVencidos = new JButton("Produtos Vencidos");
+		btnProdutosVencidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				produtosVencidos();
+			}
+		});
+		btnProdutosVencidos.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnProdutosVencidos.setBounds(220, 25, 200, 23);
+		getContentPane().add(btnProdutosVencidos);
+
+		JButton btnValorTotalMercadorias = new JButton("Valor Total Mercadorias");
+		btnValorTotalMercadorias.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				valorTotalMercadorias();
+			}
+		});
+		btnValorTotalMercadorias.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnValorTotalMercadorias.setBounds(220, 59, 200, 23);
+		getContentPane().add(btnValorTotalMercadorias);
+
+		JButton btnUsuarios = new JButton("Usuários");
+		btnUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				relatorioUsuarios();
+			}
+		});
+		btnUsuarios.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnUsuarios.setBounds(430, 59, 200, 23);
+		getContentPane().add(btnUsuarios);
+		
+		JButton btnTeste = new JButton("Teste");
+		btnTeste.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				teste();
+			}
+		});
+		btnTeste.setFont(new Font("Verdana", Font.BOLD, 12));
+		btnTeste.setBounds(10, 114, 200, 23);
+		getContentPane().add(btnTeste);
+
+	} // FIM DO CONSTRUTOR
 
 	DAO dao = new DAO();
 
-	//método responsável pela impressão do relatório de Reposicao
+	/**
+	 * FORMATADOR DE CASAS DECIMAIS
+	 */
+	DecimalFormat moeda = new DecimalFormat("0.00");
+
+	/**
+	 * METODO REPOSICAO DE ESTOQUE
+	 */
 	private void reposicaoEstoque() {
-		// criar objeto para construir a página pdf
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
 		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
-		// gerar o documento pdf
+
+		// GERAR O DOCUMENTO PDF
 		try {
-			// cria um documento pdf em branco de nome clientes.pdf
-			PdfWriter.getInstance(document, new FileOutputStream("Reposicao.pdf"));
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME REPOSICAO.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("reposicao.pdf"));
 			document.open();
-			// gerar o conteúdo do documento
+			// GERAR O CONTEUDO DO DOCUMENTO
 			Date data = new Date();
 			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
-			// documento.add adiciona um paragrafo
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
 			document.add(new Paragraph(new Paragraph(formatador.format(data))));
 			document.add(new Paragraph(" "));
 			document.add(new Paragraph("Reposição de estoque"));
 			document.add(new Paragraph(" "));
-			// ... Demais conteúdos (imagem, tabela, gráfico, etc)
-			PdfPTable tabela = new PdfPTable(5); // 5 Colunas
-			// Cabecalho da tabela
+
+			PdfPTable tabela = new PdfPTable(5); // PdfPTable(5) - colunas
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
 			PdfPCell col1 = new PdfPCell(new Paragraph("Código"));
 			PdfPCell col2 = new PdfPCell(new Paragraph("Produto"));
 			PdfPCell col3 = new PdfPCell(new Paragraph("Validade"));
@@ -123,19 +178,18 @@ public class Relatorios extends JDialog {
 			tabela.addCell(col3);
 			tabela.addCell(col4);
 			tabela.addCell(col5);
-			// Acessar o banco de dados // Logica Principal
+
+			// ACESSAR O BANCO DE DADOS
 			String relReposicao = "select codigo,produto,date_format(dataval,'%d/%m/%Y'), estoque, estoquemin from produtos where estoque < estoquemin";
 			try {
-				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(relReposicao);
 				ResultSet rs = pst.executeQuery();
+
 				/**
-				 *  enquanto houver dados na tabela no banco, obter valor
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
 				 */
 				while (rs.next()) {
-					//tablea.addCell1 adiciona a celula
 					tabela.addCell(rs.getString(1));
 					tabela.addCell(rs.getString(2));
 					tabela.addCell(rs.getString(3));
@@ -146,77 +200,391 @@ public class Relatorios extends JDialog {
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			// Adicionar a tabela ao documento pdf
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
 			document.add(tabela);
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally { // executa o código independente do resultado OK ou não
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
 			document.close();
 		}
-
-		// abrir o documento que foi gerado no leitor padrão de pdf do sistema (PC)
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
 		try {
 			Desktop.getDesktop().open(new File("reposicao.pdf"));
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-	}
-	
-	//método responsável pela impressão do relatório de clientes
-		private void relatorioClientes() {
-			//criar objeto para construir a página pdf
-			Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
-			//gerar o documento pdf
+	} // FIM REPOSICAO ESTOQUE
+
+	/**
+	 * CLIENTES
+	 */
+	private void relatorioClientes() {
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
+		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
+
+		// GERAR O DOCUMENTO PDF
+		try {
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME CLIENTES.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("clientes.pdf"));
+			document.open();
+
+			// GERAR O CONTEUDO DO DOCUMENTO
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
+			document.add(new Paragraph(new Paragraph(formatador.format(data))));
+			document.add(new Paragraph(" "));
+			document.add(new Paragraph("Clientes cadastrados"));
+			document.add(new Paragraph(" "));
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
+			PdfPTable tabela = new PdfPTable(4);
+			PdfPCell col1 = new PdfPCell(new Paragraph("Nome"));
+			PdfPCell col2 = new PdfPCell(new Paragraph("Fone"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("CPF"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Email"));
+			tabela.addCell(col1);
+			tabela.addCell(col2);
+			tabela.addCell(col3);
+			tabela.addCell(col4);
+
+			// ACESSAR O BANCO DE DADOS
+			String relClientes = "select nomeCliente,fone1,cnpjCpf,email from clientes";
 			try {
-				//cria um documento pdf em branco de nome clientes.pdf
-				PdfWriter.getInstance(document, new FileOutputStream("clientes.pdf"));
-				document.open();
-				//gerar o conteúdo do documento
-				Date data = new Date();			
-		        DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
-				document.add(new Paragraph(new Paragraph(formatador.format(data))));
-				document.add(new Paragraph(" "));
-				document.add(new Paragraph("Clientes cadastrados"));
-				document.add(new Paragraph(" "));
-				//... Demais conteúdos (imagem, tabela, gráfico, etc)
-				PdfPTable tabela = new PdfPTable(4);
-				PdfPCell col1 = new PdfPCell(new Paragraph("Nome"));
-				PdfPCell col2 = new PdfPCell(new Paragraph("Fone"));
-				PdfPCell col3 = new PdfPCell(new Paragraph("CPF"));
-				PdfPCell col4 = new PdfPCell(new Paragraph("Email"));
-				tabela.addCell(col1);
-				tabela.addCell(col2);
-				tabela.addCell(col3);
-				tabela.addCell(col4);
-				// Acessar o banco de dados
-				String relClientes = "select nome,Telefone,cpf,email from clientes";
-				try {
-					Connection con = dao.conectar();
-					PreparedStatement pst = con.prepareStatement(relClientes);
-					ResultSet rs = pst.executeQuery();
-					while (rs.next()) {
-						tabela.addCell(rs.getString(1));
-						tabela.addCell(rs.getString(2));
-						tabela.addCell(rs.getString(3));
-						tabela.addCell(rs.getString(4));
-					}				
-					
-				} catch (Exception e) {
-					System.out.println(e);
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(relClientes);
+				ResultSet rs = pst.executeQuery();
+
+				/**
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
+				 */
+				while (rs.next()) {
+					tabela.addCell(rs.getString(1));
+					tabela.addCell(rs.getString(2));
+					tabela.addCell(rs.getString(3));
+					tabela.addCell(rs.getString(4));
 				}
-				//Adicionar a tabela ao documento pdf
-				document.add(tabela);
-			} catch (Exception e) {
-				System.out.println(e);
-			} finally { //executa o código independente do resultado OK ou não
-				document.close();
-			}
-			
-			//abrir o documento que foi gerado no leitor padrão de pdf do sistema (PC)
-			try {
-				Desktop.getDesktop().open(new File("clientes.pdf"));
+
 			} catch (Exception e) {
 				System.out.println(e);
 			}
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
+			document.add(tabela);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
+			document.close();
 		}
-}
+
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
+		try {
+			Desktop.getDesktop().open(new File("clientes.pdf"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	} // FIM CLIENTES
+
+	/**
+	 * PRECO DE VENDA
+	 */
+	private void precoDeVenda() {
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
+		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
+
+		// GERAR O DOCUMENTO PDF
+		try {
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME PRECO-DE-VENDA.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("preco-de-venda.pdf"));
+			document.open();
+
+			// GERAR O CONTEUDO DO DOCUMENTO
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
+			document.add(new Paragraph(new Paragraph(formatador.format(data))));
+			document.add(new Paragraph(" "));
+			document.add(new Paragraph("Preço de Venda dos Produtos"));
+			document.add(new Paragraph(" "));
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
+			PdfPTable tabela = new PdfPTable(4);
+			PdfPCell col1 = new PdfPCell(new Paragraph("Código"));
+			PdfPCell col2 = new PdfPCell(new Paragraph("Produto"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Preço de Custo"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Preço de Venda"));
+			tabela.addCell(col1);
+			tabela.addCell(col2);
+			tabela.addCell(col3);
+			tabela.addCell(col4);
+
+			// ACESSAR O BANCO DE DADOS
+			String venda = "select codigo, produto, custo, (custo + (custo * lucro) / 100) from produtos;";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(venda);
+				ResultSet rs = pst.executeQuery();
+
+				/**
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
+				 */
+				while (rs.next()) {
+					tabela.addCell(rs.getString(1));
+					tabela.addCell(rs.getString(2));
+					tabela.addCell(rs.getString(3));
+					tabela.addCell(rs.getString(4));
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
+			document.add(tabela);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
+			document.close();
+		}
+
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
+		try {
+			Desktop.getDesktop().open(new File("preco-de-venda.pdf"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	} // FIM PRECO DE VENDA
+
+	/**
+	 * PRODUTOS VENCIDOS
+	 */
+	private void produtosVencidos() {
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
+		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
+
+		// GERAR O DOCUMENTO PDF
+		try {
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME PRODUTOS-VENCIDOS.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("produtos-vencidos.pdf"));
+			document.open();
+
+			// GERAR O CONTEUDO DO DOCUMENTO
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
+			document.add(new Paragraph(new Paragraph(formatador.format(data))));
+			document.add(new Paragraph(" "));
+			document.add(new Paragraph("Produtos Vencidos"));
+			document.add(new Paragraph(" "));
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
+			PdfPTable tabela = new PdfPTable(5);
+			PdfPCell col1 = new PdfPCell(new Paragraph("Código"));
+			PdfPCell col2 = new PdfPCell(new Paragraph("Produto"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Localização"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Data de Validade"));
+			PdfPCell col5 = new PdfPCell(new Paragraph("Dias Vencidos"));
+
+			tabela.addCell(col1);
+			tabela.addCell(col2);
+			tabela.addCell(col3);
+			tabela.addCell(col4);
+			tabela.addCell(col5);
+
+			// ACESSAR O BANCO DE DADOS
+			String vencidos = "select codigo, produto, localizacao, date_format(dataval, '%d/%m/%Y'), datediff(dataval,curdate()) from produtos where datediff(dataval,curdate()) < 0;";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(vencidos);
+				ResultSet rs = pst.executeQuery();
+
+				/**
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
+				 */
+				while (rs.next()) {
+					tabela.addCell(rs.getString(1));
+					tabela.addCell(rs.getString(2));
+					tabela.addCell(rs.getString(3));
+					tabela.addCell(rs.getString(4));
+					tabela.addCell(rs.getString(5));
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
+			document.add(tabela);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
+			document.close();
+		}
+
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
+		try {
+			Desktop.getDesktop().open(new File("produtos-vencidos.pdf"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	} // FIM PRODUTOS VENCIDOS
+
+	/**
+	 * VALOR TOTAL DAS MERCADORIAS EM ESTOQUE
+	 */
+	private void valorTotalMercadorias() {
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
+		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
+
+		// GERAR O DOCUMENTO PDF
+		try {
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME TOTAL-MERCADORIAS.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("total-mercadorias.pdf"));
+			document.open();
+
+			// GERAR O CONTEUDO DO DOCUMENTO
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
+			document.add(new Paragraph(new Paragraph(formatador.format(data))));
+			document.add(new Paragraph(" "));
+			document.add(new Paragraph("Valor total das Mercadorias em Estoque"));
+			document.add(new Paragraph(" "));
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
+			PdfPTable tabela = new PdfPTable(1);
+			PdfPCell col1 = new PdfPCell(new Paragraph("Total"));
+
+			tabela.addCell(col1);
+
+			// ACESSAR O BANCO DE DADOS
+			String estoque = "select sum(estoque * custo) from produtos;";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(estoque);
+				ResultSet rs = pst.executeQuery();
+
+				/**
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
+				 */
+				while (rs.next()) {
+					tabela.addCell(rs.getString(1));
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
+			document.add(tabela);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
+			document.close();
+		}
+
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
+		try {
+			Desktop.getDesktop().open(new File("total-mercadorias.pdf"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	} // FIM VALOR TOTAL DAS MERCADORIAS EM ESTOQUE
+
+	/**
+	 * RELATORIO DE USUARIOS
+	 */
+	private void relatorioUsuarios() {
+		// CRIAR OBJETO PARA CONSTRUIR PAGINA PDF
+		Document document = new Document(PageSize.A4.rotate(), 30f, 30f, 20f, 0f);
+
+		// GERAR O DOCUMENTO PDF
+		try {
+			// CRIA UM DOCUMENTO PDF EM BRANCO DE NOME USUARIOS.PDF
+			PdfWriter.getInstance(document, new FileOutputStream("usuarios.pdf"));
+			document.open();
+
+			// GERAR O CONTEUDO DO DOCUMENTO
+			Date data = new Date();
+			DateFormat formatador = DateFormat.getDateInstance(DateFormat.FULL);
+
+			/**
+			 * DOCUMENT.ADD - ADICIONA UM PARAGRAFO
+			 */
+			document.add(new Paragraph(new Paragraph(formatador.format(data))));
+			document.add(new Paragraph(" "));
+			document.add(new Paragraph("Relatório de Usuários"));
+			document.add(new Paragraph(" "));
+
+			/**
+			 * CABECALHO DA TABELA
+			 */
+
+			PdfPTable tabela = new PdfPTable(4);
+			PdfPCell col1 = new PdfPCell(new Paragraph("ID"));
+			PdfPCell col2 = new PdfPCell(new Paragraph("Nome completo"));
+			PdfPCell col3 = new PdfPCell(new Paragraph("Login"));
+			PdfPCell col4 = new PdfPCell(new Paragraph("Perfil"));
+			tabela.addCell(col1);
+			tabela.addCell(col2);
+			tabela.addCell(col3);
+			tabela.addCell(col4);
+
+			// ACESSAR O BANCO DE DADOS
+			String usuarios = "select id, usuario, login, perfil from usuarios;";
+			try {
+				Connection con = dao.conectar();
+				PreparedStatement pst = con.prepareStatement(usuarios);
+				ResultSet rs = pst.executeQuery();
+
+				/**
+				 * ENQUANTO HOUVER DADOS NA TABELA DO BANCO, OBTER O VALOR
+				 */
+				while (rs.next()) {
+					tabela.addCell(rs.getString(1));
+					tabela.addCell(rs.getString(2));
+					tabela.addCell(rs.getString(3));
+					tabela.addCell(rs.getString(4));
+				}
+
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			// ADICIONAR A TABELA AO DOCUMENTO PDF
+			document.add(tabela);
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally { // EXECUTA O CODIGO INDEPENDENTE DO RESULTADO
+			document.close();
+		}
+
+		// ABRIR O ARQUIVO PDF NO LEITOR PADRAO DO PC
+		try {
+			Desktop.getDesktop().open(new File("usuarios.pdf"));
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	} // FIM RELATORIO DE USUARIOS
+	
+	private void teste() {
+		
+		
+	}
+
+} // FIM DO CODIGO
