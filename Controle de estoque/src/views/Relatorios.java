@@ -1,4 +1,4 @@
-package view;
+package views;
 
 import java.awt.Desktop;
 import java.awt.EventQueue;
@@ -24,7 +24,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import model.DAO;
+import models.DAO;
 
 public class Relatorios extends JDialog {
 
