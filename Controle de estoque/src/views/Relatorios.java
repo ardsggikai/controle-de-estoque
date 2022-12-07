@@ -258,7 +258,7 @@ public class Relatorios extends JDialog {
 			tabela.addCell(col4);
 
 			// ACESSAR O BANCO DE DADOS
-			String relClientes = "select nomeCliente,fone1,cnpjCpf,email from clientes";
+			String relClientes = "select Nome,Telefone,CPF,email from clientes";
 			try {
 				Connection con = dao.conectar();
 				PreparedStatement pst = con.prepareStatement(relClientes);
