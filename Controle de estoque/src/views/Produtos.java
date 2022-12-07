@@ -110,6 +110,7 @@ public class Produtos extends JDialog {
 		getContentPane().setLayout(null);
 
 		dateEntrada = new JDateChooser();
+		dateEntrada.setEnabled(false);
 		dateEntrada.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -453,16 +454,6 @@ public class Produtos extends JDialog {
 		getContentPane().add(lblLocal);
 
 		txtLocal = new JTextField();
-		txtLocal.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// validacao (aceita somente os caracteres da String)
-				String caracteres = "AaBbcCdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890";
-				if (!caracteres.contains(e.getKeyChar() + "")) {
-					e.consume();
-				}
-			}
-		});
 		txtLocal.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtLocal.setBounds(205, 400, 108, 20);
 		getContentPane().add(txtLocal);
@@ -681,9 +672,6 @@ public class Produtos extends JDialog {
 		if (txtBarcode.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insirao o Codigo de Barras");
 			txtBarcode.requestFocus();
-		} else if (txtCodigo.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insirao o Codigo");
-			txtCodigo.requestFocus();
 		} else if (txtFabricante.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
 			txtFabricante.requestFocus();
