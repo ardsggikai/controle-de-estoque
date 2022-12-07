@@ -28,6 +28,7 @@ import models.DAO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+import java.awt.Cursor;
 
 public class Relatorios extends JDialog {
 
@@ -67,6 +68,7 @@ public class Relatorios extends JDialog {
 		getContentPane().setLayout(null);
 
 		JButton btnReposicao = new JButton("");
+		btnReposicao.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnReposicao.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnReposicao.png")));
 		btnReposicao.setToolTipText("Reposição");
 		btnReposicao.addActionListener(new ActionListener() {
@@ -79,6 +81,7 @@ public class Relatorios extends JDialog {
 		getContentPane().add(btnReposicao);
 
 		JButton btnClientes = new JButton("");
+		btnClientes.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnClientes.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnClientes.png")));
 		btnClientes.setToolTipText("Clientes");
 		btnClientes.addActionListener(new ActionListener() {
@@ -91,6 +94,7 @@ public class Relatorios extends JDialog {
 		getContentPane().add(btnClientes);
 
 		JButton btnPrecoDeVenda = new JButton("");
+		btnPrecoDeVenda.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnPrecoDeVenda.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnPrecoDeVenda.png")));
 		btnPrecoDeVenda.setToolTipText("Preço de Venda");
 		btnPrecoDeVenda.addActionListener(new ActionListener() {
@@ -103,6 +107,7 @@ public class Relatorios extends JDialog {
 		getContentPane().add(btnPrecoDeVenda);
 
 		JButton btnProdutosVencidos = new JButton("");
+		btnProdutosVencidos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnProdutosVencidos.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnProdutosVencidos.png")));
 		btnProdutosVencidos.setToolTipText("Produtos Vencidos");
 		btnProdutosVencidos.addActionListener(new ActionListener() {
@@ -115,6 +120,7 @@ public class Relatorios extends JDialog {
 		getContentPane().add(btnProdutosVencidos);
 
 		JButton btnValorTotalMercadorias = new JButton("");
+		btnValorTotalMercadorias.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnValorTotalMercadorias.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnValorTotalMercadorias.png")));
 		btnValorTotalMercadorias.setToolTipText("Valor Total Mercadorias");
 		btnValorTotalMercadorias.addActionListener(new ActionListener() {
@@ -127,6 +133,7 @@ public class Relatorios extends JDialog {
 		getContentPane().add(btnValorTotalMercadorias);
 
 		JButton btnUsuarios = new JButton("");
+		btnUsuarios.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnUsuarios.setIcon(new ImageIcon(Relatorios.class.getResource("/img/btnUsuarios.png")));
 		btnUsuarios.setToolTipText("Usuários");
 		btnUsuarios.addActionListener(new ActionListener() {
