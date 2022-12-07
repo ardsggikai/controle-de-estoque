@@ -25,6 +25,8 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import models.DAO;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class Relatorios extends JDialog {
 
@@ -54,6 +56,8 @@ public class Relatorios extends JDialog {
 	 * Create the dialog.
 	 */
 	public Relatorios() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Relatorios.class.getResource("/img/icoRelatorios.png")));
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 		setTitle("Relatórios");
 		setResizable(false);
 		setModal(true);
