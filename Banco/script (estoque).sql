@@ -178,6 +178,13 @@ date_format(dataval,'%d/%m/%Y') as Data_Validade,
 datediff(dataval,curdate()) as Dias_Vencidos
 from produtos where datediff(dataval,curdate()) <0;
  
+ -- relatório 6.1 (Produtos Vencidos)
+ select codigo, produto, localizacao, 
+date_format(dataval,'%d/%m/%Y'),
+datediff(dataval,curdate())
+from produtos where datediff(dataval,curdate()) <0;
+
+ 
  /* Fim select especial */
  
 
