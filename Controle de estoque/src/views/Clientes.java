@@ -361,6 +361,7 @@ public class Clientes extends JDialog {
 		txtTelefone.setColumns(10);
 
 		btnCreate = new JButton("");
+		btnCreate.setEnabled(false);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adicionar();
@@ -510,10 +511,10 @@ public class Clientes extends JDialog {
 	private void pesquisar() {
 
 		/**
-		 * validacao
+		 * VALIDACAO
 		 */
 		if (txtID.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Id do Cliente");
+			JOptionPane.showMessageDialog(null, "Insira o ID do cliente");
 			txtID.requestFocus();
 		} else {
 			String read = "select * from clientes where idFor = ?";
@@ -537,13 +538,12 @@ public class Clientes extends JDialog {
 					txtEmail.setText(rs.getString(12));
 
 					/**
-					 * Habilitar botoes alterar e excluir
+					 * HABILITAR BOTOES
 					 */
 					btnUpdate.setEnabled(true);
 					btnDelete.setEnabled(true);
 					btnBuscar.setEnabled(false);
 					btnCep.setEnabled(true);
-					btnLimpar.setEnabled(true);
 
 					/**
 					 * HABILITAR CAMPOS
@@ -553,7 +553,6 @@ public class Clientes extends JDialog {
 					txtNomeCliente.setEnabled(true);
 					txtCep.setEnabled(true);
 					txtEndereco.setEnabled(true);
-					txtN.setEnabled(true);
 					txtComplemento.setEnabled(true);
 					txtBairro.setEnabled(true);
 					txtCidade.setEnabled(true);
@@ -563,17 +562,35 @@ public class Clientes extends JDialog {
 					txtID.setEnabled(false);
 
 				} else {
-					JOptionPane.showMessageDialog(null, "Cliente Nao Cadastrado");
+					JOptionPane.showMessageDialog(null, "Cliente não cadastrado");
+					/**
+					 * HABILITAR CAMPOS E BOTOES
+					 */
 					btnCreate.setEnabled(true);
-					limpar();
-					txtID.requestFocus();
+					btnBuscar.setEnabled(false);
+					btnCep.setEnabled(true);
+					txtCpf.setEnabled(true);
+					txtNomeCliente.setEnabled(true);
+					txtCep.setEnabled(true);
+					txtEndereco.setEnabled(true);
+					txtComplemento.setEnabled(true);
+					txtBairro.setEnabled(true);
+					txtCidade.setEnabled(true);
+					cboUf.setEnabled(true);
+					txtTelefone.setEnabled(true);
+					txtEmail.setEnabled(true);
+					txtNomeCliente.requestFocus();
+					txtID.setEnabled(false);
+					btnCep.setEnabled(true);
+					txtID.setText(null);
+
 				}
 				con.close();
 			} catch (Exception e) {
 				System.out.println(e);
 			}
 		}
-	}
+	} // FIM PESQUISAR
 
 	public void adicionar() {
 		/**
@@ -628,6 +645,7 @@ public class Clientes extends JDialog {
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
+					
 					limpar();
 					con.close();
 				}
