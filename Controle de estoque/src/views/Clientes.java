@@ -56,7 +56,7 @@ public class Clientes extends JDialog {
 	private JLabel lblEndereco;
 	private JTextField txtEndereco;
 	private JLabel lblN;
-	private JTextField txtN;
+	private JTextField txtNumber;
 	private JLabel lblComplemento;
 	private JTextField txtComplemento;
 	private JLabel lblBairro;
@@ -65,7 +65,7 @@ public class Clientes extends JDialog {
 	private JTextField txtCidade;
 	private JLabel lblUf;
 	private JTextField txtEmail;
-	private JTextField txtTelefone;
+	private JTextField txtTel;
 	private JButton btnCreate;
 	private JButton btnUpdate;
 	private JButton btnDelete;
@@ -179,13 +179,13 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCpf.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCpf.setBounds(236, 142, 86, 20);
+		txtCpf.setBounds(236, 142, 147, 20);
 		getContentPane().add(txtCpf);
 		txtCpf.setColumns(10);
 
 		lblCep = new JLabel("Cep");
 		lblCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		lblCep.setBounds(329, 142, 46, 14);
+		lblCep.setBounds(404, 146, 46, 14);
 		getContentPane().add(lblCep);
 
 		txtCep = new JTextField();
@@ -200,7 +200,7 @@ public class Clientes extends JDialog {
 			}
 		});
 		txtCep.setFont(new Font("Arial", Font.PLAIN, 11));
-		txtCep.setBounds(354, 142, 86, 20);
+		txtCep.setBounds(429, 146, 86, 20);
 		getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 
@@ -229,8 +229,8 @@ public class Clientes extends JDialog {
 		lblN.setBounds(312, 170, 20, 14);
 		getContentPane().add(lblN);
 
-		txtN = new JTextField();
-		txtN.addKeyListener(new KeyAdapter() {
+		txtNumber = new JTextField();
+		txtNumber.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// valida��o (aceita somente os caracteres da String)
@@ -240,9 +240,9 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtN.setBounds(332, 167, 49, 20);
-		getContentPane().add(txtN);
-		txtN.setColumns(10);
+		txtNumber.setBounds(332, 167, 49, 20);
+		getContentPane().add(txtNumber);
+		txtNumber.setColumns(10);
 
 		lblComplemento = new JLabel("Complemento");
 		lblComplemento.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -307,7 +307,7 @@ public class Clientes extends JDialog {
 
 		lblUf = new JLabel("UF");
 		lblUf.setFont(new Font("Verdana", Font.PLAIN, 11));
-		lblUf.setBounds(514, 142, 20, 14);
+		lblUf.setBounds(589, 146, 20, 14);
 		getContentPane().add(lblUf);
 
 		cboUf = new JComboBox<Object>();
@@ -316,7 +316,7 @@ public class Clientes extends JDialog {
 						"PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO" }));
 		cboUf.setToolTipText("Coloque o Estado");
 		cboUf.setFont(new Font("Arial", Font.PLAIN, 11));
-		cboUf.setBounds(535, 137, 60, 22);
+		cboUf.setBounds(610, 141, 60, 22);
 		getContentPane().add(cboUf);
 
 		JLabel lblEmail = new JLabel("Email");
@@ -345,8 +345,8 @@ public class Clientes extends JDialog {
 		lblTelefone.setBounds(285, 198, 46, 14);
 		getContentPane().add(lblTelefone);
 
-		txtTelefone = new JTextField();
-		txtTelefone.addKeyListener(new KeyAdapter() {
+		txtTel = new JTextField();
+		txtTel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// valida��o (aceita somente os caracteres da String)
@@ -356,12 +356,11 @@ public class Clientes extends JDialog {
 				}
 			}
 		});
-		txtTelefone.setBounds(332, 197, 108, 20);
-		getContentPane().add(txtTelefone);
-		txtTelefone.setColumns(10);
+		txtTel.setBounds(332, 197, 108, 20);
+		getContentPane().add(txtTel);
+		txtTel.setColumns(10);
 
 		btnCreate = new JButton("");
-		btnCreate.setEnabled(false);
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				adicionar();
@@ -439,6 +438,9 @@ public class Clientes extends JDialog {
 		Nome.setOnlyText(true);
 		Nome.setAcceptSpace(true);
 		Nome.setLimit(50);
+		// txtCpf
+		RestrictedTextField CPF = new RestrictedTextField(txtCpf);
+		CPF.setLimit(15);
 		// txtCep
 		RestrictedTextField CEP = new RestrictedTextField(txtCep);
 		CEP.setLimit(10);
@@ -446,7 +448,7 @@ public class Clientes extends JDialog {
 		RestrictedTextField Endereco = new RestrictedTextField(txtEndereco);
 		Endereco.setLimit(50);
 		// txtNumero
-		RestrictedTextField NumeroCasa = new RestrictedTextField(txtN);
+		RestrictedTextField NumeroCasa = new RestrictedTextField(txtNumber);
 		NumeroCasa.setLimit(6);
 		// txtComplemento
 		RestrictedTextField Complemento = new RestrictedTextField(txtComplemento);
@@ -458,7 +460,7 @@ public class Clientes extends JDialog {
 		RestrictedTextField Cidade = new RestrictedTextField(txtCidade);
 		Cidade.setLimit(50);
 		// txtWhatsapp
-		RestrictedTextField Whatsapp = new RestrictedTextField(txtTelefone);
+		RestrictedTextField Whatsapp = new RestrictedTextField(txtTel);
 		Whatsapp.setLimit(12);
 		// txtEmail
 		RestrictedTextField Email = new RestrictedTextField(txtEmail);
@@ -467,7 +469,7 @@ public class Clientes extends JDialog {
 		/**
 		 * Uso da tecla <Enter> junto com um botao
 		 */
-		getRootPane().setDefaultButton(btnBuscar);
+		//getRootPane().setDefaultButton(btnBuscar);
 
 		btnCep = new JButton("");
 		btnCep.addActionListener(new ActionListener() {
@@ -478,7 +480,7 @@ public class Clientes extends JDialog {
 		btnCep.setContentAreaFilled(false);
 		btnCep.setBorderPainted(false);
 		btnCep.setIcon(new ImageIcon(Clientes.class.getResource("/img/btnSeach.png")));
-		btnCep.setBounds(445, 137, 32, 32);
+		btnCep.setBounds(520, 141, 32, 32);
 		getContentPane().add(btnCep);
 
 	}// Fim do Construtor
@@ -529,12 +531,12 @@ public class Clientes extends JDialog {
 					txtCpf.setText(rs.getString(3));
 					txtCep.setText(rs.getString(4));
 					txtEndereco.setText(rs.getString(5));
-					txtN.setText(rs.getString(6));
+					txtNumber.setText(rs.getString(6));
 					txtComplemento.setText(rs.getString(7));
 					txtBairro.setText(rs.getString(8));
 					txtCidade.setText(rs.getString(9));
 					cboUf.setSelectedItem(rs.getString(10));
-					txtTelefone.setText(rs.getString(11));
+					txtTel.setText(rs.getString(11));
 					txtEmail.setText(rs.getString(12));
 
 					/**
@@ -545,6 +547,11 @@ public class Clientes extends JDialog {
 					btnBuscar.setEnabled(false);
 					btnCep.setEnabled(true);
 					btnLimpar.setEnabled(true);
+					
+					/**
+					 * Desabilitar BOTOES
+					 */
+                    btnCreate.setEnabled(false);
 
 					/**
 					 * HABILITAR CAMPOS
@@ -558,7 +565,7 @@ public class Clientes extends JDialog {
 					txtBairro.setEnabled(true);
 					txtCidade.setEnabled(true);
 					cboUf.setEnabled(true);
-					txtTelefone.setEnabled(true);
+					txtTel.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtID.setEnabled(false);
 					
@@ -579,7 +586,7 @@ public class Clientes extends JDialog {
 					txtBairro.setEnabled(true);
 					txtCidade.setEnabled(true);
 					cboUf.setEnabled(true);
-					txtTelefone.setEnabled(true);
+					txtTel.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtNomeCliente.requestFocus();
 					txtID.setEnabled(false);
@@ -611,9 +618,9 @@ public class Clientes extends JDialog {
 		} else if (txtEndereco.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o endereco");
 			txtEndereco.requestFocus();
-		} else if (txtTelefone.getText().isEmpty()) {
+		} else if (txtTel.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o numero");
-			txtTelefone.requestFocus();
+			txtTel.requestFocus();
 		} else if (txtBairro.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o bairro");
 			txtBairro.requestFocus();
@@ -636,18 +643,17 @@ public class Clientes extends JDialog {
 				pst.setString(2, txtCpf.getText());
 				pst.setString(3, txtCep.getText());
 				pst.setString(4, txtEndereco.getText());
-				pst.setString(5, txtN.getText());
+				pst.setString(5, txtNumber.getText());
 				pst.setString(6, txtComplemento.getText());
 				pst.setString(7, txtBairro.getText());
 				pst.setString(8, txtCidade.getText());
 				pst.setString(9, cboUf.getSelectedItem().toString());
-				pst.setString(10, txtTelefone.getText());
+				pst.setString(10, txtTel.getText());
 				pst.setString(11, txtEmail.getText());
 
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
-					
 					limpar();
 					con.close();
 				}
@@ -678,9 +684,9 @@ public class Clientes extends JDialog {
 		} else if (txtEndereco.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Endereço");
 			txtEndereco.requestFocus();
-		} else if (txtN.getText().isEmpty()) {
+		} else if (txtNumber.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Numero");
-			txtN.requestFocus();
+			txtNumber.requestFocus();
 		} else if (txtComplemento.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Complemento");
 			txtComplemento.requestFocus();
@@ -690,9 +696,9 @@ public class Clientes extends JDialog {
 		} else if (txtCidade.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira A Cidade");
 			txtCidade.requestFocus();
-		} else if (txtTelefone.getText().isEmpty()) {
+		} else if (txtTel.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Telefone");
-			txtTelefone.requestFocus();
+			txtTel.requestFocus();
 		} else if (txtEmail.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira o Email");
 			txtEmail.requestFocus();
@@ -711,12 +717,12 @@ public class Clientes extends JDialog {
 				pst.setString(2, txtCpf.getText());
 				pst.setString(3, txtCep.getText());
 				pst.setString(4, txtEndereco.getText());
-				pst.setString(5, txtN.getText());
+				pst.setString(5, txtNumber.getText());
 				pst.setString(6, txtComplemento.getText());
 				pst.setString(7, txtBairro.getText());
 				pst.setString(8, txtCidade.getText());
 				pst.setString(9, cboUf.getSelectedItem().toString());
-				pst.setString(10, txtTelefone.getText());
+				pst.setString(10, txtTel.getText());
 				pst.setString(11, txtEmail.getText());
 				pst.setString(12, txtID.getText());
 				// Executar a query e atualizar as informacoes no banco
@@ -726,6 +732,7 @@ public class Clientes extends JDialog {
 				if (confirma == 1) {
 					JOptionPane.showMessageDialog(null, "Cliente Atualizado.");
 					limpar();
+					btnCreate.setEnabled(false);
 					btnUpdate.setEnabled(false);
 					btnDelete.setEnabled(false);
 				} else {
@@ -845,12 +852,12 @@ public class Clientes extends JDialog {
 		txtCep.setText(null);
 		txtCep.setText(null);
 		txtEndereco.setText(null);
-		txtN.setText(null);
+		txtNumber.setText(null);
 		txtComplemento.setText(null);
 		txtBairro.setText(null);
 		txtCidade.setText(null);
 		cboUf.setSelectedItem("");
-		txtTelefone.setText(null);
+		txtTel.setText(null);
 		txtEmail.setText(null);
 		txtID.setEnabled(true);
 		btnBuscar.setEnabled(true);
