@@ -670,33 +670,37 @@ public class Produtos extends JDialog {
 
 		// Validacao
 		if (txtBarcode.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insirao o Codigo de Barras");
+			JOptionPane.showMessageDialog(null, "Insira o código de barras do produto");
 			txtBarcode.requestFocus();
+		} else if (txtProduto.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o nome do produto");
+			txtProduto.requestFocus();
 		} else if (txtFabricante.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Fabricante");
+			JOptionPane.showMessageDialog(null, "Insira o fabricante do produto");
 			txtFabricante.requestFocus();
 		} else if (txtEstoque.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Estoque");
+			JOptionPane.showMessageDialog(null, "Insira a quantidade disponível em estoque");
 			txtEstoque.requestFocus();
 		} else if (txtEstoquemin.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Estoque Minimo");
+			JOptionPane.showMessageDialog(null, "Insira o valor mínimo em estoque");
 			txtEstoquemin.requestFocus();
-		} else if (((String) cboUnidade.getSelectedItem()).isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Tipo de Unidade");
+		} else if (dateValidade.getDate() == null) {
+			JOptionPane.showMessageDialog(null, "Insira a data de validade");
+			dateValidade.requestFocus();
+		} else if (cboUnidade.getSelectedItem() == "") {
+			JOptionPane.showMessageDialog(null, "Insira a unidade do produto");
 			cboUnidade.requestFocus();
 		} else if (txtLocal.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Local Armazenado");
+			JOptionPane.showMessageDialog(null, "Insira a localização do produto");
 			txtLocal.requestFocus();
 		} else if (txtCusto.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Custo");
+			JOptionPane.showMessageDialog(null, "Insira o preço de custo");
 			txtCusto.requestFocus();
-		} else if (txtIdFor.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o ID");
-			txtIdFor.requestFocus();
 		} else {
 
 			// logica principal
-			String insert = "insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,IdFor)values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			String insert = "insert into produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,IdFor)"
+					+ "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			try {
 				// Abrir a conexao
@@ -730,14 +734,12 @@ public class Produtos extends JDialog {
 			}
 
 			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
-				JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Duplicado");
-				txtBarcode.setText(null);
-				txtBarcode.requestFocus();
+				JOptionPane.showMessageDialog(null, "Produto nao adicionado - Campo Barcode Duplicado");
+				
 			}
 
 			catch (Exception e2) {
 				System.out.println(e2);
-				// JOptionPane.showConfirmDialog(null, e2);
 				limpar();
 			}
 		}

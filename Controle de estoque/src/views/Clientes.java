@@ -48,7 +48,7 @@ public class Clientes extends JDialog {
 	private JTable table;
 	private JTextField txtID;
 	private JLabel lblNome;
-	private JTextField txtNome;
+	private JTextField txtNomeCliente;
 	private JLabel lblCpf;
 	private JTextField txtCpf;
 	private JLabel lblCep;
@@ -157,10 +157,10 @@ public class Clientes extends JDialog {
 		lblNome.setBounds(10, 145, 46, 14);
 		getContentPane().add(lblNome);
 
-		txtNome = new JTextField();
-		txtNome.setBounds(65, 142, 147, 20);
-		getContentPane().add(txtNome);
-		txtNome.setColumns(10);
+		txtNomeCliente = new JTextField();
+		txtNomeCliente.setBounds(65, 142, 147, 20);
+		getContentPane().add(txtNomeCliente);
+		txtNomeCliente.setColumns(10);
 
 		lblCpf = new JLabel("CPF");
 		lblCpf.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -434,7 +434,7 @@ public class Clientes extends JDialog {
 		RestrictedTextField id = new RestrictedTextField(txtID);
 		id.setLimit(7);
 		// txtNome
-		RestrictedTextField Nome = new RestrictedTextField(txtNome);
+		RestrictedTextField Nome = new RestrictedTextField(txtNomeCliente);
 		Nome.setOnlyText(true);
 		Nome.setAcceptSpace(true);
 		Nome.setLimit(50);
@@ -524,7 +524,7 @@ public class Clientes extends JDialog {
 				ResultSet rs = pst.executeQuery();
 				if (rs.next()) {
 					txtID.setText(rs.getString(1));
-					txtNome.setText(rs.getString(2));
+					txtNomeCliente.setText(rs.getString(2));
 					txtCpf.setText(rs.getString(3));
 					txtCep.setText(rs.getString(4));
 					txtEndereco.setText(rs.getString(5));
@@ -548,9 +548,9 @@ public class Clientes extends JDialog {
 					/**
 					 * HABILITAR CAMPOS
 					 */
-					txtNome.setEnabled(true);
+					txtNomeCliente.setEnabled(true);
 					txtCpf.setEnabled(true);
-					txtNome.setEnabled(true);
+					txtNomeCliente.setEnabled(true);
 					txtCep.setEnabled(true);
 					txtEndereco.setEnabled(true);
 					txtN.setEnabled(true);
@@ -577,50 +577,43 @@ public class Clientes extends JDialog {
 
 	public void adicionar() {
 		/**
-		 * Validacao
+		 * VALIDACAO
 		 */
 
-		if (txtNome.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira O Nome");
-			txtNome.requestFocus();
+		if (txtNomeCliente.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o nome do Cliente");
+			txtNomeCliente.requestFocus();
 		} else if (txtCpf.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira O CPF");
+			JOptionPane.showMessageDialog(null, "Insira o CNPJ ou o CPF");
 			txtCpf.requestFocus();
 		} else if (txtCep.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Cep");
+			JOptionPane.showMessageDialog(null, "Insira o CEP");
 			txtCep.requestFocus();
 		} else if (txtEndereco.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Endereço");
+			JOptionPane.showMessageDialog(null, "Insira o endereco");
 			txtEndereco.requestFocus();
-		} else if (txtN.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Numero");
-			txtN.requestFocus();
+		} else if (txtTelefone.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Insira o numero");
+			txtTelefone.requestFocus();
 		} else if (txtBairro.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Bairro");
+			JOptionPane.showMessageDialog(null, "Insira o bairro");
 			txtBairro.requestFocus();
 		} else if (txtCidade.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira A Cidade");
+			JOptionPane.showMessageDialog(null, "Insira a cidade");
 			txtCidade.requestFocus();
-		} else if (((String) cboUf.getSelectedItem()).isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Estado");
+		} else if (cboUf.getSelectedItem() == "") {
+			JOptionPane.showMessageDialog(null, "Selecione o estado");
 			cboUf.requestFocus();
-		} else if (txtTelefone.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Telefone");
-			txtTelefone.requestFocus();
 		} else if (txtEmail.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Insira o Email");
+			JOptionPane.showMessageDialog(null, "Insira o e-mail do cliente");
 			txtEmail.requestFocus();
 		} else {
 
-			// Logica Principal
 			String create = "insert into clientes (Nome, CPF, Cep, Endereco, Numero, Complemento, Bairro, Cidade, Uf, Telefone, Email) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			try {
-				// Abrir a conexao
 				Connection con = dao.conectar();
-				// Preparar a query (substituicao de parametros)
 				PreparedStatement pst = con.prepareStatement(create);
-
-				pst.setString(1, txtNome.getText());
+				pst.setString(1, txtNomeCliente.getText());
 				pst.setString(2, txtCpf.getText());
 				pst.setString(3, txtCep.getText());
 				pst.setString(4, txtEndereco.getText());
@@ -632,39 +625,30 @@ public class Clientes extends JDialog {
 				pst.setString(10, txtTelefone.getText());
 				pst.setString(11, txtEmail.getText());
 
-				// Executar a query e atualizar as informa�oes no banco
 				int confirma = pst.executeUpdate();
 				if (confirma == 1) {
-					JOptionPane.showMessageDialog(null, "Cliente adicionado.");
+					JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso!");
 					limpar();
-				} else {
-					// System.out.println(e1);
-					JOptionPane.showMessageDialog(null, "Cliente Não Adicionado");
-					limpar();
+					con.close();
 				}
 
-				// Encerrar a conexÃ£o
-				con.close();
-			}
-
-			catch (java.sql.SQLIntegrityConstraintViolationException e1) {
+			} catch (java.sql.SQLIntegrityConstraintViolationException e1) {
 
 				JOptionPane.showMessageDialog(null, "CPF duplicado");
-				txtCpf.setText(null);
-				txtCpf.requestFocus();
 
 			} catch (Exception e2) {
 				System.out.println(e2);
 			}
 		}
+
 	}
 
 	public void atualizar() {
 
 		// Validacao
-		if (txtNome.getText().isEmpty()) {
+		if (txtNomeCliente.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira O Nome");
-			txtNome.requestFocus();
+			txtNomeCliente.requestFocus();
 		} else if (txtCpf.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Insira O CPF");
 			txtCpf.requestFocus();
@@ -703,7 +687,7 @@ public class Clientes extends JDialog {
 				// Preparar a query (substitui�ao de parametros)
 				PreparedStatement pst = con.prepareStatement(update);
 
-				pst.setString(1, txtNome.getText());
+				pst.setString(1, txtNomeCliente.getText());
 				pst.setString(2, txtCpf.getText());
 				pst.setString(3, txtCep.getText());
 				pst.setString(4, txtEndereco.getText());
@@ -745,6 +729,7 @@ public class Clientes extends JDialog {
 			}
 		}
 	}
+
 	/**
 	 * Metodo De Deletar
 	 */
@@ -835,7 +820,7 @@ public class Clientes extends JDialog {
 	public void limpar() {
 		txtCliente.setText(null);
 		txtID.setText(null);
-		txtNome.setText(null);
+		txtNomeCliente.setText(null);
 		txtCpf.setText(null);
 		txtCep.setText(null);
 		txtCep.setText(null);
