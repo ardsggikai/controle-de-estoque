@@ -544,6 +544,7 @@ public class Clientes extends JDialog {
 					btnDelete.setEnabled(true);
 					btnBuscar.setEnabled(false);
 					btnCep.setEnabled(true);
+					btnLimpar.setEnabled(true);
 
 					/**
 					 * HABILITAR CAMPOS
@@ -560,6 +561,7 @@ public class Clientes extends JDialog {
 					txtTelefone.setEnabled(true);
 					txtEmail.setEnabled(true);
 					txtID.setEnabled(false);
+					
 
 				} else {
 					JOptionPane.showMessageDialog(null, "Cliente não cadastrado");
@@ -852,6 +854,7 @@ public class Clientes extends JDialog {
 		txtEmail.setText(null);
 		txtID.setEnabled(true);
 		btnBuscar.setEnabled(true);
+		btnCreate.setEnabled(true);
 		// Limpar a tabela
 		((DefaultTableModel) table.getModel()).setRowCount(0);
 
