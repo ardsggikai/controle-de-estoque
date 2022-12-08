@@ -974,7 +974,7 @@ public class Fornecedores extends JDialog {
 					
 					
 				}catch (java.sql.SQLIntegrityConstraintViolationException e2) {
-					JOptionPane.showMessageDialog(null, "Fornecedor N�o Pode ser Excluido Pois Existem Produtos no Estoque");
+					JOptionPane.showMessageDialog(null, "Fornecedor Nao Pode ser Excluido Pois Existem Produtos no Estoque");
 				} catch (Exception e) {
 					System.out.println(e);
 				}

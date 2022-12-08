@@ -99,7 +99,7 @@ public class Sobre extends JDialog {
 		
 		txtVersion = new JTextField();
 		txtVersion.setEditable(false);
-		txtVersion.setText("Version 1.1");
+		txtVersion.setText("Version 1.3");
 		txtVersion.setHorizontalAlignment(SwingConstants.CENTER);
 		txtVersion.setFont(new Font("Arial", Font.PLAIN, 11));
 		txtVersion.setBounds(318, 235, 86, 20);

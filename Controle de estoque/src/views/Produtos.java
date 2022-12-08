@@ -506,7 +506,6 @@ public class Produtos extends JDialog {
 		btnLimpar = new JButton("");
 		btnLimpar.setToolTipText("Limpar Campos de Texto");
 		btnLimpar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnLimpar.setEnabled(false);
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpar();
@@ -586,6 +585,7 @@ public class Produtos extends JDialog {
 					 */
 					btnUpdateProduto.setEnabled(true);
 					btnDeleteProduto.setEnabled(true);
+					btnAddProduto.setEnabled(false);
 					btnLimpar.setEnabled(true);
 
 				} else {
@@ -650,6 +650,7 @@ public class Produtos extends JDialog {
 					txtCodigo.setEnabled(false);
 					dateValidade.setEnabled(false);
 					txtBarcode.setEnabled(false);
+					btnAddProduto.setEnabled(false);
 
 
 				} else {
@@ -658,6 +659,7 @@ public class Produtos extends JDialog {
 					btnAddProduto.setEnabled(true);
 					btnPesquisar.setEnabled(false);
 					txtProduto.requestFocus();
+					
 				}
 				con.close();
 			} catch (Exception e) {
@@ -725,7 +727,7 @@ public class Produtos extends JDialog {
 				int confirm = pst.executeUpdate();
 				if (confirm == 1) {
 					JOptionPane.showMessageDialog(null, "Produto Cadastrado Com Sucesso");
-
+					limpar();
 				} else {
 					JOptionPane.showMessageDialog(null, "Erro ao cadastrar o produto");
 
@@ -803,7 +805,7 @@ public class Produtos extends JDialog {
 					limpar();
 					btnUpdateProduto.setEnabled(false);
 					btnDeleteProduto.setEnabled(false);
-				} else {
+					} else {
 					JOptionPane.showMessageDialog(null, "Erro ao atualizar o produto");
 				}
 				con.close();
