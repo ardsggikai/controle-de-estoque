@@ -114,21 +114,21 @@ describe produtos;
 
 -- inserir produto
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('11111111','Caneta BIC Azul','Caneta BIC Cor Azul,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 2',38.50,20,14);
+values ('11111111','Caneta BIC Azul','Caneta BIC Cor Azul,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 2',38.50,20,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('22222222','Caneta BIC Vermelha','Caneta BIC Cor Vermelha,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 3',38.50,20,14);
+values ('22222222','Caneta BIC Vermelha','Caneta BIC Cor Vermelha,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 3',38.50,20,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('33333333','Caneta BIC Verde','Caneta BIC Cor Verde,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 4',38.50,20,14);
+values ('33333333','Caneta BIC Verde','Caneta BIC Cor Verde,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 4',38.50,20,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('44444444','Caneta BIC Preta','Caneta BIC Cor Preta,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 5',38.50,20,14);
+values ('44444444','Caneta BIC Preta','Caneta BIC Cor Preta,Ponta Fina CX 50','BIC',20231122,20,5,'CX','Prateleira 5',38.50,20,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('55555555','Caneta BIC Amarela','Caneta BIC Cor Amarela,Ponta Fina CX 30','BIC',20211122,3,5,'CX','Prateleira 5',32.50,15,14);
+values ('55555555','Caneta BIC Amarela','Caneta BIC Cor Amarela,Ponta Fina CX 30','BIC',20211122,3,5,'CX','Prateleira 5',32.50,15,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
 values ('66666666','Cola Bastão','Cola Bastão Printt','Printt',20211122,7,5,'UN','Prateleira 6',1.25,50,2);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
 values ('77777777','Mouse Logitech','Mouse Logitech para uso de escritorio','Logitech',20271122,5,5,'UN','Prateleira 7',25,30,3);
 insert produtos (barcode,produto,descricao,fabricante,dataval,estoque,estoquemin,unidade,localizacao,custo,lucro,idFor)
-values ('88888888','Régua 30cm','Régua de acrílico 30cm','Faber-Castell',20251122,5,5,'UN','Prateleira 8',2.50,30,14);
+values ('88888888','Régua 30cm','Régua de acrílico 30cm','Faber-Castell',20251122,5,5,'UN','Prateleira 8',2.50,30,2);
 
 -- delete
 delete from produtos where codigo = 1;
