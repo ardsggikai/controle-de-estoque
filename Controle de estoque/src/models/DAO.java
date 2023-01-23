@@ -5,14 +5,14 @@ import java.sql.DriverManager;
 
 public class DAO {
 
-	// criando variáveis encapsuladas para acesso ao banco
+	// criando variï¿½veis encapsuladas para acesso ao banco
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://10.26.49.111:3306/dbestoque";
-	private String user = "root";
+	private String url = "jdbc:mysql://10.26.49.107:3306/dbestoque";
+	private String user = "dba";
 	private String password = "123@senac";
 
 	/**
-	 * Método responsavel por abrir uma coneção com o banco
+	 * Mï¿½todo responsavel por abrir uma coneï¿½ï¿½o com o banco
 	 * 
 	 * @return conectar
 	 */
@@ -20,14 +20,14 @@ public class DAO {
 
 		// criar um objeto
 		Connection con = null;
-		// tratamento de exceções
+		// tratamento de exceï¿½ï¿½es
 		try {
-			// lógica principal para abrir a conexão
+			// lï¿½gica principal para abrir a conexï¿½o
 			// Uso do driver
 			Class.forName(driver);
-			// Obter os parâmetros da conexão (Informações do servidor)
+			// Obter os parï¿½metros da conexï¿½o (Informaï¿½ï¿½es do servidor)
 			con = DriverManager.getConnection(url, user, password); //conectar
-			// retornar a conexão ("abrir a porta da geladeira")
+			// retornar a conexï¿½o ("abrir a porta da geladeira")
 			return con;
 		} catch (Exception e) {
 			System.out.println(e);
