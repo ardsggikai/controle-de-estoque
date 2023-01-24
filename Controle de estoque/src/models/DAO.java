@@ -7,7 +7,7 @@ public class DAO {
 
 	// criando vari�veis encapsuladas para acesso ao banco
 	private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://10.26.49.107:3306/dbestoque";
+	private String url = "jdbc:mysql://10.26.49.107:3306/dblojinha";
 	private String user = "dba";
 	private String password = "123@senac";
 

@@ -183,7 +183,6 @@ public class Login extends JFrame {
 		login.setLimit(50);
 		
 		RestrictedTextField senha = new RestrictedTextField(txtSenha);
-		senha.setOnlyAlphaNumeric(true);
 		senha.setLimit(50);
 
 	}
