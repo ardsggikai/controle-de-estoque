@@ -243,6 +243,18 @@ idcli int not null,
 foreign key(idcli) references clientes (idcli)
 );
 
+-- abertura de um pedido
+insert into pedidos(idcli)
+values(1);
+
+-- relatorio de pedidos
+select
+pedidos.pedido,
+date_format(pedidos.dataped, '%d/%m/%Y - %H:%i') as data_pedido,
+clientes.nome as Cliente,
+clientes.Telefone as Telefone
+from pedidos inner join clientes
+on pedidos.idcli = clientes.idcli;
 
 /********* Fim Pedidos *********/
 
